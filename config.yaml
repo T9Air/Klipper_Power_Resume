@@ -1,7 +1,7 @@
 functions:
     logger:
-        path: /home/$USER/print_position_logger/logger.py
+        path: /home/$USER/Klipper_Power_Resume/logger.py
         function: increment_number
     unlog:
-        path: /home/$USER/print_position_logger/logger.py
+        path: /home/$USER/Klipper_Power_Resume/logger.py
         function: clear_file
