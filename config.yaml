@@ -1,7 +1,7 @@
 functions:
     logger:
-        path: /home/avraham/print_position_logger/logger.py
+        path: /home/$USER/print_position_logger/logger.py
         function: increment_number
     unlog:
-        path: /home/avraham/print_position_logger/logger.py
+        path: /home/$USER/print_position_logger/logger.py
         function: clear_file
