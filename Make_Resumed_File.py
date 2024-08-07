@@ -14,7 +14,9 @@ def delete_lines(file1, file2, gcode):
 
   try:
     with open(file1, 'r') as f1:
-      lines_to_delete = (int(f1.read()) * 2) + 1
+      Logs = f1.readlines()
+      lines_to_delete = (int(Logs[0]) * 2) + 1
+      gcode_position = str(Logs[1])
       
     with open(file2, 'r') as f2:
       lines = f2.readlines()
@@ -27,6 +29,8 @@ def delete_lines(file1, file2, gcode):
 
     # Create a new filename with "_restarted" appended
     new_file = os.path.splitext(file2)[0] + "_restarted" + os.path.splitext(file2)[1]
+
+    gcode = gcode + "\n" + gcode_position
 
     # Combine G-code with remaining lines
     combined_lines = [gcode + "\n"] + new_lines
@@ -44,7 +48,7 @@ def delete_lines(file1, file2, gcode):
     print(f"An error occurred: {e}")
 
 # Example usage:
-file1 = "logfile"
-file2 = "stopped file"
-gcode = "M190 S60\nG28\nM109 S200"  # Replace with your desired G-code
-delete_lines(file1, file2, gcode)  # Replace 0 with the desired number of lines to delete
+file1 = "logfile" ###This will be replaced###
+file2 = "stopped file" ###This will be replaced###
+gcode = "M190 S60\nG28\nM109 S200" + "\n" + gcode_position
+delete_lines(file1, file2, gcode)
