@@ -44,7 +44,7 @@ def delete_lines(file1, file2, gcode):
     print(f"An error occurred: {e}")
 
 # Example usage:
-file1 = "C:\\Users\\smorg\\Downloads\\klipper_logger\\log.txt"
-file2 = "C:\\Users\\smorg\\Downloads\\klipper_logger\\Logger_Test(Full_Cylinder).gcode"
+file1 = "logfile"
+file2 = "stopped file"
 gcode = "M190 S60\nG28\nM109 S200"  # Replace with your desired G-code
 delete_lines(file1, file2, gcode)  # Replace 0 with the desired number of lines to delete
