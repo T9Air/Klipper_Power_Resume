@@ -50,5 +50,5 @@ def delete_lines(file1, file2, gcode):
 # Example usage:
 file1 = "logfile" ###This will be replaced###
 file2 = "stopped file" ###This will be replaced###
-gcode = "M190 S60\nG28\nM109 S200" + "\n" + gcode_position
+gcode = "M190 S60\nG28\nM109 S200"
 delete_lines(file1, file2, gcode)
