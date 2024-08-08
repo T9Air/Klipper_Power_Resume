@@ -1,5 +1,3 @@
-#This is the post-processing script for Cura
-
 from ..Script import Script
 
 class AddLoggingGcode(Script):

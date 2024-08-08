@@ -1,17 +1,6 @@
 import os
 
 def delete_lines(file1, file2, gcode):
-  """
-  Deletes a specified number of lines from a file based on a value in another file,
-  adds provided G-code to the beginning of the remaining content,
-  and creates a copy with "_restarted" appended to the filename.
-
-  Args:
-    file1: The file containing the number of lines to delete.
-    file2: The file to delete lines from and add G-code to.
-    gcode: The G-code string to add to the beginning of the file.
-  """
-
   try:
     with open(file1, 'r') as f1:
       Logs = f1.readlines()
@@ -27,12 +16,10 @@ def delete_lines(file1, file2, gcode):
 
     new_lines = lines[lines_to_delete:]
 
-    # Create a new filename with "_restarted" appended
     new_file = os.path.splitext(file2)[0] + "_restarted" + os.path.splitext(file2)[1]
 
     gcode = gcode + "\n" + gcode_position
 
-    # Combine G-code with remaining lines
     combined_lines = [gcode + "\n"] + new_lines
 
     with open(new_file, 'w') as f3:
@@ -47,8 +34,7 @@ def delete_lines(file1, file2, gcode):
   except Exception as e:
     print(f"An error occurred: {e}")
 
-# Example usage:
-file1 = "logfile" ###This will be replaced###
-file2 = "stopped file" ###This will be replaced###
+file1 = "/home/$USER/Klipper_Power_Resume/log.txt"
+file2 = "stopped file"
 gcode = "M190 S60\nG28\nM109 S200"
 delete_lines(file1, file2, gcode)
