@@ -9,7 +9,7 @@ def delete_lines(file1, file2, gcode):
             # Read all lines from the lag
             Logs = f1.readlines()
             # Calculate the number of lines to delete based on the first line of the log
-            lines_to_delete = (int(Logs[0]) * 2) + 1
+            lines_to_delete = (int(Logs[0]) * 2)
             # Get the printer position from the second line of the log
             gcode_position = str(Logs[1])
 
