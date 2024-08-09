@@ -31,4 +31,5 @@ fi
 
 read -r -p "Please input your username" response3
 
-sed -i 's/US
+sed -i 's/USER/$response3/g' ~/KLIPPER_POWER_RESUME/logger.cfg
+sed -i 's/USER/$response3/g' ~/KLIPPER_POWER_RESUME/Make_Resumed_File.py
