@@ -29,11 +29,29 @@ else
     echo " "
 fi
 
-echo "Changing username in files to your username"
+echo "Changing username in files to your username..."
 
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/logger.cfg
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/Make_Resumed_File.py
 
+echo "usernames changed"
+echo " "
+
+echo "Moving logger.cfg to where all your config files are stored..."
+
 mv /home/$USER/Klipper_Power_Resume/logger.cfg /home/$USER/printer_data/config/
 
+echo "logger.cfg moved"
+echo ""
+
+echo "Adding [include logger.cfg] to your printer.cfg..."
+
 sed -i '1i \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
+
+echo "[logger.cfg moved]"
+echo ""
+
+echo "Installation finished!"
+echo "Press any key to exit..."
+read -n1 -s
+exit 0
