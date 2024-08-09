@@ -25,3 +25,4 @@
    cd Klipper_Power_Resume
    python3 ./Make_Resumed_File.py
    ```
+> Note: The file assumes that you are using a print temp of 200c and a bed temp of 60c. If you are using different print settings, you can change it in the Make_Resumed_File.py file.
