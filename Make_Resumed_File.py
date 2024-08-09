@@ -56,7 +56,7 @@ def delete_lines(file1, file2, gcode):
 # Specify the log and g-code file paths and start g-code
 file1 = "/home/$USER/Klipper_Power_Resume/log.txt"
 file2 = "stopped file"
-gcode = "M190 S60\nG28\nM109 S200"
+gcode = "M190 S60\nG28\nM109 S200\nUNLOG_FILE"
 
 # Call the function to delete lines, add start g-code, and create a new g-code file
 delete_lines(file1, file2, gcode)
