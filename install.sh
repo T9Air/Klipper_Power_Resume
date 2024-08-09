@@ -33,3 +33,5 @@ echo "Changing username in files to your username"
 
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/logger.cfg
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/Make_Resumed_File.py
+
+mv /home/$USER/Klipper_Power_Resume/logger.cfg /home/$USER/printer_data/config/
