@@ -9,7 +9,7 @@ def delete_lines(file1, file2, gcode):
             # Read all lines from the lag
             Logs = f1.readlines()
             # Calculate the number of lines to delete based on the first line of the log
-            lines_to_delete = (int(Logs[0]) * 2) + 1
+            lines_to_delete = (int(Logs[0]) * 2)
             # Get the printer position from the second line of the log
             gcode_position = str(Logs[1])
 
@@ -56,7 +56,9 @@ def delete_lines(file1, file2, gcode):
 # Specify the log and g-code file paths and start g-code
 file1 = "/home/$USER/Klipper_Power_Resume/log.txt"
 file2 = "stopped file"
-gcode = "M190 S60\nG28\nM109 S200"
+extruder_temp = "200"
+bed_temp = "60"
+gcode = "M190 S" + bed temp + "\nG28\nM109 S" + extruder_temp + "\nUNLOG_FILE"
 
 # Call the function to delete lines, add start g-code, and create a new g-code file
 delete_lines(file1, file2, gcode)
