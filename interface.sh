@@ -1,3 +1,5 @@
+#!/bin/bash
+
 clear
 
 echo "Klipper_Power_Resume:"
