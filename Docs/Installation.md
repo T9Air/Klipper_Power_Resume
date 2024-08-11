@@ -1,14 +1,34 @@
 # Installation
-1. Install the extended_macros library. Instructions can be found here: https://github.com/droans/klipper_extras/tree/main/extended_macro
-2. Run the following commands on your RPI
+
+#### Using the install.sh script
+
+1. Run the following commands on your Raspberry Pi
    ```
-   cd
+   cd ~
+   git clone https://github.com/T9Air/Klipper_Power_Resume.git
+   cd Klipper_Power_Resume
+   bash install.sh
+   ```
+2. Follow the instructions in the install script. The instructions for installing the extended_macros repo are [here](https://github.com/droans/klipper_extras/blob/main/extended_macro/readme.md).
+
+> NOTE: Currently you must be using Cura for this to work, that will be changed in the future
+
+3. On your PC, download the AddLoggingGcode.py script, and move it to C:\Users\(Your Username)\AppData\Roaming\cura\(most recent version of cura)\scripts
+
+#### Manually installing 
+
+1. Run the following commands on your Raspberry Pi
+   ```
+   cd ~
    git clone https://github.com/T9Air/Klipper_Power_Resume.git
    ```
+2. Install the extended_macros repo. Instructions can be found [here](https://github.com/droans/klipper_extras/blob/main/extended_macro/readme.md).
 3. In all the files, change "$USER" to your username
 4. Move logger.cfg to the path where all your config files are. (Usually ~/printer_data/config)
 5. In your printer.cfg add ```[include logger.cfg]```
+
 > NOTE: Currently you must be using Cura for this to work, that will be changed in the future
+
 6. On your PC, download the AddLoggingGcode.py script, and move it to C:\Users\(Your Username)\AppData\Roaming\cura\(most recent version of cura)\scripts
 
 # Setup
