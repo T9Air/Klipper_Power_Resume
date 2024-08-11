@@ -14,15 +14,15 @@ echo "(0) Quit"
 read -r -n1 -p "#### Perform an action: " action
 
 if [[ "$action" == 1 ]]; then
-    bash /home/$USER/Klipper_Power_Resume/Interface scripts/install.sh
+    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/install.sh
 fi
 
 if [[ "$action" == 2 ]]; then
-    bash /home/$USER/Klipper_Power_Resume/Interface scripts/add_logs.sh
+    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/add_logs.sh
 fi
 
 if [[ "$action" == 6 ]]; then
-    bash /home/$USER/Klipper_Power_Resume/Interface scripts/uninstall.sh
+    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/uninstall.sh
 fi
 
 if [[ "$action" == 0 ]]; then
