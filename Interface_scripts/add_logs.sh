@@ -22,7 +22,6 @@ if [[ ! -f "$filepath" ]]; then
     exit 1
 fi
 
-
 read -r -p "How many lines do you want to skip between logs? " num
 
 num=num+1
