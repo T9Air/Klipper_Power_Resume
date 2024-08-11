@@ -21,3 +21,7 @@ else
     sed -i '1d' /home/$USER/printer_data/config/printer.cfg
     echo "logger.cfg inclusion removed"
 fi
+
+echo "You will need to remove the klipper_extras repo on your own."
+echo "Removing Klipper_Power_Resume directory..."
+rm -r /home/$USER/Klipper_Power_Resume
