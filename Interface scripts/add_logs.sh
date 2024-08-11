@@ -20,3 +20,8 @@ read -r -p "How many lines do you want to skip between logs?" num
 sed "0~num a\LOG_FILE" $filepath
 
 sed -i '1i \UNLOG_FILE' $filepath
+
+echo "File changed!"
+echo "Press any key to exit..."
+read -n1 -s
+exit 0
