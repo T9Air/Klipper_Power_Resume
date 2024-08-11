@@ -54,7 +54,7 @@ def delete_lines(file1, file2, gcode):
         print(f"An error occurred: {e}")
 
 # Specify the log and g-code file paths and start g-code
-file1 = "/home/$USER/Klipper_Power_Resume/log.txt"
+file1 = "/home/USER/Klipper_Power_Resume/log.txt"
 file2 = "stopped file"
 extruder_temp = "200"
 bed_temp = "60"
