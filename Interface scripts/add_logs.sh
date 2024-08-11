@@ -17,7 +17,7 @@ filepath="/home/$USER/printer_data/gcodes/$filepath"
 
 read -r -p "How many lines do you want to skip between logs?" num
 
-sed "0~$num a\LOG_FILE" $filepath
+sed -i "${num}~${num}a\LOG_FILE" $filepath
 
 sed -i '1i \UNLOG_FILE' $filepath
 
