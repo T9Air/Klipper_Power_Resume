@@ -23,5 +23,10 @@ else
 fi
 
 echo "You will need to remove the klipper_extras repo on your own."
-echo "Removing Klipper_Power_Resume directory..."
-rm -r /home/$USER/Klipper_Power_Resume
+echo "Sadly, there is some strange error when running the rm -r command"
+echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your own."
+
+echo "Press any key to exit..."
+read -n1 -s
+exit 0
+# This is the bug: rm: cannot remove 'Klipper_Power_Resume/.git/objects/pack': Directory not empty
