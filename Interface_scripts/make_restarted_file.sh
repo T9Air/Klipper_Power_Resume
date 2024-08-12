@@ -19,8 +19,16 @@ logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
 
+extruder_temp=200
+bed_temp=60
+
 if [[ "$starttype" == [Nn] ]]; then
     echo ""
     echo "Sorry, but this feature is currently not working. Please press enter to continue..."
     read -n1 -s
+else
+    read -r -p "What temperature should your extruder be set to? " extruder_temp
+    echo " "
+    read -r -p "What temperature should your bed be set to? " bed_temp
+    gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
