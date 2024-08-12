@@ -35,3 +35,10 @@ fi
 
 # TODO: Change the next code to work with custom start gcode 
 #       Potentially, could have the next code depend on whether using custom gcode or not
+
+linenumber=$(sed -n '1p' $logpath)
+printerpositon=$(sed -n '1p' $logpath)
+
+linenumber=$(($linenumber * 2))
+
+sed -i "1,$linenumber d"
