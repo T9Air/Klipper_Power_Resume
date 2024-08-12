@@ -37,10 +37,9 @@ fi
 #       Potentially, could have the next code depend on whether using custom gcode or not
 
 linenumber=$(sed -n '1p' $logpath)
-printerpositon=$(sed -n '1p' $logpath)
+printerposition=$(sed -n '2p' $logpath)
 
 linenumber=$(($linenumber * 2))
-gcode="$gcode \n$printerposition\n"
 
 origfilepath_no_extension="${originalfilepath%.*}"
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
@@ -48,6 +47,7 @@ newfilepath="${origfilepath_no_extension}_restarted.gcode"
 cp $originalfilepath $newfilepath
 
 sed -i "1,${linenumber}d" $newfilepath
+sed -i "1i $printerposition" $newfilepaths
 sed -i "1i $gcode" $newfilepath
 
 echo "_restarted file created!"
