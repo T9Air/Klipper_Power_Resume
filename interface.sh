@@ -22,7 +22,7 @@ if [[ "$action" == 1 ]]; then
 fi
 
 if [[ "$action" == 2 ]]; then
-    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/add_logs.sh
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/add_logs.sh
     exit 0
 fi
 
@@ -30,26 +30,26 @@ if [[ "$action" == 3 ]]; then
     #echo "Sorry, but this feature is currently not working. Please press enter to continue..."
     #read -n1 -s
     #bash /home/$USER/Klipper_Power_Resume/interface.sh
-    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh
     exit 0
 fi
 
 if [[ "$action" == 4 ]]; then
     echo "Sorry, but this feature is currently not working. Please press enter to continue..."
     read -n1 -s
-    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
 
 if [[ "$action" == 5 ]]; then
     echo "Sorry, but this feature is currently not working. Please press enter to continue..."
     read -n1 -s
-    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
 
 if [[ "$action" == 6 ]]; then
-    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/uninstall.sh
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/uninstall.sh
     exit 0
 fi
 

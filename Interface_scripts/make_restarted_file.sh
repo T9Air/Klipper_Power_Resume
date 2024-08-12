@@ -10,7 +10,7 @@ read -r -p "Please input the filename: " originalfilepath
 
 if [[ "$originalfilepath" == "" ]]; then
     echo "Exiting..."
-    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
 
@@ -54,5 +54,5 @@ echo "_restarted file created!"
 echo "Press any key to exit..."
 read -n1 -s
 
-bash /home/$USER/Klipper_Power_Resume/interface.sh
+/home/$USER/Klipper_Power_Resume/interface.sh
 exit 0

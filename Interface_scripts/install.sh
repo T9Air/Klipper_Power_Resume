@@ -55,9 +55,12 @@ sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
 echo "[logger.cfg moved]"
 echo ""
 
+echo "Adding permissions to files in Klipper_Power_Resume directory..."
+chmod -R u+rwx /home/$USER/Klipper_Power_Resume
+
 echo "Installation finished!"
 echo "Press any key to exit..."
 read -n1 -s
 
-bash /home/$USER/Klipper_Power_Resume/interface.sh
+/home/$USER/Klipper_Power_Resume/interface.sh
 exit 0
