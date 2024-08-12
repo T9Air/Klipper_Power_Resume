@@ -21,6 +21,7 @@
    ```
    cd ~
    git clone https://github.com/T9Air/Klipper_Power_Resume.git
+   chmod -R u+rwx /home/$USER/Klipper_Power_Resume
    ```
 2. Install the extended_macros repo. Instructions can be found [here](https://github.com/droans/klipper_extras/blob/main/extended_macro/readme.md).
 3. In all the files, change "$USER" to your username
