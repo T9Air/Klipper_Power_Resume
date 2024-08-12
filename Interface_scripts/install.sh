@@ -5,7 +5,7 @@ read -r -p "Are you sure you want to proceed? (y/N)" response1
 
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
-    exit 1
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
 fi
 echo " "
 echo "Please install the extended_macros repo."
@@ -55,4 +55,5 @@ echo ""
 echo "Installation finished!"
 echo "Press any key to exit..."
 read -n1 -s
-exit 0
+
+bash /home/$USER/Klipper_Power_Resume/interface.sh

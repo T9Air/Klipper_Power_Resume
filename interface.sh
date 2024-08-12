@@ -12,6 +12,7 @@ echo "(6) Uninstall"
 echo "(0) Quit"
 
 read -r -n1 -p "#### Perform an action: " action
+read -n1 -s
 
 if [[ "$action" == 1 ]]; then
     bash /home/$USER/Klipper_Power_Resume/Interface_scripts/install.sh

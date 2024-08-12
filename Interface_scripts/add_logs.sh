@@ -10,7 +10,7 @@ read -r -p "Please input the filename: " filepath
 
 if [[ "$filepath" == "" ]]; then
     echo "Exiting..."
-    exit 0
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
 fi
 
 num=1
@@ -19,7 +19,7 @@ filepath="/home/$USER/printer_data/gcodes/$filepath"
 
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath"
-    exit 1
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
 fi
 
 read -r -p "How many lines do you want to skip between logs? " num
@@ -31,4 +31,4 @@ sed -i "${num}~${num}a\LOG_FILE" $filepath
 
 echo "File changed!"
 echo "Press any key to exit..."
-read -n1 -s
+bash /home/$USER/Klipper_Power_Resume/interface.sh
