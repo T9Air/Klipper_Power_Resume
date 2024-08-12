@@ -50,7 +50,7 @@ echo ""
 
 echo "Adding [include logger.cfg] to your printer.cfg..."
 
-sed -i '1i \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
+sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
 
 echo "[logger.cfg moved]"
 echo ""
