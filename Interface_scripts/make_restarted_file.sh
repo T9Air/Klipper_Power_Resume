@@ -6,15 +6,15 @@ echo "Please write the name of the file you want to restart."
 echo "If it is in a subdirectory, please write it in this format: directory/file."
 echo "If you want to go back to the Main Menu, press enter"
 echo " "
-read -r -p "Please input the filename: " filepath
+read -r -p "Please input the filename: " originalfilepath
 
-if [[ "$filepath" == "" ]]; then
+if [[ "$originalfilepath" == "" ]]; then
     echo "Exiting..."
     bash /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
 
-filepath="/home/$USER/printer_data/gcodes/$filepath"
+filepath="/home/$USER/printer_data/gcodes/$originalfilepath"
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
@@ -42,5 +42,10 @@ printerpositon=$(sed -n '1p' $logpath)
 linenumber=$(($linenumber * 2))
 gcode="$gcode \n$printerposition\n"
 
-sed -i "1,$linenumber d" $filepath
-sed -i "1i $gcode" $filepath
+origfilepath_no_extension="${originalfilepath%.*}"
+newfilepath="${originalfilepath}_restarted.gcode"
+
+cp $originalfilepath $newfilepath
+
+sed -i "1,${linenumber}d" $newfilepath
+sed -i "1i $gcode" $newfilepath
