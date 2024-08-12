@@ -32,3 +32,6 @@ else
     read -r -p "What temperature should your bed be set to? " bed_temp
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
+
+# TODO: Change the next code to work with custom start gcode 
+#       Potentially, could have the next code depend on whether using custom gcode or not
