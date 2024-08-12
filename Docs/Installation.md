@@ -11,6 +11,8 @@
    ```
 2. Press 1 to run the installation script
 
+> NOTE: YOU MUST RUN THE INSTALLATION SCRIPT FIRST, OTHERWISE YOU WILL RECIEVE AN ERROR TELLING YOU THAT YOU DO NOT HAVE EXECUTE PERMISSIONS
+
 3. Follow the instructions in the install script. The instructions for installing the extended_macros repo are [here](https://github.com/droans/klipper_extras/blob/main/extended_macro/readme.md).
 
 #### Manually installing 
