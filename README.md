@@ -10,3 +10,18 @@ Installation instructions can be found here: https://github.com/T9Air/Klipper_Po
 ## Usage
 
 You can find the instructions on how to use the interface over here: https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Usage.md
+
+## Currently working interface features
+
+| Feature                                      | Status  |
+| -------------------------------------------- | ------- |
+| Installing                                   | &check; |
+| Uninstalling                                 | &check; |
+| Add log macro                                | &check; |
+| Can create _restarted file                   | &check; |
+| Specify what temps to print at               | &check; |
+| Choose how many lines to skip between logs   | &check; |
+| Create custom start gcode                    | &cross; |
+| Edit custom start gcode                      | &cross; |
+| Specify which custom start gcode to use      | &cross; |
+| Choose to only log at each layer             | &cross; |
