@@ -14,16 +14,39 @@ echo "(0) Quit"
 read -r -n1 -p "#### Perform an action: " action
 read -n1 -s
 
+echo " "
+
 if [[ "$action" == 1 ]]; then
     bash /home/$USER/Klipper_Power_Resume/Interface_scripts/install.sh
+    exit 0
 fi
 
 if [[ "$action" == 2 ]]; then
     bash /home/$USER/Klipper_Power_Resume/Interface_scripts/add_logs.sh
+    exit 0
+fi
+
+if [[ "$action" == 3 ]]; then
+    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
+fi
+
+if [[ "$action" == 4 ]]; then
+    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
+fi
+
+if [[ "$action" == 5 ]]; then
+    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
 fi
 
 if [[ "$action" == 6 ]]; then
     bash /home/$USER/Klipper_Power_Resume/Interface_scripts/uninstall.sh
+    exit 0
 fi
 
 if [[ "$action" == 0 ]]; then
