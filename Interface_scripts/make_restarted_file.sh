@@ -14,7 +14,7 @@ if [[ "$originalfilepath" == "" ]]; then
     exit 0
 fi
 
-filepath="/home/$USER/printer_data/gcodes/$originalfilepath"
+originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
@@ -43,7 +43,7 @@ linenumber=$(($linenumber * 2))
 gcode="$gcode \n$printerposition\n"
 
 origfilepath_no_extension="${originalfilepath%.*}"
-newfilepath="${originalfilepath}_restarted.gcode"
+newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
 cp $originalfilepath $newfilepath
 
