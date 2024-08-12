@@ -40,6 +40,7 @@ linenumber=$(sed -n '1p' $logpath)
 printerpositon=$(sed -n '1p' $logpath)
 
 linenumber=$(($linenumber * 2))
-gcode="$gcode \n$printerposition"
+gcode="$gcode \n$printerposition\n"
 
-sed -i "1,$linenumber d"
+sed -i "1,$linenumber d" $filepath
+sed -i "1i $gcode" $filepath
