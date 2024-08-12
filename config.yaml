@@ -1,7 +1,7 @@
 functions:
     logger:
-        path: /home/$USER/Klipper_Power_Resume/logger.py
+        path: /home/USER/Klipper_Power_Resume/logger.py
         function: log
     unlog:
-        path: /home/$USER/Klipper_Power_Resume/logger.py
+        path: /home/USER/Klipper_Power_Resume/logger.py
         function: clear_log

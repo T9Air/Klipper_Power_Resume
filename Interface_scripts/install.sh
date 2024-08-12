@@ -1,11 +1,14 @@
 #!/bin/bash
+
 clear
+
 echo "KLIPPER_POWER_RESUME Installer:"
 read -r -p "Are you sure you want to proceed? (y/N)" response1
 
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
-    exit 1
+    bash /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
 fi
 echo " "
 echo "Please install the extended_macros repo."
@@ -47,12 +50,17 @@ echo ""
 
 echo "Adding [include logger.cfg] to your printer.cfg..."
 
-sed -i '1i \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
+sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
 
 echo "[logger.cfg moved]"
 echo ""
 
+echo "Adding permissions to files in Klipper_Power_Resume directory..."
+chmod -R u+rwx /home/$USER/Klipper_Power_Resume
+
 echo "Installation finished!"
 echo "Press any key to exit..."
 read -n1 -s
+
+/home/$USER/Klipper_Power_Resume/interface.sh
 exit 0
