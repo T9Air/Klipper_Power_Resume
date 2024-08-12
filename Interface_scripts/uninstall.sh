@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 read -r -p "Are you sure you want to uninstall? You will have to redownload if you want to re-install (y/N)" response1
 
 if [[ "$response1" == [Nn] ]]; then

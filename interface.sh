@@ -27,6 +27,7 @@ if [[ "$action" == 6 ]]; then
 fi
 
 if [[ "$action" == 0 ]]; then
+    echo " "
     echo "exiting..."
     exit 0
 fi

@@ -1,5 +1,7 @@
 #!/bin/bash
+
 clear
+
 echo "KLIPPER_POWER_RESUME Installer:"
 read -r -p "Are you sure you want to proceed? (y/N)" response1
 
