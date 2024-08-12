@@ -49,3 +49,10 @@ cp $originalfilepath $newfilepath
 
 sed -i "1,${linenumber}d" $newfilepath
 sed -i "1i $gcode" $newfilepath
+
+echo "_restarted file created!"
+echo "Press any key to exit..."
+read -n1 -s
+
+bash /home/$USER/Klipper_Power_Resume/interface.sh
+exit 0
