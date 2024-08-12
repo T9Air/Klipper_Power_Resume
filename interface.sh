@@ -27,9 +27,6 @@ if [[ "$action" == 2 ]]; then
 fi
 
 if [[ "$action" == 3 ]]; then
-    #echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    #read -n1 -s
-    #bash /home/$USER/Klipper_Power_Resume/interface.sh
     /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh
     exit 0
 fi
