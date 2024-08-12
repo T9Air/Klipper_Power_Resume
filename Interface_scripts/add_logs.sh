@@ -11,6 +11,7 @@ read -r -p "Please input the filename: " filepath
 if [[ "$filepath" == "" ]]; then
     echo "Exiting..."
     bash /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
 fi
 
 num=1
@@ -32,3 +33,4 @@ sed -i "${num}~${num}a\LOG_FILE" $filepath
 echo "File changed!"
 echo "Press any key to exit..."
 bash /home/$USER/Klipper_Power_Resume/interface.sh
+exit 0

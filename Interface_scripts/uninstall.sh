@@ -5,6 +5,7 @@ read -r -p "Are you sure you want to uninstall? You will have to redownload if y
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     bash /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
 fi
 echo " "
 echo "Deleting logger.cfg..."
@@ -29,4 +30,5 @@ echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your
 echo "Press any key to exit..."
 read -n1 -s
 bash /home/$USER/Klipper_Power_Resume/interface.sh
+exit 0
 # This is the bug: rm: cannot remove 'Klipper_Power_Resume/.git/objects/pack': Directory not empty
