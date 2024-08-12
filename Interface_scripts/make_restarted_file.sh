@@ -17,3 +17,10 @@ fi
 filepath="/home/$USER/printer_data/gcodes/$filepath"
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
+read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
+
+if [[ "$starttype" == [Nn] ]]; then
+    echo ""
+    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
+    read -n1 -s
+fi

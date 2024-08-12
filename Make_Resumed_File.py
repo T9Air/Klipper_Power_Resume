@@ -58,7 +58,7 @@ file1 = "/home/USER/Klipper_Power_Resume/log.txt"
 file2 = "stopped file"
 extruder_temp = "200"
 bed_temp = "60"
-gcode = "M190 S" + bed temp + "\nG28\nM109 S" + extruder_temp + "\nUNLOG_FILE"
+gcode = "M190 S" + bed_temp + "\nG28\nM109 S" + extruder_temp + "\nUNLOG_FILE"
 
 # Call the function to delete lines, add start g-code, and create a new g-code file
 delete_lines(file1, file2, gcode)
