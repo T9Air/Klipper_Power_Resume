@@ -14,14 +14,14 @@ echo "Deleting logger.cfg..."
 rm /home/$USER/printer_data/config/logger.cfg
 echo "logger.cfg deleted"
 
-read -r -p "Is the first line in your printer.cfg [include logger.cfg]?: (y/N)" response2
+read -r -p "Is the second line in your printer.cfg [include logger.cfg]?: (y/N)" response2
 if [[ "$response2" == [Nn] ]]; then
     echo "Please remove it when you can."
     echo "Press any key to continue..."
     read -r -n1 -s
 else
     echo "removing logger.cfg inclusion from printer.cfg..."
-    sed -i '1d' /home/$USER/printer_data/config/printer.cfg
+    sed -i '2d' /home/$USER/printer_data/config/printer.cfg
     echo "logger.cfg inclusion removed"
 fi
 

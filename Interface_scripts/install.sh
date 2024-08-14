@@ -36,7 +36,6 @@ echo "Changing username in files to your username..."
 
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/logger.cfg
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/config.yaml
-sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/Make_Resumed_File.py
 
 echo "usernames changed"
 echo " "
@@ -54,6 +53,11 @@ sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
 
 echo "[logger.cfg moved]"
 echo ""
+
+echo "Creating custom start gcode folder..."
+cd /home/$USER/Klipper_Power_Resume
+mkdir start_gcode
+echo "custom start gcode folder created"
 
 echo "Adding permissions to files in Klipper_Power_Resume directory..."
 chmod -R u+rwx /home/$USER/Klipper_Power_Resume

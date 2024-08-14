@@ -24,8 +24,15 @@ bed_temp=60
 
 if [[ "$starttype" == [Nn] ]]; then
     echo ""
-    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    read -r -n1 -s
+    echo "Please just write the name of the file, excluding the .gcode"
+    read -r -p "Pleae input the filename: " startfile
+    startfilepath="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
+    if [[ ! -f "$startfilepath" ]]; then
+        echo "File not found: $startfilepath"
+        echo "Press any key to exit..."
+        read -r -n1 -s
+        /home/$USER/Klipper_Power_Resume/interface.sh  
+    fi
 else
     read -r -p "What temperature should your extruder be set to? " extruder_temp
     echo " "
@@ -33,13 +40,10 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
-# TODO: Change the next code to work with custom start gcode 
-#       Potentially, could have the next code depend on whether using custom gcode or not
-
 linenumber=$(sed -n '1p' $logpath)
 printerposition=$(sed -n '2p' $logpath)
 
-linenumber=$(($linenumber * 2))
+linenumber=$((linenumber * 2))
 
 origfilepath_no_extension="${originalfilepath%.*}"
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
@@ -47,8 +51,14 @@ newfilepath="${origfilepath_no_extension}_restarted.gcode"
 cp $originalfilepath $newfilepath
 
 sed -i "1,${linenumber}d" $newfilepath
-sed -i "1i $printerposition" $newfilepaths
-sed -i "1i $gcode" $newfilepath
+sed -i "1i $printerposition" $newfilepath
+
+if [[ "$starttype" == [Nn] ]]; then
+    sed -i "1r $startfilepath" $newfilepath
+else
+    sed -i "1i $gcode" $newfilepath
+fi
+
 
 echo "_restarted file created!"
 echo "Press any key to exit..."
