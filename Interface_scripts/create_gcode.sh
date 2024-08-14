@@ -14,3 +14,6 @@ read -r -p "What to name the file? " filename
 
 filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
 touch $filename
+
+cd /home/$USER/Klipper_Power_Resume/start_gcode
+nano ${filename}.gcode
