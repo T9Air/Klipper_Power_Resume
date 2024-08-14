@@ -19,3 +19,10 @@ echo " "
 echo "Please input the name of the file you want to edit"
 echo "Do not include the .gcode extension"
 read -r -p "If you want to exit, press enter. " filename
+
+if [[ "$filename" == "" ]]; then
+    echo "Exiting..."
+    read -r -n1 -s
+    /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
+fi
