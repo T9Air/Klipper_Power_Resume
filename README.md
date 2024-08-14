@@ -25,7 +25,8 @@ You can find the instructions on how to use the interface over here: https://git
 | Can create _restarted file                   | &check; |
 | Specify what temps to print at               | &check; |
 | Choose how many lines to skip between logs   | &check; |
-| Create custom start gcode                    | &cross; |
-| Edit custom start gcode                      | &cross; |
+| Use custom start gcode for _restarted file   | &cross; |
+| Create custom start gcode in interface       | &cross; |
+| Edit custom start gcode in interface         | &cross; |
 | Specify which custom start gcode to use      | &cross; |
 | Choose to only log at each layer             | &cross; |
