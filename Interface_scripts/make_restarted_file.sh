@@ -45,7 +45,7 @@ fi
 linenumber=$(sed -n '1p' $logpath)
 printerposition=$(sed -n '2p' $logpath)
 
-linenumber=$(($linenumber * 2))
+linenumber=$((linenumber * 2))
 
 origfilepath_no_extension="${originalfilepath%.*}"
 newfilepath="${origfilepath_no_extension}_restarted.gcode"

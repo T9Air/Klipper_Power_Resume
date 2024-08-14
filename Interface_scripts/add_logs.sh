@@ -25,7 +25,7 @@ fi
 
 read -r -p "How many lines do you want to skip between logs? " num
 
-num=$(($num + 1))
+num=$((num + 1))
 
 sed -i '1i \UNLOG_FILE' $filepath
 sed -i "${num}~${num}a\LOG_FILE" $filepath
