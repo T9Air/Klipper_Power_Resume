@@ -10,6 +10,7 @@ read -r -p "Please input the filename: " filepath
 
 if [[ "$filepath" == "" ]]; then
     echo "Exiting..."
+    read -r -n1 -s
     /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
@@ -27,6 +28,7 @@ fi
 
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath"
+    read -r -n1 -s
     /home/$USER/Klipper_Power_Resume/interface.sh
 fi
 
