@@ -20,6 +20,12 @@ if [[ $originalfilepath == *.* ]]; then
 else
     originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
 fi
+if [[ ! -f "$originalfilepath" ]]; then
+    echo "File not found: $originalfilepath"
+    /home/$USER/Klipper_Power_Resume/interface.sh
+fi
+
+
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
