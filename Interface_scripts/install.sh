@@ -54,6 +54,11 @@ sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
 echo "[logger.cfg moved]"
 echo ""
 
+echo "Creating custom start gcode folder..."
+cd /home/$USER/Klipper_Power_Resume
+mkdir start_gcode
+echo "custom start gcode folder created"
+
 echo "Adding permissions to files in Klipper_Power_Resume directory..."
 chmod -R u+rwx /home/$USER/Klipper_Power_Resume
 
