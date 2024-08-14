@@ -35,3 +35,11 @@ if [[ ! -f "$filename" ]]; then
     read -r -n1 -s
     /home/$USER/Klipper_Power_Resume/interface.sh
 fi
+
+cd /home/$USER/Klipper_Power_Resume/start_gcode
+nano ${filename}
+
+echo " "
+echo "Exiting..."
+read -r -n1 -s
+/home/$USER/Klipper_Power_Resume/interface.sh
