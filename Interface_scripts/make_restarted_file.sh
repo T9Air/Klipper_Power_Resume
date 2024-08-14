@@ -26,7 +26,13 @@ if [[ "$starttype" == [Nn] ]]; then
     echo ""
     #echo "Sorry, but this feature is currently not working. Please press enter to continue..."
     #read -n1 -s
+    echo "Please just write the name of the file, excluding the .gcode"
     read -r -p "Pleae input the filename: " startfile
+    filename="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
+    if [[ ! -f "$filepath" ]]; then
+        echo "File not found: $filepath"
+        /home/$USER/Klipper_Power_Resume/interface.sh  
+    fi
 else
     read -r -p "What temperature should your extruder be set to? " extruder_temp
     echo " "
