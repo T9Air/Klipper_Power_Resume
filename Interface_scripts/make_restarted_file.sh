@@ -24,17 +24,15 @@ bed_temp=60
 
 if [[ "$starttype" == [Nn] ]]; then
     echo ""
-    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    read -n1 -s
+    #echo "Sorry, but this feature is currently not working. Please press enter to continue..."
+    #read -n1 -s
+    read -r -p "Pleae input the filename: " startfile
 else
     read -r -p "What temperature should your extruder be set to? " extruder_temp
     echo " "
     read -r -p "What temperature should your bed be set to? " bed_temp
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
-
-# TODO: Change the next code to work with custom start gcode 
-#       Potentially, could have the next code depend on whether using custom gcode or not
 
 linenumber=$(sed -n '1p' $logpath)
 printerposition=$(sed -n '2p' $logpath)
@@ -47,8 +45,14 @@ newfilepath="${origfilepath_no_extension}_restarted.gcode"
 cp $originalfilepath $newfilepath
 
 sed -i "1,${linenumber}d" $newfilepath
-sed -i "1i $printerposition" $newfilepaths
-sed -i "1i $gcode" $newfilepath
+sed -i "1i $printerposition" $newfilepath
+
+if [[ "$starttype" == [Nn] ]]; then
+    sed -i "1r $startfile" $newfilepath
+else
+    sed -i "1i $gcode" $newfilepath
+fi
+
 
 echo "_restarted file created!"
 echo "Press any key to exit..."
