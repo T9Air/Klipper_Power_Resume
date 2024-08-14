@@ -28,9 +28,11 @@ if [[ "$starttype" == [Nn] ]]; then
     #read -n1 -s
     echo "Please just write the name of the file, excluding the .gcode"
     read -r -p "Pleae input the filename: " startfile
-    filename="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
-    if [[ ! -f "$filepath" ]]; then
-        echo "File not found: $filepath"
+    startfilepath="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
+    if [[ ! -f "$startfilepath" ]]; then
+        echo "File not found: $startfilepath"
+        echo "Press any key to exit..."
+        read -n1 -s
         /home/$USER/Klipper_Power_Resume/interface.sh  
     fi
 else
