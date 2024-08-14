@@ -14,7 +14,12 @@ if [[ "$originalfilepath" == "" ]]; then
     exit 0
 fi
 
-originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
+
+if [[ $originalfilepath == *.* ]]; then
+    originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
+else
+    originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
+fi
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
