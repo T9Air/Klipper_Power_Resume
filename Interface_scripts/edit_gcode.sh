@@ -36,6 +36,9 @@ if [[ ! -f "$filename" ]]; then
     /home/$USER/Klipper_Power_Resume/interface.sh
 fi
 
+echo "Press ctrl+x when finished editing"
+read -r -n1 -s
+
 cd /home/$USER/Klipper_Power_Resume/start_gcode
 nano ${filename}
 

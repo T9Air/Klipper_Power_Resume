@@ -17,6 +17,9 @@ read -r -p "What to name the file? " filename
 filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
 touch $filename
 
+echo "Press ctrl+x when finished editing"
+read -r -n1 -s
+
 cd /home/$USER/Klipper_Power_Resume/start_gcode
 nano ${filename}
 
