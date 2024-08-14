@@ -26,3 +26,12 @@ if [[ "$filename" == "" ]]; then
     /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
+
+filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
+
+if [[ ! -f "$filename" ]]; then
+    echo "File not found: $filename"
+    echo "Exiting..."
+    read -r -n1 -s
+    /home/$USER/Klipper_Power_Resume/interface.sh
+fi
