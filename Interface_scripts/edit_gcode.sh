@@ -15,5 +15,7 @@ else
     exit 0
 fi
 
-
-
+echo " "
+echo "Please input the name of the file you want to edit"
+echo "Do not include the .gcode extension"
+read -r -p "If you want to exit, press enter. " filename
