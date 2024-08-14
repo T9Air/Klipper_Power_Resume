@@ -56,7 +56,7 @@ sed -i "1,${linenumber}d" $newfilepath
 sed -i "1i $printerposition" $newfilepath
 
 if [[ "$starttype" == [Nn] ]]; then
-    sed -i "1r $startfile" $newfilepath
+    sed -i "1r $startfilepath" $newfilepath
 else
     sed -i "1i $gcode" $newfilepath
 fi
