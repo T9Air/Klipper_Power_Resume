@@ -37,9 +37,7 @@ if [[ "$action" == 4 ]]; then
 fi
 
 if [[ "$action" == 5 ]]; then
-    echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    read -r -n1 -s
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/edit_gcode.sh
     exit 0
 fi
 
