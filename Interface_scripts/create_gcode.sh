@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 echo "Custom start gcode creater"
 read -r -p "Are you sure you want to create a custom start gcode? (Y/n) " response1
 
