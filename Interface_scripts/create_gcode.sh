@@ -9,3 +9,8 @@ if [[ "$response1" == [Nn] ]]; then
     bash /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
+
+read -r -p "What to name the file? " filename
+
+filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
+touch $filename
