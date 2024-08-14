@@ -12,7 +12,7 @@ echo "(6) Uninstall"
 echo "(0) Quit"
 
 read -r -n1 -p "#### Perform an action: " action
-read -n1 -s
+read -r -n1 -s
 
 echo " "
 
@@ -33,14 +33,14 @@ fi
 
 if [[ "$action" == 4 ]]; then
     echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    read -n1 -s
+    read -r -n1 -s
     /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
 
 if [[ "$action" == 5 ]]; then
     echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    read -n1 -s
+    read -r -n1 -s
     /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
