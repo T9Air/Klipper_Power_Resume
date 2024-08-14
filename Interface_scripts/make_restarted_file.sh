@@ -25,7 +25,7 @@ bed_temp=60
 if [[ "$starttype" == [Nn] ]]; then
     echo ""
     echo "Sorry, but this feature is currently not working. Please press enter to continue..."
-    read -n1 -s
+    read -r -n1 -s
 else
     read -r -p "What temperature should your extruder be set to? " extruder_temp
     echo " "
@@ -52,7 +52,7 @@ sed -i "1i $gcode" $newfilepath
 
 echo "_restarted file created!"
 echo "Press any key to exit..."
-read -n1 -s
+read -r -n1 -s
 
 /home/$USER/Klipper_Power_Resume/interface.sh
 exit 0

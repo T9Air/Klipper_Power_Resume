@@ -60,7 +60,7 @@ chmod -R u+rwx /home/$USER/Klipper_Power_Resume
 
 echo "Installation finished!"
 echo "Press any key to exit..."
-read -n1 -s
+read -r -n1 -s
 
 /home/$USER/Klipper_Power_Resume/interface.sh
 exit 0
