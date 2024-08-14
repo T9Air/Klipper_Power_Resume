@@ -16,7 +16,7 @@ fi
 
 num=1
 
-filepath="/home/$USER/printer_data/gcodes/$filepath"
+filepath="/home/$USER/printer_data/gcodes/${filepath}.gcode"
 
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath"
