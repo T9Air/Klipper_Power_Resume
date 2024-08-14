@@ -23,9 +23,6 @@ else
     filepath="/home/$USER/printer_data/gcodes/${filepath}.gcode"
 fi
 
-
-
-
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath"
     read -r -n1 -s

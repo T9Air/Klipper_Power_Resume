@@ -36,7 +36,12 @@ extruder_temp=200
 bed_temp=60
 
 if [[ "$starttype" == [Nn] ]]; then
-    echo ""
+    echo " "
+    echo "List of available start_gcode files..."
+    echo " "
+    cd /home/$USER/Klipper_Power_Resume/start_gcode 
+    ls
+    echo " "
     echo "Please just write the name of the file, excluding the .gcode"
     read -r -p "Pleae input the filename: " startfile
     startfilepath="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
