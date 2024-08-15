@@ -26,12 +26,29 @@ else
     echo "logger.cfg inclusion removed"
 fi
 
-echo "You will need to remove the klipper_extras repo on your own."
-echo "Sadly, there is some strange error when running the rm -r command"
-echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your own."
+#echo "You will need to remove the klipper_extras repo on your own."
+#echo "Sadly, there is some strange error when running the rm -r command"
+#echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your own."
 
-echo "Press any key to exit..."
+
+#/home/$USER/Klipper_Power_Resume/interface.sh
+#exit 0
+
+read -r -p "Do you want to delete the klipper_extras repo on your own? (y/N) " response3
+echo " "
+if [[ "$response3" == [Nn] ]]; then
+    echo "Deleting klipper_extras repo..."
+    rm -rf /home/$USER/klipper_extras
+    echo "klipper_extras repo deleted"
+else
+    echo "Please remember to remove the klipper_extras repo"
+fi
+
+echo "Press any key to continue..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/interface.sh
+echo " "
+
+echo "Deleting Klipper_Power_Resume repository..."
+rm -rf /home/$USER/Klipper_Power_Resume
+echo "Repository deleted"
 exit 0
-# This is the bug: rm: cannot remove 'Klipper_Power_Resume/.git/objects/pack': Directory not empty
