@@ -61,7 +61,11 @@ fi
 linenumber=$(sed -n '1p' $logpath)
 printerposition=$(sed -n '2p' $logpath)
 
-linenumber=$((linenumber * 2))
+read -r -p "How many lines were skipped in between logs? " skippedlines
+
+skippedlines=$((skippedlines + 2))
+
+linenumber=$((linenumber * skippedlines))
 
 origfilepath_no_extension="${originalfilepath%.*}"
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
