@@ -25,7 +25,7 @@
    chmod -R u+rwx /home/$USER/Klipper_Power_Resume
    ```
 2. Install the extended_macros repo. Instructions can be found [here](https://github.com/droans/klipper_extras/blob/main/extended_macro/readme.md).
-3. In all the files, change "$USER" to your username
+3. In all the files, change "USER" to your username
 4. Move logger.cfg to the path where all your config files are. (Usually ~/printer_data/config)
 5. In your printer.cfg add ```[include logger.cfg]```
 
