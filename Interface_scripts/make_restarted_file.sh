@@ -87,30 +87,44 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
+# Get the linenumber where the printer stopped
 linenumber=$(sed -n '1p' $logpath)
+
+# Get the last recorded printer position
 printerposition=$(sed -n '2p' $logpath)
 
+# Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
 
-skippedlines=$((skippedlines + 2))
+# Calculate the amount of lines to delete
+skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
 
-linenumber=$((linenumber * skippedlines))
+linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
 
+# Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
+
+# Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
+# Copy the contents of the original file to a new file
 cp $originalfilepath $newfilepath
 
+# Delete an amount of lines based on the calculated number above
 sed -i "1,${linenumber}d" $newfilepath
+
+# Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
 if [[ "$starttype" == [Nn] ]]; then
-    sed -i "1r $startfilepath" $newfilepath
+    # If using custom start gcode...
+    sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
 else
-    sed -i "1i $gcode" $newfilepath
+    # If using standard start gcode
+    sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
 fi
 
-
+# Exit
 echo "_restarted file created!"
 echo "Press any key to exit..."
 read -r -n1 -s
