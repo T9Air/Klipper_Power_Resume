@@ -27,11 +27,10 @@ else
 fi
 
 echo "You will need to remove the klipper_extras repo on your own."
-echo "Sadly, there is some strange error when running the rm -r command"
-echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your own."
+#echo "Sadly, there is some strange error when running the rm -r command"
+#echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your own."
 
-echo "Press any key to exit..."
+echo "Press any key to continue..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/interface.sh
-exit 0
-# This is the bug: rm: cannot remove 'Klipper_Power_Resume/.git/objects/pack': Directory not empty
+#/home/$USER/Klipper_Power_Resume/interface.sh
+#exit 0
