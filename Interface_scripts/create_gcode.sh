@@ -25,6 +25,7 @@ filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
 # Create the file
 touch $filename
 
+echo "Please remember to add UNLOG_FILE to the end of the file"
 echo "Press ctrl+x when finished editing"
 read -r -n1 -s
 
