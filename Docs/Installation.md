@@ -36,5 +36,3 @@
 2. Press 0 to run the uninstall script
 
 3. Follow the instructions in the script
-
-4. You will need to open [WinSCP](https://winscp.net/eng/download.php) or an alternative to delete the Klipper_Power_Resume directory, rm -r does not work
