@@ -34,3 +34,8 @@ echo "Press any key to continue..."
 read -r -n1 -s
 #/home/$USER/Klipper_Power_Resume/interface.sh
 #exit 0
+
+echo "Deleting repository..."
+rm -rf /home/$USER/Klipper_Power_Resume
+echo "Repository deleted"
+exit 0
