@@ -26,14 +26,6 @@ else
     echo "logger.cfg inclusion removed"
 fi
 
-#echo "You will need to remove the klipper_extras repo on your own."
-#echo "Sadly, there is some strange error when running the rm -r command"
-#echo "Therefore, you will need to delete the Klipper_Power_Resume folder on your own."
-
-
-#/home/$USER/Klipper_Power_Resume/interface.sh
-#exit 0
-
 read -r -p "Do you want to delete the klipper_extras repo on your own? (y/N) " response3
 echo " "
 if [[ "$response3" == [Nn] ]]; then
