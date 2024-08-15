@@ -38,5 +38,6 @@ sed -i "${num}~${num}a\LOG_FILE" $filepath
 
 echo "File changed!"
 echo "Press any key to exit..."
+read -r -n1 -s
 /home/$USER/Klipper_Power_Resume/interface.sh
 exit 0
