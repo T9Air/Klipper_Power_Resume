@@ -28,27 +28,37 @@ if [[ "$response2" == [Nn] ]]; then
     # Tell the user to delete it on their own
     echo "Please remove it when you can."
     echo "Press any key to continue..."
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
+    read -r -n1 -s # Wait for a keypress before continuing
 else
+    # If yes...
+    # Inform user that [include logger.cfg] is being deleted
     echo "removing logger.cfg inclusion from printer.cfg..."
     sed -i '2d' /home/$USER/printer_data/config/printer.cfg
     echo "logger.cfg inclusion removed"
 fi
 
+# Ask user if the want to delete the klipper_extras repo on their own
 read -r -p "Do you want to delete the klipper_extras repo on your own? (y/N) " response3
 echo " "
+
 if [[ "$response3" == [Nn] ]]; then
+    # If no...
+    # Inform user that the klipper_extras repo is being deleted
     echo "Deleting klipper_extras repo..."
     rm -rf /home/$USER/klipper_extras
     echo "klipper_extras repo deleted"
 else
+    # If yes...
+    # Tell user to remove it on their own
     echo "Please remember to remove the klipper_extras repo"
 fi
 
+# Add break before deleting the whole repository
 echo "Press any key to continue..."
-read -r -n1 -s
+read -r -n1 -s # Wait for a keypress before continuing
 echo " "
 
+# Inform user that the Klipper_Power_Resume repository is being deleted
 echo "Deleting Klipper_Power_Resume repository..."
 rm -rf /home/$USER/Klipper_Power_Resume
 echo "Repository deleted"
