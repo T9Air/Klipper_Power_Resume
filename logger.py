@@ -1,4 +1,4 @@
-def log(filename, x_position, y_position, z_position):
+def log(filename, x_position, y_position, z_position, layer):
     """
     This function logs the current line of the gcode, and the current position of the printer.
 
