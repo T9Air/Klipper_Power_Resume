@@ -35,6 +35,8 @@ def log(filename, x_position, y_position, z_position, layer):
             # Write the G0 command to a new line in the file
             file.write("\n" + movement_command)
 
+            file.write(str(layer))
+
     except FileNotFoundError:
         # If the file doesn't exist, create it and write initial values
         with open(filename, 'w') as file:
