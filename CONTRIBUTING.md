@@ -17,3 +17,4 @@
    2. It will add/change the majority of a file
    3. It is a new feature that did not exist earlier
    4. It involves changing the docs
+4. If a task does not meet any of the 4 rules, it should be included in the branch for the task that makes the most sense for it to be with
