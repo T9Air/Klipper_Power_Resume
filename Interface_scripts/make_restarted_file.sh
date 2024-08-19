@@ -107,6 +107,9 @@ linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by t
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
 
+# Clear layer.gcode file
+truncate -s -0 /home/$USER/Klipper_Power_Resume/layer.gcode
+
 # Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
