@@ -125,6 +125,8 @@ sed -i "1,${linenumber}d" $newfilepath
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
+sed -i "1r /home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
+
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
     sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
