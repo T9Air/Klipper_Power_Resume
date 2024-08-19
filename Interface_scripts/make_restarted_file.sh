@@ -110,9 +110,6 @@ origfilepath_no_extension="${originalfilepath%.*}"
 # Clear layer.gcode file
 truncate -s -0 /home/$USER/Klipper_Power_Resume/layer.gcode
 
-# Add the gcode in the logged layer to layer.gcode
-sed -n "/;LAYER:${layer}/,/;LAYER:/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
-
 # Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
@@ -125,6 +122,13 @@ sed -i "1,${linenumber}d" $newfilepath
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
+# Add the gcode in the logged layer to layer.gcode
+sed -n "/;LAYER:${layer}/,/;LAYER:/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
+
+# Delete all of the extrusions of the layer.gcode file
+sed -i 's/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
+
+# Add gcode to beggining of file
 sed -i "1r /home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
 
 if [[ "$starttype" == [Nn] ]]; then
