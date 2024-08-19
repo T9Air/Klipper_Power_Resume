@@ -93,6 +93,9 @@ linenumber=$(sed -n '1p' $logpath)
 # Get the last recorded printer position
 printerposition=$(sed -n '2p' $logpath)
 
+# Get the layer that was bing printed
+layer=$(sed -n '3p' $logpath)
+
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
 
