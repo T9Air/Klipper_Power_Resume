@@ -144,6 +144,12 @@ else
     sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
 fi
 
+# Add logs
+skippedlines=$((skippedlines + 1))
+
+# Insert LOG_FILE after the specified number of lines (skipping the first line)
+sed -i "${num}~${num}a\LOG_FILE" $filepath
+
 # Exit
 echo "_restarted file created!"
 echo "Press any key to exit..."
