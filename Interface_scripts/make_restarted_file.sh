@@ -71,6 +71,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
         /home/$USER/Klipper_Power_Resume/interface.sh  
+        exit 0
     fi
 else
     # If using standard start gcode
