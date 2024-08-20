@@ -31,7 +31,7 @@
 
 ## Uninstalling
 
-1. Run the following command on your Raspberry Pi ```cd ~/Klipper_Power_Resume/interface.sh```
+1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/interface.sh```
 
 2. Press 0 to run the uninstall script
 
