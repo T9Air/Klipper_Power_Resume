@@ -100,9 +100,9 @@ layer=$(sed -n '3p' $logpath)
 read -r -p "How many lines were skipped in between logs? " skippedlines
 
 # Calculate the amount of lines to delete
-skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
+deletelines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
 
-linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
+linenumber=$((linenumber * deletelines)) # Multiply the logged line number by the above number
 
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
