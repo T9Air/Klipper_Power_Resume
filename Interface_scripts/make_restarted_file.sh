@@ -148,7 +148,7 @@ fi
 skippedlines=$((skippedlines + 1))
 
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
-sed -i "${num}~${num}a\LOG_FILE" $filepath
+sed -i "${skippedlines}~${skippedlines}a\LOG_FILE" $filepath
 
 # Exit
 echo "_restarted file created!"
