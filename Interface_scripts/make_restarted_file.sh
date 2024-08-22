@@ -111,9 +111,6 @@ origfilepath_no_extension="${originalfilepath%.*}"
 # Clear layer.gcode file
 truncate -s -0 /home/$USER/Klipper_Power_Resume/layer.gcode
 
-# Clear tmp.gcode file
-truncate -s -0 /home/$USER/Klipper_Power_Resume/tmp.gcode
-
 # Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
@@ -134,7 +131,7 @@ sed -i '/LOG_FILE/d' /home/$USER/Klipper_Power_Resume/layer.gcode
 sed -i '/LOG_FILE/d' $newfilepath
 
 # Delete all of the extrusions of the layer.gcode file
-# sed -i 's/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
+sed -i '/^G1/s/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Add gcode to beggining of file
 sed -i "1r/home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
