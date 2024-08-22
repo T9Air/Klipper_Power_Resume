@@ -124,7 +124,7 @@ sed -i "1,${linenumber}d" $newfilepath
 sed -i "1i $printerposition" $newfilepath
 
 # Add the gcode in the logged layer to layer.gcode
-sed -n "/;LAYER:${layer}/,/;LAYER:/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
+sed -n "/;LAYER:10/,/;LAYER:11/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Remove Log_File macro from files
 sed -i '/LOG_FILE/d' /home/$USER/Klipper_Power_Resume/layer.gcode
@@ -134,21 +134,21 @@ sed -i '/LOG_FILE/d' $newfilepath
 sed -i 's/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Add gcode to beggining of file
-sed -i "1r /home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
-
-if [[ "$starttype" == [Nn] ]]; then
-    # If using custom start gcode...
-    sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
-else
-    # If using standard start gcode
-    sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
-fi
+sed -i "1r/home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
 
 # Add logs
 skippedlines=$((skippedlines + 1))
 
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
-sed -i "${skippedlines}~${skippedlines}a\LOG_FILE" $filepath
+sed -i "${skippedlines}~${skippedlines}a\LOG_FILE" $newfilepath
+
+if [[ "$starttype" == [Nn] ]]; then
+    # If using custom start gcode...
+    sed -i "1r$startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
+else
+    # If using standard start gcode
+    sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
+fi
 
 # Exit
 echo "_restarted file created!"
