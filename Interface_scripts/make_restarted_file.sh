@@ -71,6 +71,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
         /home/$USER/Klipper_Power_Resume/interface.sh  
+        exit 0
     fi
 else
     # If using standard start gcode
@@ -93,16 +94,22 @@ linenumber=$(sed -n '1p' $logpath)
 # Get the last recorded printer position
 printerposition=$(sed -n '2p' $logpath)
 
+# Get the layer that was bing printed
+layer=$(sed -n '3p' $logpath)
+
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
 
 # Calculate the amount of lines to delete
-skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
+deletelines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
 
-linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
+linenumber=$((linenumber * deletelines)) # Multiply the logged line number by the above number
 
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
+
+# Clear layer.gcode file
+truncate -s -0 /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
@@ -116,9 +123,28 @@ sed -i "1,${linenumber}d" $newfilepath
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
+# Add the gcode in the logged layer to layer.gcode
+sed -n "/;LAYER:10/,/;LAYER:11/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
+
+# Remove Log_File macro from files
+sed -i '/LOG_FILE/d' /home/$USER/Klipper_Power_Resume/layer.gcode
+sed -i '/LOG_FILE/d' $newfilepath
+
+# Delete all of the extrusions of the layer.gcode file
+sed -i '/^G1/s/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
+
+# Add gcode to beggining of file
+sed -i "1r/home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
+
+# Add logs
+skippedlines=$((skippedlines + 1))
+
+# Insert LOG_FILE after the specified number of lines (skipping the first line)
+sed -i "${skippedlines}~${skippedlines}a\LOG_FILE" $newfilepath
+
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
-    sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
+    sed -i "1r$startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
 else
     # If using standard start gcode
     sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
