@@ -134,7 +134,7 @@ sed -i '/LOG_FILE/d' /home/$USER/Klipper_Power_Resume/layer.gcode
 sed -i '/LOG_FILE/d' $newfilepath
 
 # Delete all of the extrusions of the layer.gcode file
-sed -i 's/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
+# sed -i 's/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Add gcode to beggining of file
 sed -i "1r/home/$USER/Klipper_Power_Resume/layer.gcode" $newfilepath 
