@@ -127,8 +127,8 @@ sed -i "1i $printerposition" $newfilepath
 sed -n "/;LAYER:${layer}/,/;LAYER:/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Remove Log_File macro from files
-sed -i '/LOG_FILE/' /home/$USER/Klipper_Power_Resume/layer.gcode
-sed -i '/LOG_FILE/' $newfilepath
+sed -i '/LOG_FILE/d' /home/$USER/Klipper_Power_Resume/layer.gcode
+sed -i '/LOG_FILE/d' $newfilepath
 
 # Delete all of the extrusions of the layer.gcode file
 sed -i 's/E.*//' /home/$USER/Klipper_Power_Resume/layer.gcode
