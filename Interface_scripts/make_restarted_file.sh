@@ -97,6 +97,9 @@ printerposition=$(sed -n '2p' $logpath)
 # Get the layer that was bing printed
 layer=$(sed -n '3p' $logpath)
 
+# Add variable for the number of the layer after the current layer
+nextlayer=$((layer + 1))
+
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
 
@@ -124,7 +127,7 @@ sed -i "1,${linenumber}d" $newfilepath
 sed -i "1i $printerposition" $newfilepath
 
 # Add the gcode in the logged layer to layer.gcode
-sed -n "/;LAYER:10/,/;LAYER:11/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
+sed -n "/;LAYER:${layer}/,/;LAYER:${nextlayer}/p" $originalfilepath > /home/$USER/Klipper_Power_Resume/layer.gcode
 
 # Remove Log_File macro from files
 sed -i '/LOG_FILE/d' /home/$USER/Klipper_Power_Resume/layer.gcode
