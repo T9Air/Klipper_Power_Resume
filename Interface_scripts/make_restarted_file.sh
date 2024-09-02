@@ -96,6 +96,7 @@ printerposition=$(sed -n '2p' $logpath)
 
 # Get the layer that was bing printed
 layer=$(sed -n '3p' $logpath)
+layer=$((layer - 1))
 
 # Add variable for the number of the layer after the current layer
 nextlayer=$((layer + 1))
