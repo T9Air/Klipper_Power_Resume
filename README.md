@@ -1,3 +1,5 @@
+# This version is currently not being worked on due to certain parts of the code not working out as I wanted it to. This will be gone back to and tried again later.
+
 # Klipper_Power_Resume
 
 ## All feedback will be greatly appreciated
