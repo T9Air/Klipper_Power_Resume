@@ -14,3 +14,40 @@ Installation instructions can be found here: https://github.com/T9Air/Klipper_Po
 ### Usage
 
 You can find the instructions on how to use the interface over here: https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Usage.md
+
+## Changelog
+
+### version 2.2.1
+
+* Can fully uninstall directly from the interface
+* Ask the user how many lines skipped in make_restarted_file.sh
+
+### version 2.2.0
+
+* User can create and edit custom start gcode files from the interface
+* Added checks to add_logs.sh and make_restarted_file.sh to see if the user added .gcode in the filename, and act accordingly
+
+### version 2.1.0
+
+* Allow user to use a custom gcode file as the start gcode
+
+### version 2.0.0
+
+* Deprecated the post-processing script for Cura
+* Deprecated the Python script to make a _restarted file
+* Created the command line interface with these basic features
+  * Add the logging gcode to the gcode files
+  * Make a _restarted file just by inputting basic information
+  * Used the install script from v1.1.0 with minor changes
+  * An uninstall script
+
+### version 1.1.0
+
+* Added an install script
+* Still no interface for other features, and creating a _restarted file is still complicated
+
+### version 1.0.0
+
+* All basic functionality is working, without an interface
+* No scripts for installation
+* Creating a _restarted file is complicated
