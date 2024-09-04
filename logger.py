@@ -1,3 +1,5 @@
+import subprocess
+
 def log(filename, x_position, y_position, z_position):
     """
     This function logs the current line of the gcode, and the current position of the printer.
@@ -52,6 +54,7 @@ def clear_log(filename):
     Args:
         filename (str): The filepathof the log.
     """
-    with open(filename, 'w') as file:
-        # Write '0' to the file, effectively resetting the line count
-        file.write('0')
+#    with open(filename, 'w') as file:
+#        # Write '0' to the file, effectively resetting the line count
+#        file.write('0')
+    subprocess(["bash", "/home/USER/Klipper_Power_Resume/unlog.sh"])
