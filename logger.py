@@ -47,7 +47,7 @@ def log(filename, x_position, y_position, z_position):
 #            movement_command = "G0 X" + x + " Y" + y + " Z" + z
 #            file.write("\n" + movement_command)
 #
-
+    subprocess.run(["bash", "/home/USER/Klipper_Power_Resume/log.sh", x_position, y_position, z_position])
 
 def clear_log(filename):
     """
