@@ -57,4 +57,4 @@ def clear_log(filename):
 #    with open(filename, 'w') as file:
 #        # Write '0' to the file, effectively resetting the line count
 #        file.write('0')
-    subprocess(["bash", "/home/USER/Klipper_Power_Resume/unlog.sh"])
+    subprocess.run(["bash", "/home/USER/Klipper_Power_Resume/unlog.sh"])
