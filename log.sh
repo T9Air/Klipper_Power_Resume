@@ -7,3 +7,5 @@ linenumber=$((linenumber + 1))
 x=$1
 y=$2
 z=$3
+
+echo $linenumber > /home/$USER/Klipper_Power_Resume/log.txt
