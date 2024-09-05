@@ -9,3 +9,5 @@ y=$2
 z=$3
 
 echo $linenumber > /home/$USER/Klipper_Power_Resume/log.txt
+
+movement_command="G0 X${x} Y${y} Z${z}"
