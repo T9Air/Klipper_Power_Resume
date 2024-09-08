@@ -16,26 +16,46 @@ if [[ "$response1" == [Nn] ]]; then
     exit 0
 fi
 
-# Inform user that they need to install gcode_shell_command
-echo " "
-echo "Please install the gcode_shell_command extension from Kiauh"
-echo "Press option 4 (advanced), and then option 8"
 echo " "
 
-# Wait for keypress to continue
-echo "Press enter to continue..."
-read -r -n1 -s
+# Inform user about extended_macros installation
+echo "Please install the extended_macros repo."
 echo " "
+echo "This will download another repository from GitHub, and install it."
+echo " "
+
+# Provide installation instructions link for extended_macros repo
+echo "Please follow the instructions at this link: https://github.com/droans/klipper_extras/blob/main/extended_macro/readme.md"
+echo " "
+echo "Once you finish installing it, you will be sent back here"
+echo " "
+
+# Ask user if they want to install extended_macros on their own, or through this script
+read -r -p "Do you want to install it from here? (Y/n)" response2
+echo " "
+
+if [[ "$response2" == [Yy] ]]; then
+    # If installing through script...
+    cd ~ # Change directory to user's home directory
+    git clone https://github.com/droans/klipper_extras.git # Clone the extended_macros repository from GitHub
+    cd klipper_extras # Change directory to the cloned repository
+    python3 scripts/install.py # Run the installation script
+else
+    # If installing manually, tell user they must install it, otherwise the logging will not work
+    echo "Please remember to install it on your own, otherwise logging will not work."
+    echo " "
+fi
 
 # Inform user about replacing username in configuration files
 echo "Changing username in files to your username..."
 sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/logger.cfg
+sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/config.yaml
 echo "usernames changed"
 echo " "
 
 # Inform user about moving logger.cfg to where the config files are stored
 echo "Moving logger.cfg to where all your config files are stored..."
-cp /home/$USER/Klipper_Power_Resume/logger.cfg /home/$USER/printer_data/config/
+mv /home/$USER/Klipper_Power_Resume/logger.cfg /home/$USER/printer_data/config/
 echo "logger.cfg moved"
 echo ""
 

@@ -1,3 +1,5 @@
+import subprocess
+
 def log(filename, x_position, y_position, z_position):
     """
     This function logs the current line of the gcode, and the current position of the printer.
@@ -20,7 +22,6 @@ def log(filename, x_position, y_position, z_position):
             x = str(x_position)
             y = str(y_position)
             z = str(z_position)
-
             # Go to the beginning of the file and truncate any existing content
             file.seek(0)
             file.truncate()
@@ -31,7 +32,6 @@ def log(filename, x_position, y_position, z_position):
             # Log G0 movement command with current printer positions
             # The G0 command is created over here in order to make it easier to create the restarted file
             movement_command = "G0 X" + x + " Y" + y + " Z" + z
-
             # Write the G0 command to a new line in the file
             file.write("\n" + movement_command)
 
@@ -45,6 +45,8 @@ def log(filename, x_position, y_position, z_position):
             movement_command = "G0 X" + x + " Y" + y + " Z" + z
             file.write("\n" + movement_command)
 
+#    subprocess.run(["bash", "/home/USER/Klipper_Power_Resume/log.sh", x_position, y_position, z_position])
+
 def clear_log(filename):
     """
     This function clears the log file and writes '0' to the first line.
@@ -55,3 +57,5 @@ def clear_log(filename):
     with open(filename, 'w') as file:
         # Write '0' to the file, effectively resetting the line count
         file.write('0')
+
+#    subprocess.run(["bash", "/home/USER/Klipper_Power_Resume/unlog.sh"])

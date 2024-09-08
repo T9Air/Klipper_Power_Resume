@@ -17,6 +17,14 @@ You can find the instructions on how to use the interface over here: https://git
 
 ## Changelog
 
+### version 3.0.0
+
+* Logging and unlogging done through shell scripts instead of a Python script
+* Use gcode_shell_command instead of the previous [klipper-extras](https://github.com/droans/klipper_extras) repo that was in use
+* When logging during printing, each axis is logged on its own line
+* Made a new install script
+* Updated uninstall script
+
 ### version 2.2.1
 
 * Can fully uninstall directly from the interface
