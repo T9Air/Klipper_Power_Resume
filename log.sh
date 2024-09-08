@@ -12,6 +12,6 @@ truncate -s 0 /home/$USER/Klipper_Power_Resume/log.txt
 
 echo $linenumber > /home/$USER/Klipper_Power_Resume/log.txt
 
-movement_command="G0 X${x} Y${y} Z${z}"
-
-echo $movement_command >> /home/$USER/Klipper_Power_Resume/log.txt
+echo $x >> /home/$USER/Klipper_Power_Resume/log.txt
+echo $y >> /home/$USER/Klipper_Power_Resume/log.txt
+echo $z >> /home/$USER/Klipper_Power_Resume/log.txt

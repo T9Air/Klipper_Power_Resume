@@ -91,7 +91,11 @@ fi
 linenumber=$(sed -n '1p' $logpath)
 
 # Get the last recorded printer position
-printerposition=$(sed -n '2p' $logpath)
+printerx=$(sed -n '2p' $logpath)
+printery=$(sed -n '3p' $logpath)
+printerz=$(sed -n '4p' $logpath)
+
+printerposition="G0 X${printerx} Y${printery} Z${printerz}"
 
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
