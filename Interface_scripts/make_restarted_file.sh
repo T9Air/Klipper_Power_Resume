@@ -120,6 +120,17 @@ sed -i "1,${linenumber}d" $newfilepath
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
+while IFS= read -r line; do
+  # Extract the number after "Z"
+  number_after_z=$(echo "$line" | sed 's/^.*Z\(.*\)$/\1/')
+
+  # Subtract the saved z-height from the number
+  subtracted_number=$(echo "$number_after_z" - "$printerz" | bc)
+
+  # Replace the number in the line and write changes directly to the file
+  sed -i "s/\($number_after_z\)$/$subtracted_number/" "$file"
+done < "$newfilepath"
+
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
     sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
