@@ -128,7 +128,7 @@ while IFS= read -r line; do
   subtracted_number=$(echo "$number_after_z" - "$printerz" | bc)
 
   # Replace the number in the line and write changes directly to the file
-  sed -i "s/\($number_after_z\)$/$subtracted_number/" "$file"
+  sed -i "s/\($number_after_z\)$/$subtracted_number/" "$newfilepath"
 done < "$newfilepath"
 
 if [[ "$starttype" == [Nn] ]]; then
