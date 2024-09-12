@@ -122,7 +122,7 @@ sed -i "1i $printerposition" $newfilepath
 
 while IFS= read -r line; do
   # Extract the number after "Z"
-  number_after_z=$(echo "$line" | sed 's/^.*Z\(.*\)$/\1/')
+  number_after_z=$(echo "$line" | sed '/^G0\|^G1/s/^.*Z\(.*\)$/\1/')
 
   # Subtract the saved z-height from the number
   subtracted_number=$(echo "$number_after_z" - "$printerz" | bc)
