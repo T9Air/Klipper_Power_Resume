@@ -131,6 +131,9 @@ while IFS= read -r line; do
             if [[ "$new_z_coord" -lt 1 ]]; then
                 new_z_coord="0${new_z_coord}"    
             fi
+            if [[ $(bc <<< "scale=0; $new_z_coord") -eq $new_z_coord ]]; then
+                new_z_coord="${new_z_coord}.0"
+            fi
             line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
         fi
     fi
