@@ -120,16 +120,19 @@ sed -i "1,${linenumber}d" $newfilepath
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
+# Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
 while IFS= read -r line; do
-  # Extract the number after "Z"
-  number_after_z=$(echo "$line" | sed '/^G0\|^G1/s/^.*Z\(.*\)$/\1/')
-
-  # Subtract the saved z-height from the number
-  subtracted_number=$(echo "$number_after_z" - "$printerz" | bc)
-
-  # Replace the number in the line and write changes directly to the file
-  sed -i "s/\($number_after_z\)$/$subtracted_number/" "$newfilepath"
+  if [[ "$line" =~ ^G[01] ]]; then
+    if [[ "$line" =~ Z ]]; then
+      z_coord=$(echo "$line" | cut -d Z -f 2)
+      new_z_coord=$((z_coord - printerz))
+      line=$(echo "$line" | sed "s/Z$z_coord/Z$new_z_coord/")
+    fi
+  fi
+  echo "$line" >> "$newfilepath.tmp"
 done < "$newfilepath"
+mv "$newfilepath.tmp" "$newfilepath"
+rm "$newfilepath.tmp"
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
