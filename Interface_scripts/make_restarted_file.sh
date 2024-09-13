@@ -124,13 +124,16 @@ touch "$newfilepath.tmp"
 
 # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
 while IFS= read -r line; do
-  if [[ "$line" =~ ^G[01] ]]; then
-    if [[ "$line" =~ Z ]]; then
-      z_coord=$(echo "$line" | cut -d Z -f 2)
-      new_z_coord=$(echo "$z_coord - $printerz" | bc)
-      line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
+    if [[ "$line" =~ ^G[01] ]]; then
+        if [[ "$line" =~ Z ]]; then
+            z_coord=$(echo "$line" | cut -d Z -f 2)
+            new_z_coord=$(echo "$z_coord - $printerz" | bc)
+            if [[ "$new_z_coord" -lt 1 ]]; then
+                new_z_coord="0${new_z_coord}"    
+            fi
+            line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
+        fi
     fi
-  fi
   echo "$line" >> "$newfilepath.tmp"
 done < "$newfilepath"
 mv "$newfilepath.tmp" "$newfilepath"
