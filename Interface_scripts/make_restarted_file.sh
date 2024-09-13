@@ -120,19 +120,20 @@ sed -i "1,${linenumber}d" $newfilepath
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
 
+touch "$newfilepath.tmp"
+
 # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
 while IFS= read -r line; do
   if [[ "$line" =~ ^G[01] ]]; then
     if [[ "$line" =~ Z ]]; then
       z_coord=$(echo "$line" | cut -d Z -f 2)
-      new_z_coord=$((z_coord - printerz))
-      line=$(echo "$line" | sed "s/Z$z_coord/Z$new_z_coord/")
+      new_z_coord=$(echo "$z_coord - $printerz" | bc)
+      line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
     fi
   fi
   echo "$line" >> "$newfilepath.tmp"
 done < "$newfilepath"
 mv "$newfilepath.tmp" "$newfilepath"
-rm "$newfilepath.tmp"
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
@@ -144,6 +145,11 @@ fi
 
 # Exit
 echo "_restarted file created!"
+echo "Press any key to exit..."
+read -r -n1 -s
+
+/home/$USER/Klipper_Power_Resume/interface.sh
+exit 0
 echo "Press any key to exit..."
 read -r -n1 -s
 
