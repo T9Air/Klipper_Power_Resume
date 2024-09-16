@@ -17,6 +17,11 @@ You can find the instructions on how to use the interface over here: https://git
 
 ## Changelog
 
+### version 3.1.0
+
+* User can now home on the print itself, instead of just in the corner
+* Fixed bug in [make_restarted_file.sh ](https://github.com/T9Air/Klipper_Power_Resume/blob/v3.1.0/Interface_scripts/make_restarted_file.sh)where if files do not exist, the script will still run
+
 ### version 3.0.0
 
 * Logging and unlogging done through shell scripts instead of a Python script
