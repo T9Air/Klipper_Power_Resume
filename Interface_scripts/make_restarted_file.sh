@@ -34,6 +34,7 @@ if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
     /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
 fi
 
 # Set the path to the log file
@@ -71,6 +72,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
         /home/$USER/Klipper_Power_Resume/interface.sh  
+        exit 0
     fi
 else
     # If using standard start gcode
@@ -119,6 +121,31 @@ sed -i "1,${linenumber}d" $newfilepath
 
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $printerposition" $newfilepath
+
+read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
+
+if [[ "$home_area" == "1" ]]; then
+    touch "$newfilepath.tmp"
+
+    # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
+    while IFS= read -r line; do
+        if [[ "$line" =~ ^G[01] ]]; then
+            if [[ "$line" =~ Z ]]; then
+                z_coord=$(echo "$line" | cut -d Z -f 2)
+                new_z_coord=$(bc <<< "$z_coord - $printerz")
+                if [[ $(bc <<< "$new_z_coord < 1") -eq 1 && $(bc <<< "$new_z_coord != 0") -eq 1 ]]; then
+                    new_z_coord="0${new_z_coord}"    
+                fi
+                if ! [[ $new_z_coord =~ \. ]]; then
+                    new_z_coord="${new_z_coord}.0"
+                fi
+                line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
+            fi
+        fi
+    echo "$line" >> "$newfilepath.tmp"
+    done < "$newfilepath"
+    mv "$newfilepath.tmp" "$newfilepath"
+fi
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
