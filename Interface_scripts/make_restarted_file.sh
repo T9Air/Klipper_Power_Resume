@@ -133,7 +133,7 @@ if [[ "$home_area" == "1" ]]; then
             if [[ "$line" =~ Z ]]; then
                 z_coord=$(echo "$line" | cut -d Z -f 2)
                 new_z_coord=$(bc <<< "$z_coord - $printerz")
-                if [[ $(bc <<< "$new_z_coord < 1") -eq 1 ]]; then
+                if [[ $(bc <<< "$new_z_coord < 1") -eq 1 && $(bc <<< "$new_z_coord != 0") -eq 1 ]]; then
                     new_z_coord="0${new_z_coord}"    
                 fi
                 if ! [[ $new_z_coord =~ \. ]]; then
