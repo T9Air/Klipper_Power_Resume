@@ -1,6 +1,6 @@
 # Klipper_Power_Resume
 
-## All feedback will be greatly appreciated
+## All feedback/ideas would be greatly appreciated
 
 ### Background
 
