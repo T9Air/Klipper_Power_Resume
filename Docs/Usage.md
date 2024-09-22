@@ -1,6 +1,6 @@
 # Usage
 
-### Adding Log Macro to a File
+## Adding Log Macro to a File
 
 1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/interface.sh```
 
@@ -16,10 +16,10 @@
 
 3. Follow the instructions in the script
 
-### Creating Custom Start Gcode Files
+## Creating Custom Start Gcode Files
 
 > Note: You can also import files using an editor such as WinSCP
->       Make sure to put the files in the start_gcode folder
+> Make sure to put the files in the start_gcode folder
 
 1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/interface.sh```
 

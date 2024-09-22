@@ -9,18 +9,18 @@ I recently moved from Marlin to Klipper, and what has annoyed me is that with Kl
 
 ### Installation instructions
 
-Installation instructions can be found here: https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Installation.md
+Installation instructions can be found here: <https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Installation.md>
 
 ### Usage
 
-You can find the instructions on how to use the interface over here: https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Usage.md
+You can find the instructions on how to use the interface over here: <https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Usage.md>
 
 ## Changelog
 
 ### version 3.1.0
 
 * User can now home on the print itself, instead of just in the corner
-* Fixed bug in [make_restarted_file.sh ](https://github.com/T9Air/Klipper_Power_Resume/blob/v3.1.0/Interface_scripts/make_restarted_file.sh)where if files do not exist, the script will still run
+* Fixed bug in [make_restarted_file.sh](https://github.com/T9Air/Klipper_Power_Resume/blob/v3.1.0/Interface_scripts/make_restarted_file.sh) where if files do not exist, the script will still run
 
 ### version 3.0.0
 
