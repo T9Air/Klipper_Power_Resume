@@ -1,28 +1,32 @@
 # Installation
 
-### Using the interface script
+## Using the interface script
 
 1. Run the following commands on your Raspberry Pi
-   ```
+
+   ```bash
    cd ~
    git clone https://github.com/T9Air/Klipper_Power_Resume.git
    cd Klipper_Power_Resume
    bash interface.sh
    ```
-2. Press 1 to run the installation script
 
-> NOTE: YOU MUST RUN THE INSTALLATION SCRIPT FIRST, OTHERWISE YOU WILL RECIEVE AN ERROR TELLING YOU THAT YOU DO NOT HAVE EXECUTE PERMISSIONS
+2. Press 1 to run the installation script
 
 3. Follow the instructions in the install script. To install the gcode_shell_command extension, go to kiauh, `./kiauh/kiauh.sh`, press option 4 (advanced), and then option 8.
 
-### Manually installing 
+> NOTE: YOU MUST RUN THE INSTALLATION SCRIPT FIRST, OTHERWISE YOU WILL RECIEVE AN ERROR TELLING YOU THAT YOU DO NOT HAVE EXECUTE PERMISSIONS
+
+## Manually installing
 
 1. Run the following commands on your Raspberry Pi
-   ```
+
+   ```bash
    cd ~
    git clone https://github.com/T9Air/Klipper_Power_Resume.git
    chmod -R u+rwx /home/$USER/Klipper_Power_Resume
    ```
+
 2. Install the gcode_shell_command extension. To install, go to kiauh, `./kiauh/kiauh.sh`, press option 4 (advanced), and then option 8.
 3. In all the files, change "USER" to your username
 4. Move logger.cfg to the path where all your config files are. (Usually ~/printer_data/config)
