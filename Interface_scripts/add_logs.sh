@@ -49,6 +49,9 @@ sed -i '1i \UNLOG_FILE' $filepath
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
 sed -i "${num}~${num}a\LOG_FILE" $filepath
 
+# Add LOG_FINISHED to end of file
+echo "LOG_FINISHED" >> $filepath
+
 # Exit
 echo "File changed!"
 echo "Press any key to exit..."
