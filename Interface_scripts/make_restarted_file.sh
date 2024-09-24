@@ -3,21 +3,29 @@
 # Clear the screen before starting
 clear
 
-# Ask user the name of the file that need to be restarted
-echo "Please write the name of the file you want to restart."
-echo "If it is in a subdirectory, please write it in this format: directory/file."
+# Set the path to the log file
+logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
-# Inform the user that they can press enter to exit
-echo "If you want to go back to the Main Menu, press enter"
-echo " "
-read -r -p "Please input the filename: " originalfilepath
+# Check if run from restart_file/main interface script
+if [ $1 == "main"]; then
+    # Ask user the name of the file that need to be restarted
+    echo "Please write the name of the file you want to restart."
+    echo "If it is in a subdirectory, please write it in this format: directory/file."
 
-# If user pressed enter, exit
-if [[ "$originalfilepath" == "" ]]; then
-    echo "Exiting..."
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
-    exit 0
+    # Inform the user that they can press enter to exit
+    echo "If you want to go back to the Main Menu, press enter"
+    echo " "
+    read -r -p "Please input the filename: " originalfilepath
+
+    # If user pressed enter, exit
+    if [[ "$originalfilepath" == "" ]]; then
+        echo "Exiting..."
+        read -r -n1 -s # Wait for a keypress to prevent immediate exit
+        /home/$USER/Klipper_Power_Resume/interface.sh
+        exit 0
+    fi
+else
+    $originalfilepath=$(sed -n '1p' $logpath)
 fi
 
 # Check if the filename has an extension
@@ -36,9 +44,6 @@ if [[ ! -f "$originalfilepath" ]]; then
     /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
-
-# Set the path to the log file
-logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 # Ask user if they want to use the standard gcode
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
