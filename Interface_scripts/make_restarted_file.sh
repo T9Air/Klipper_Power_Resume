@@ -42,7 +42,9 @@ fi
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    if [ $1 == "main" ]; then
+        /home/$USER/Klipper_Power_Resume/interface.sh
+    fi
     exit 0
 fi
 
@@ -77,7 +79,9 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        /home/$USER/Klipper_Power_Resume/interface.sh  
+        if [ $1 == "main" ]; then
+            /home/$USER/Klipper_Power_Resume/interface.sh  
+        fi
         exit 0
     fi
 else
