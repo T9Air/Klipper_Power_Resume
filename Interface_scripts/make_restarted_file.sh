@@ -24,18 +24,19 @@ if [ $1 == "main" ]; then
         /home/$USER/Klipper_Power_Resume/interface.sh
         exit 0
     fi
+    # Check if the filename has an extension
+    if [[ $originalfilepath == *.* ]]; then
+        # If it has an extension, do not add an extension
+        originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
+    else
+        # Otherwise add the .gcode extension
+        originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
+    fi
 else
-    $originalfilepath=$(sed -n '1p' $logpath)
+    originalfilepath=$(sed -n '1p' $logpath)
 fi
 
-# Check if the filename has an extension
-if [[ $originalfilepath == *.* ]]; then
-    # If it has an extension, do not add an extension
-    originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
-else
-    # Otherwise add the .gcode extension
-    originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
-fi
+
 
 # Check if the file exists
 if [[ ! -f "$originalfilepath" ]]; then
