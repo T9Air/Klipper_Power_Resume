@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Truncate file to clear it
-echo 0 > /home/$USER/Klipper_Power_Resume/log.txt
-
-# Log file path
+# Clear log.txt and log file path to it
 file_path=$1
-echo "$file_path" >> /home/$USER/Klipper_Power_Resume/log.txt
+echo "$file_path" > /home/$USER/Klipper_Power_Resume/log.txt
