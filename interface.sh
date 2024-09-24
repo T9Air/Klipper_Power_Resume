@@ -11,8 +11,10 @@ if ! [ "$finished" == "Finished" ]; then
     
     if [[ "$restart" == [Yy] ]]; then
         /home/$USER/Klipper_Power_Resume/Interface_scripts/restart_file.sh
-    fi 
+    fi
 fi
+
+echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
 
 # Menu
 echo "Klipper_Power_Resume:"
