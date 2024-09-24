@@ -3,6 +3,17 @@
 # Clear screen before displaying menu
 clear
 
+# Check if the last print was finished or not
+finished=$(sed -n '1p' /home/$USER/Klipper_Power_Resume/log.txt)
+
+if ! [ "$finished" == "Finished" ]; then
+    read -r -p "Do you want to restart your last print? (Y/n) " restart
+    
+    if [[ "$restart" == [Yy] ]]; then
+        /home/$USER/Klipper_Power_Resume/Interface_scripts/restart_file.sh
+    fi 
+fi
+
 # Menu
 echo "Klipper_Power_Resume:"
 echo "(1) Install"
