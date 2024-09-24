@@ -7,7 +7,7 @@ clear
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
 # Check if run from restart_file/main interface script
-if [ $1 == "main"]; then
+if [ $1 == "main" ]; then
     # Ask user the name of the file that need to be restarted
     echo "Please write the name of the file you want to restart."
     echo "If it is in a subdirectory, please write it in this format: directory/file."
