@@ -90,12 +90,12 @@ else
 fi
 
 # Get the linenumber where the printer stopped
-linenumber=$(sed -n '1p' $logpath)
+linenumber=$(sed -n '2p' $logpath)
 
 # Get the last recorded printer position
-printerx=$(sed -n '2p' $logpath)
-printery=$(sed -n '3p' $logpath)
-printerz=$(sed -n '4p' $logpath)
+printerx=$(sed -n '3p' $logpath)
+printery=$(sed -n '4p' $logpath)
+printerz=$(sed -n '5p' $logpath)
 
 printerposition="G0 X${printerx} Y${printery} Z${printerz}"
 
