@@ -165,6 +165,7 @@ fi
 echo "_restarted file created!"
 echo "Press any key to exit..."
 read -r -n1 -s
-
-/home/$USER/Klipper_Power_Resume/interface.sh
+if [ $1 == "main" ]; then
+    /home/$USER/Klipper_Power_Resume/interface.sh
+fi
 exit 0
