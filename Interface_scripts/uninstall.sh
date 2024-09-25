@@ -10,7 +10,7 @@ read -r -p "Are you sure you want to uninstall? You will have to redownload if y
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/menu.sh
     exit 0
 fi
 echo " "

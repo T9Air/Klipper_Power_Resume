@@ -14,7 +14,7 @@ read -r -p "Please input the filename: " filepath
 if [[ "$filepath" == "" ]]; then
     echo "Exiting..."
     read -r -n1 -s  # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/menu.sh
     exit 0
 fi
 
@@ -34,7 +34,7 @@ fi
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/menu.sh
 fi
 
 # Prompt the user for the number of lines to skip
@@ -56,5 +56,5 @@ echo "LOG_FINISHED" >> $filepath
 echo "File changed!"
 echo "Press any key to exit..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/interface.sh
+/home/$USER/Klipper_Power_Resume/menu.sh
 exit 0
