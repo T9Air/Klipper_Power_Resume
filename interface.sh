@@ -44,7 +44,7 @@ if [[ "$action" == 2 ]]; then
 fi
 
 if [[ "$action" == 3 ]]; then
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh main
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh
     exit 0
 fi
 
