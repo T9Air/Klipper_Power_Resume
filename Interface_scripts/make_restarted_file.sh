@@ -6,45 +6,37 @@ clear
 # Set the path to the log file
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
-# Check if run from restart_file/main interface script
-if [ $1 == "main" ]; then
-    # Ask user the name of the file that need to be restarted
-    echo "Please write the name of the file you want to restart."
-    echo "If it is in a subdirectory, please write it in this format: directory/file."
+# Ask user the name of the file that need to be restarted
+echo "Please write the name of the file you want to restart."
+echo "If it is in a subdirectory, please write it in this format: directory/file."
 
-    # Inform the user that they can press enter to exit
-    echo "If you want to go back to the Main Menu, press enter"
-    echo " "
-    read -r -p "Please input the filename: " originalfilepath
+# Inform the user that they can press enter to exit
+echo "If you want to go back to the Main Menu, press enter"
+echo " "
+read -r -p "Please input the filename: " originalfilepath
 
-    # If user pressed enter, exit
-    if [[ "$originalfilepath" == "" ]]; then
-        echo "Exiting..."
-        read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        /home/$USER/Klipper_Power_Resume/interface.sh
-        exit 0
-    fi
-    # Check if the filename has an extension
-    if [[ $originalfilepath == *.* ]]; then
-        # If it has an extension, do not add an extension
-        originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
-    else
-        # Otherwise add the .gcode extension
-        originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
-    fi
-else
-    originalfilepath=$(sed -n '1p' $logpath)
+# If user pressed enter, exit
+if [[ "$originalfilepath" == "" ]]; then
+    echo "Exiting..."
+    read -r -n1 -s # Wait for a keypress to prevent immediate exit
+    /home/$USER/Klipper_Power_Resume/interface.sh
+    exit 0
 fi
 
-
+# Check if the filename has an extension
+if [[ $originalfilepath == *.* ]]; then
+    # If it has an extension, do not add an extension
+    originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
+else
+    # Otherwise add the .gcode extension
+    originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
+fi
 
 # Check if the file exists
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    if [ $1 == "main" ]; then
-        /home/$USER/Klipper_Power_Resume/interface.sh
-    fi
+    /home/$USER/Klipper_Power_Resume/interface.sh
     exit 0
 fi
 
@@ -79,9 +71,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        if [ $1 == "main" ]; then
-            /home/$USER/Klipper_Power_Resume/interface.sh  
-        fi
+        /home/$USER/Klipper_Power_Resume/interface.sh  
         exit 0
     fi
 else
@@ -169,7 +159,5 @@ fi
 echo "_restarted file created!"
 echo "Press any key to exit..."
 read -r -n1 -s
-if [ $1 == "main" ]; then
-    /home/$USER/Klipper_Power_Resume/interface.sh
-fi
+/home/$USER/Klipper_Power_Resume/interface.sh
 exit 0
