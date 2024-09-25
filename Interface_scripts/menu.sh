@@ -3,18 +3,20 @@
 # Clear screen before displaying menu
 clear
 
-# Check if the last print was finished or not
-finished=$(sed -n '1p' /home/$USER/Klipper_Power_Resume/log.txt)
+if [ $1 == "restart" ]; then
+     # Check if the last print was finished or not
+    finished=$(sed -n '1p' /home/$USER/Klipper_Power_Resume/log.txt)
 
-if ! [ "$finished" == "Finished" ]; then
-    read -r -p "Do you want to restart your last print? (Y/n) " restart
+    if ! [ "$finished" == "Finished" ]; then
+        read -r -p "Do you want to restart your last print? (Y/n) " restart
     
-    if [[ "$restart" == [Yy] ]]; then
-        /home/$USER/Klipper_Power_Resume/Interface_scripts/restart_file.sh
+        if [[ "$restart" == [Yy] ]]; then
+            /home/$USER/Klipper_Power_Resume/Interface_scripts/restart_file.sh
+        fi
     fi
-fi
 
-echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
+    echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
+fi
 
 # Menu
 echo "Klipper_Power_Resume:"
