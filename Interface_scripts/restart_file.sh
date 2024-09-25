@@ -148,5 +148,4 @@ if [[ $run == [Yy] ]]; then
     echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
 fi
 
-/home/$USER/Klipper_Power_Resume/interface.sh
 exit 0
