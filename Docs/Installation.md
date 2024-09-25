@@ -8,7 +8,7 @@
    cd ~
    git clone https://github.com/T9Air/Klipper_Power_Resume.git
    cd Klipper_Power_Resume
-   bash interface.sh
+   bash kpr.sh
    ```
 
 2. Press 1 to run the installation script
@@ -34,7 +34,7 @@
 
 ## Uninstalling
 
-1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/interface.sh```
+1. Run the following command on your Raspberry Pi `~/Klipper_Power_Resume/kpr.sh`
 
 2. Press 0 to run the uninstall script
 
