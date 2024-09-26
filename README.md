@@ -17,6 +17,11 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.2.0
+
+* After creating a _restarted file, user can start the print from the interface
+* When interface first opened, if the print has been cancelled, the interface asks whether to make a _restarted file or not
+
 ### version 3.1.0
 
 * User can now home on the print itself, instead of just in the corner

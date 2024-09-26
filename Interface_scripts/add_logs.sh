@@ -14,7 +14,7 @@ read -r -p "Please input the filename: " filepath
 if [[ "$filepath" == "" ]]; then
     echo "Exiting..."
     read -r -n1 -s  # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -34,7 +34,7 @@ fi
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/interface.sh
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
 fi
 
 # Prompt the user for the number of lines to skip
@@ -49,9 +49,12 @@ sed -i '1i \UNLOG_FILE' $filepath
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
 sed -i "${num}~${num}a\LOG_FILE" $filepath
 
+# Add LOG_FINISHED to end of file
+echo "LOG_FINISHED" >> $filepath
+
 # Exit
 echo "File changed!"
 echo "Press any key to exit..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/interface.sh
+/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
 exit 0

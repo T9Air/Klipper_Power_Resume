@@ -1,36 +1,11 @@
 #!/bin/bash
 
-# Clear the screen before starting
 clear
 
 # Set the path to the log file
 logpath="/home/$USER/Klipper_Power_Resume/log.txt"
 
-# Ask user the name of the file that need to be restarted
-echo "Please write the name of the file you want to restart."
-echo "If it is in a subdirectory, please write it in this format: directory/file."
-
-# Inform the user that they can press enter to exit
-echo "If you want to go back to the Main Menu, press enter"
-echo " "
-read -r -p "Please input the filename: " originalfilepath
-
-# If user pressed enter, exit
-if [[ "$originalfilepath" == "" ]]; then
-    echo "Exiting..."
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
-    exit 0
-fi
-
-# Check if the filename has an extension
-if [[ $originalfilepath == *.* ]]; then
-    # If it has an extension, do not add an extension
-    originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
-else
-    # Otherwise add the .gcode extension
-    originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
-fi
+originalfilepath=$(sed -n '1p' $logpath)
 
 # Check if the file exists
 if [[ ! -f "$originalfilepath" ]]; then
@@ -155,12 +130,12 @@ else
     sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
 fi
 
-# Exit
 echo "_restarted file created!"
-
 echo ""
 
 read -r -p "Do you want to restart the print now? (y/N) " run
+
+echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
 
 filename=$(basename newfilepath)
 
@@ -168,5 +143,4 @@ if [[ $run == [Yy] ]]; then
     echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
 fi
 
-/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
 exit 0
