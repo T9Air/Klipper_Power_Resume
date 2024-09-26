@@ -12,7 +12,7 @@ read -r -p "Are you sure you want to create a custom start gcode? (Y/n) " respon
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/menu.sh home
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -39,4 +39,4 @@ nano ${filename}
 echo " "
 echo "Exiting..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/menu.sh home
+/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home

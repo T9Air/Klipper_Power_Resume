@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# clear
-# /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh restart
-# clear
-# orig_filepath=$(sed -n '1p' /home/$USER/Klipper_Power_Resume/log.txt)
-# origfilepath_no_extension="${orig_filepath%.*}"
-# filename="${origfilepath_no_extension}_restarted.gcode"
-# filename=$(basename filename)
-
 clear
 
 # Set the path to the log file
@@ -19,7 +11,7 @@ originalfilepath=$(sed -n '1p' $logpath)
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/menu.sh home
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -54,7 +46,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        /home/$USER/Klipper_Power_Resume/menu.sh home  
+        /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home  
         exit 0
     fi
 else

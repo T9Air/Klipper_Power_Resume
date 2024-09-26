@@ -15,7 +15,7 @@ else
     echo "Directory is empty..."
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/menu.sh home
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -32,7 +32,7 @@ read -r -p "If you want to exit, press enter. " filename
 if [[ "$filename" == "" ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/menu.sh home
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -45,7 +45,7 @@ if [[ ! -f "$filename" ]]; then
     echo "File not found: $filename"
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/menu.sh home
+    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
 fi
 
 # Inform user about exiting with ctrl+x
@@ -62,4 +62,4 @@ nano ${filename}
 echo " "
 echo "Exiting..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/menu.sh home
+/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
