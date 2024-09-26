@@ -15,7 +15,8 @@
 
 3. Follow the instructions in the install script. To install the gcode_shell_command extension, go to kiauh, `./kiauh/kiauh.sh`, press option 4 (advanced), and then option 8.
 
-> NOTE: YOU MUST RUN THE INSTALLATION SCRIPT FIRST, OTHERWISE YOU WILL RECIEVE AN ERROR TELLING YOU THAT YOU DO NOT HAVE EXECUTE PERMISSIONS
+> NOTE: YOU MUST RUN THE INSTALLATION SCRIPT FIRST, OTHERWISE YOU WILL RECEIVE AN ERROR TELLING YOU THAT YOU DO NOT HAVE EXECUTE PERMISSIONS
+> NOTE: You must have VIRTUAL_SDCARD enabled
 
 ## Manually installing
 
