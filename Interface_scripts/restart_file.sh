@@ -130,6 +130,9 @@ else
     sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
 fi
 
+echo "_restarted file created!"
+echo ""
+
 read -r -p "Do you want to restart the print now? (y/N) " run
 
 echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
