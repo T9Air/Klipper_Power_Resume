@@ -157,7 +157,16 @@ fi
 
 # Exit
 echo "_restarted file created!"
-echo "Press any key to exit..."
-read -r -n1 -s
+
+echo ""
+
+read -r -p "Do you want to restart the print now? (y/N) " run
+
+filename=$(basename newfilepath)
+
+if [[ $run == [Yy] ]]; then
+    echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
+fi
+
 /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
 exit 0
