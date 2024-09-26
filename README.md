@@ -11,6 +11,8 @@ I recently moved from Marlin to Klipper, and what has annoyed me is that with Kl
 
 Installation instructions can be found here: <https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Installation.md>
 
+> NOTE: You must have VIRTUAL_SDCARD enabled
+
 ### Usage
 
 You can find the instructions on how to use the interface over here: <https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Usage.md>
