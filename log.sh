@@ -1,8 +1,10 @@
 #!/bin/bash
 
-file_path=$(sed -n '1p' /home/$USER/Klipper_Power_Resume/log.txt)
+log_path="/home/$USER/Klipper_Power_Resume/log.txt"
 
-linenumber=$(sed -n '2p' /home/$USER/Klipper_Power_Resume/log.txt)
+file_path=$(sed -n '1p' $log_path)
+
+linenumber=$(sed -n '2p' $log_path)
 
 linenumber=$((linenumber + 1))
 
@@ -13,12 +15,13 @@ z=$3
 speed=$4
 speed=$( speed * 60 )
 
-truncate -s 0 /home/$USER/Klipper_Power_Resume/log.txt
+truncate -s 0 $log_path
 
-echo $file_path > /home/$USER/Klipper_Power_Resume/log.txt
+echo $file_path > $log_path
 
-echo $linenumber >> /home/$USER/Klipper_Power_Resume/log.txt
+echo $linenumber >> $log_path
 
-echo $x >> /home/$USER/Klipper_Power_Resume/log.txt
-echo $y >> /home/$USER/Klipper_Power_Resume/log.txt
-echo $z >> /home/$USER/Klipper_Power_Resume/log.txt
+echo $x >> $log_path
+echo $y >> $log_path
+echo $z >> $log_path
+echo $speed >> $log_path
