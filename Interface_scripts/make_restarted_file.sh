@@ -99,7 +99,9 @@ printerx=$(sed -n '3p' $logpath)
 printery=$(sed -n '4p' $logpath)
 printerz=$(sed -n '5p' $logpath)
 
-printerposition="G0 X${printerx} Y${printery} Z${printerz}"
+speed=$(sed -n '6p' $logpath)
+
+move="G0 X${printerx} Y${printery} F${speed} \nG0 Z${printerz} F150 \n G0 F${speed}"
 
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
@@ -122,7 +124,7 @@ cp $originalfilepath $newfilepath
 sed -i "1,${linenumber}d" $newfilepath
 
 # Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $printerposition" $newfilepath
+sed -i "1i $move" $newfilepath
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
