@@ -10,6 +10,9 @@ x=$1
 y=$2
 z=$3
 
+speed=$4
+speed=$( speed * 60 )
+
 truncate -s 0 /home/$USER/Klipper_Power_Resume/log.txt
 
 echo $file_path > /home/$USER/Klipper_Power_Resume/log.txt
