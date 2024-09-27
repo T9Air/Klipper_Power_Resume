@@ -2,8 +2,10 @@
 
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 # Set the path to the log file
-logpath="/home/$USER/Klipper_Power_Resume/log.txt"
+logpath="$kpr/log.txt"
 
 originalfilepath=$(sed -n '1p' $logpath)
 
@@ -11,7 +13,7 @@ originalfilepath=$(sed -n '1p' $logpath)
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -29,7 +31,7 @@ if [[ "$starttype" == [Nn] ]]; then
     echo " "
     echo "List of available start_gcode files..."
     echo " "
-    cd /home/$USER/Klipper_Power_Resume/start_gcode 
+    cd $kpr/start_gcode 
     ls
     echo " "
 
@@ -38,7 +40,7 @@ if [[ "$starttype" == [Nn] ]]; then
     read -r -p "Pleae input the filename: " startfile
 
     # Construct the full filepath with extension
-    startfilepath="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
+    startfilepath="$kpr/start_gcode/${startfile}.gcode"
 
     # Check if the file exists
     if [[ ! -f "$startfilepath" ]]; then
@@ -46,7 +48,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home  
+        $kpr/Interface_scripts/menu.sh home  
         exit 0
     fi
 else
@@ -135,7 +137,7 @@ echo ""
 
 read -r -p "Do you want to restart the print now? (y/N) " run
 
-echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
+echo "Finished" > $kpr/log.txt
 
 filename=$(basename newfilepath)
 

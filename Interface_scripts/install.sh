@@ -3,6 +3,8 @@
 # Clear the screen before starting
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 echo "KLIPPER_POWER_RESUME Installer:"
 
 # Ask for confirmation before installing
@@ -12,7 +14,7 @@ read -r -p "Are you sure you want to proceed? (y/N)" response1
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    bash $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -29,7 +31,7 @@ echo " "
 
 # Inform user about replacing username in configuration files
 echo "Changing username in files to your username..."
-sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" ~/Klipper_Power_Resume/logger.cfg
+sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/logger.cfg
 echo "usernames changed"
 echo " "
 
@@ -47,18 +49,18 @@ echo ""
 
 # Inform user about creating a folder to store custom start gcodes
 echo "Creating custom start gcode folder..."
-cd /home/$USER/Klipper_Power_Resume
+cd $kpr
 mkdir start_gcode
 echo "custom start gcode folder created"
 
 # Inform user about adding execute permissions to whole directory
 echo "Adding permissions to files in Klipper_Power_Resume directory..."
-chmod -R u+rwx /home/$USER/Klipper_Power_Resume
+chmod -R u+rwx $kpr
 
 # Exit
 echo "Installation finished!"
 echo "Press any key to exit..."
 read -r -n1 -s
 
-/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+$kpr/Interface_scripts/menu.sh home
 exit 0

@@ -3,6 +3,8 @@
 # Clear the screen before starting
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 echo "Custom start gcode creater"
 
 # Ask for confirmation before starting 
@@ -12,7 +14,7 @@ read -r -p "Are you sure you want to create a custom start gcode? (Y/n) " respon
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -20,7 +22,7 @@ fi
 read -r -p "What to name the file? " filename
 
 # Construct the full filepath with extension
-filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
+filename="$kpr/start_gcode/${filename}.gcode"
 
 # Create the file
 touch $filename
@@ -30,7 +32,7 @@ echo "Press ctrl+x when finished editing"
 read -r -n1 -s
 
 # Navigate to the directory the file is in
-cd /home/$USER/Klipper_Power_Resume/start_gcode
+cd $kpr/start_gcode
 
 # Open the nano editor
 nano ${filename}
@@ -39,4 +41,4 @@ nano ${filename}
 echo " "
 echo "Exiting..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+$kpr/Interface_scripts/menu.sh home
