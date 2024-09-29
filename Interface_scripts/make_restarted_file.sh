@@ -101,7 +101,7 @@ printerz=$(sed -n '5p' $logpath)
 
 speed=$(sed -n '6p' $logpath)
 
-move="G0 X${printerx} Y${printery} F${speed} \nG0 Z${printerz} F150 \n G0 F${speed}"
+move="G0 X${printerx} Y${printery} F${speed} \nG0 Z${printerz} F150 \nG0 F${speed}"
 
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
