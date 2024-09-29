@@ -41,11 +41,21 @@ cp /home/$USER/Klipper_Power_Resume/logger.cfg /home/$USER/printer_data/config/
 echo "logger.cfg moved"
 echo ""
 
-# Inform user that adding [include logger.cfg] to their printer.cfg
-echo "Adding [include logger.cfg] to your printer.cfg..."
-sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
-echo "[logger.cfg moved]"
-echo ""
+
+# Check if logger.cfg is already in printer.cfg
+in_config=$(sed -n '2p' /home/$USER/printer_data/config/printer.cfg)
+
+if [[ "$in_config" == "logger.cfg" ]]; then
+    # Inform user that [include logger.cfg] is already in printer.cfg
+    echo "logger.cfg already in printer.cfg"
+    echo ""
+else
+    # Inform user that adding [include logger.cfg] to their printer.cfg
+    echo "Adding [include logger.cfg] to your printer.cfg..."
+    sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
+    echo "[include logger.cfg] added"
+    echo ""
+fi
 
 # Inform user about creating a folder to store custom start gcodes
 echo "Creating custom start gcode folder..."
