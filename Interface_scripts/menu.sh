@@ -16,8 +16,6 @@ if [ $1 == "restart" ]; then
             $kpr/Interface_scripts/restart_file.sh
         fi
     fi
-
-    echo "Finished" > $kpr/log.txt
 fi
 
 # Menu
