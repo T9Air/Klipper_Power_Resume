@@ -19,6 +19,12 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.2.1
+
+* The speed is logged, and used in the _restarted file
+* In the install script, only add [include logger.cfg] to printer.cfg if it is not already there
+* The gcode to move to the last known position has been changed to have the z axis moved separately than the x & y axes
+
 ### version 3.2.0
 
 * After creating a _restarted file, user can start the print from the interface
