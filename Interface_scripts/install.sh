@@ -45,7 +45,7 @@ echo ""
 # Check if logger.cfg is already in printer.cfg
 in_config=$(sed -n '2p' /home/$USER/printer_data/config/printer.cfg)
 
-if [[ "$in_config" == "logger.cfg" ]]; then
+if [[ "$in_config" == "[include logger.cfg]" ]]; then
     # Inform user that [include logger.cfg] is already in printer.cfg
     echo "logger.cfg already in printer.cfg"
     echo ""
