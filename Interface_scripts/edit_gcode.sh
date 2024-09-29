@@ -3,19 +3,21 @@
 # Clear screen before starting
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 # Check if there are any available files to edit
-if [ "$(ls -A "/home/$USER/Klipper_Power_Resume/start_gcode")" ]; then
+if [ "$(ls -A "$kpr/start_gcode")" ]; then
     # If there are...
     echo "These are the files currently available to edit..."
     echo " " 
-    cd /home/$USER/Klipper_Power_Resume/start_gcode # Navigate to the start_gcode directory
+    cd $kpr/start_gcode # Navigate to the start_gcode directory
     ls # List all of the files available to edit
 else
     # If not...
     echo "Directory is empty..."
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -32,12 +34,12 @@ read -r -p "If you want to exit, press enter. " filename
 if [[ "$filename" == "" ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
 # Construct the full filepath with extension
-filename="/home/$USER/Klipper_Power_Resume/start_gcode/${filename}.gcode"
+filename="$kpr/start_gcode/${filename}.gcode"
 
 # Check if the file exists
 if [[ ! -f "$filename" ]]; then
@@ -45,7 +47,7 @@ if [[ ! -f "$filename" ]]; then
     echo "File not found: $filename"
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
 fi
 
 # Inform user about exiting with ctrl+x
@@ -53,7 +55,7 @@ echo "Press ctrl+x when finished editing"
 read -r -n1 -s
 
 # Navigate to the start_gcode directory
-cd /home/$USER/Klipper_Power_Resume/start_gcode
+cd $kpr/start_gcode
 
 # Open the nano editor
 nano ${filename}
@@ -62,4 +64,4 @@ nano ${filename}
 echo " "
 echo "Exiting..."
 read -r -n1 -s
-/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+$kpr/Interface_scripts/menu.sh home

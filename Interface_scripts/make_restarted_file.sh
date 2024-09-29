@@ -3,8 +3,10 @@
 # Clear the screen before starting
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 # Set the path to the log file
-logpath="/home/$USER/Klipper_Power_Resume/log.txt"
+logpath="$kpr/log.txt"
 
 # Ask user the name of the file that need to be restarted
 echo "Please write the name of the file you want to restart."
@@ -19,7 +21,7 @@ read -r -p "Please input the filename: " originalfilepath
 if [[ "$originalfilepath" == "" ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -36,7 +38,7 @@ fi
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 
@@ -54,7 +56,7 @@ if [[ "$starttype" == [Nn] ]]; then
     echo " "
     echo "List of available start_gcode files..."
     echo " "
-    cd /home/$USER/Klipper_Power_Resume/start_gcode 
+    cd $kpr/start_gcode 
     ls
     echo " "
 
@@ -63,7 +65,7 @@ if [[ "$starttype" == [Nn] ]]; then
     read -r -p "Pleae input the filename: " startfile
 
     # Construct the full filepath with extension
-    startfilepath="/home/$USER/Klipper_Power_Resume/start_gcode/${startfile}.gcode"
+    startfilepath="$kpr/start_gcode/${startfile}.gcode"
 
     # Check if the file exists
     if [[ ! -f "$startfilepath" ]]; then
@@ -71,7 +73,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home  
+        $kpr/Interface_scripts/menu.sh home  
         exit 0
     fi
 else
@@ -97,7 +99,9 @@ printerx=$(sed -n '3p' $logpath)
 printery=$(sed -n '4p' $logpath)
 printerz=$(sed -n '5p' $logpath)
 
-printerposition="G0 X${printerx} Y${printery} Z${printerz}"
+speed=$(sed -n '6p' $logpath)
+
+move="G0 F${speed} X${printerx} Y${printery} \nG0 Z${printerz} F150 \nG0 F${speed}"
 
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
@@ -120,7 +124,7 @@ cp $originalfilepath $newfilepath
 sed -i "1,${linenumber}d" $newfilepath
 
 # Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $printerposition" $newfilepath
+sed -i "1i $move" $newfilepath
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
@@ -168,5 +172,5 @@ if [[ $run == [Yy] ]]; then
     echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
 fi
 
-/home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+$kpr/Interface_scripts/menu.sh home
 exit 0

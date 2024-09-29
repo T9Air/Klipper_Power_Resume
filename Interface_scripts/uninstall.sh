@@ -3,6 +3,8 @@
 # Clear the screen before starting
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 # Ask user to confirm that they want to uninstall
 read -r -p "Are you sure you want to uninstall? You will have to redownload if you want to re-install (y/N)" response1
 
@@ -10,7 +12,7 @@ read -r -p "Are you sure you want to uninstall? You will have to redownload if y
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/menu.sh home
+    $kpr/Interface_scripts/menu.sh home
     exit 0
 fi
 echo " "
@@ -44,6 +46,7 @@ echo " "
 
 # Inform user that the Klipper_Power_Resume repository is being deleted
 echo "Deleting Klipper_Power_Resume repository..."
-rm -rf /home/$USER/Klipper_Power_Resume
+rm -rf $kpr
 echo "Repository deleted"
+cd ~
 exit 0

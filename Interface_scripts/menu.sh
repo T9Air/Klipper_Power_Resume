@@ -3,19 +3,19 @@
 # Clear screen before displaying menu
 clear
 
+kpr="/home/$USER/Klipper_Power_Resume"
+
 if [ $1 == "restart" ]; then
      # Check if the last print was finished or not
-    finished=$(sed -n '1p' /home/$USER/Klipper_Power_Resume/log.txt)
+    finished=$(sed -n '1p' $kpr/log.txt)
 
     if ! [ "$finished" == "Finished" ]; then
         read -r -p "Do you want to restart your last print? (Y/n) " restart
     
         if [[ "$restart" == [Yy] ]]; then
-            /home/$USER/Klipper_Power_Resume/Interface_scripts/restart_file.sh
+            $kpr/Interface_scripts/restart_file.sh
         fi
     fi
-
-    echo "Finished" > /home/$USER/Klipper_Power_Resume/log.txt
 fi
 
 # Menu
@@ -36,32 +36,32 @@ read -r -n1 -s
 echo " "
 
 if [[ "$action" == 1 ]]; then
-    bash /home/$USER/Klipper_Power_Resume/Interface_scripts/install.sh
+    bash $kpr/Interface_scripts/install.sh
     exit 0
 fi
 
 if [[ "$action" == 2 ]]; then
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/add_logs.sh
+    $kpr/Interface_scripts/add_logs.sh
     exit 0
 fi
 
 if [[ "$action" == 3 ]]; then
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/make_restarted_file.sh
+    $kpr/Interface_scripts/make_restarted_file.sh
     exit 0
 fi
 
 if [[ "$action" == 4 ]]; then
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/create_gcode.sh
+    $kpr/Interface_scripts/create_gcode.sh
     exit 0
 fi
 
 if [[ "$action" == 5 ]]; then
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/edit_gcode.sh
+    $kpr/Interface_scripts/edit_gcode.sh
     exit 0
 fi
 
 if [[ "$action" == 6 ]]; then
-    /home/$USER/Klipper_Power_Resume/Interface_scripts/uninstall.sh
+    $kpr/Interface_scripts/uninstall.sh
     exit 0
 fi
 
