@@ -13,7 +13,7 @@ y=$2
 z=$3
 
 speed=$4
-speed=$( speed * 60 )
+speed=$(( speed * 60 ))
 
 truncate -s 0 $log_path
 
