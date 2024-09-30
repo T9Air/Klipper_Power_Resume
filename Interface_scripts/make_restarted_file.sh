@@ -6,7 +6,7 @@ clear
 kpr="/home/$USER/Klipper_Power_Resume"
 
 # Set the path to the log file
-logpath="$kpr/log.txt"
+dynamic_logpath="$kpr/dynamic_log.txt"
 
 # Ask user the name of the file that need to be restarted
 echo "Please write the name of the file you want to restart."
@@ -92,14 +92,14 @@ else
 fi
 
 # Get the linenumber where the printer stopped
-linenumber=$(sed -n '2p' $logpath)
+linenumber=$(sed -n '1p' $dynamic_logpath)
 
 # Get the last recorded printer position
-printerx=$(sed -n '3p' $logpath)
-printery=$(sed -n '4p' $logpath)
-printerz=$(sed -n '5p' $logpath)
+printerx=$(sed -n '2p' $dynamic_logpath)
+printery=$(sed -n '3p' $dynamic_logpath)
+printerz=$(sed -n '4p' $dynamic_logpath)
 
-speed=$(sed -n '6p' $logpath)
+speed=$(sed -n '5p' $dynamic_logpath)
 
 move="G0 F${speed} X${printerx} Y${printery} \nG0 Z${printerz} F150 \nG0 F${speed}"
 
