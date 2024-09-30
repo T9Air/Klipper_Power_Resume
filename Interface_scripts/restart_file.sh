@@ -141,7 +141,7 @@ echo ""
 
 read -r -p "Do you want to restart the print now? (y/N) " run
 
-echo "Finished" > $kpr/log.txt
+echo "Finished" > $kpr/static_log.txt
 
 filename=$(basename newfilepath)
 
