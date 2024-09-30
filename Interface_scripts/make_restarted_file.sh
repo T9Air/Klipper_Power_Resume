@@ -8,39 +8,39 @@ kpr="/home/$USER/Klipper_Power_Resume"
 # Set the path to the log file
 logpath="$kpr/log.txt"
 
-# Ask user the name of the file that need to be restarted
-echo "Please write the name of the file you want to restart."
-echo "If it is in a subdirectory, please write it in this format: directory/file."
+# # Ask user the name of the file that need to be restarted
+# echo "Please write the name of the file you want to restart."
+# echo "If it is in a subdirectory, please write it in this format: directory/file."
 
-# Inform the user that they can press enter to exit
-echo "If you want to go back to the Main Menu, press enter"
-echo " "
-read -r -p "Please input the filename: " originalfilepath
+# # Inform the user that they can press enter to exit
+# echo "If you want to go back to the Main Menu, press enter"
+# echo " "
+# read -r -p "Please input the filename: " originalfilepath
 
-# If user pressed enter, exit
-if [[ "$originalfilepath" == "" ]]; then
-    echo "Exiting..."
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    $kpr/Interface_scripts/menu.sh home
-    exit 0
-fi
+# # If user pressed enter, exit
+# if [[ "$originalfilepath" == "" ]]; then
+#     echo "Exiting..."
+#     read -r -n1 -s # Wait for a keypress to prevent immediate exit
+#     $kpr/Interface_scripts/menu.sh home
+#     exit 0
+# fi
 
-# Check if the filename has an extension
-if [[ $originalfilepath == *.* ]]; then
-    # If it has an extension, do not add an extension
-    originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
-else
-    # Otherwise add the .gcode extension
-    originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
-fi
+# # Check if the filename has an extension
+# if [[ $originalfilepath == *.* ]]; then
+#     # If it has an extension, do not add an extension
+#     originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
+# else
+#     # Otherwise add the .gcode extension
+#     originalfilepath="/home/$USER/printer_data/gcodes/${originalfilepath}.gcode"
+# fi
 
-# Check if the file exists
-if [[ ! -f "$originalfilepath" ]]; then
-    echo "File not found: $originalfilepath" # Error message if file not found
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    $kpr/Interface_scripts/menu.sh home
-    exit 0
-fi
+# # Check if the file exists
+# if [[ ! -f "$originalfilepath" ]]; then
+#     echo "File not found: $originalfilepath" # Error message if file not found
+#     read -r -n1 -s # Wait for a keypress to prevent immediate exit
+#     $kpr/Interface_scripts/menu.sh home
+#     exit 0
+# fi
 
 # Ask user if they want to use the standard gcode
 read -r -p "Do you want to use the standard start gcode? (Y/n) " starttype
