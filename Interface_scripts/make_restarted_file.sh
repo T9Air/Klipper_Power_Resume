@@ -92,7 +92,8 @@ else
 fi
 
 echo ""
-read -r -p "How fast do you want your printer to be moving when it is first started? (mm/s) " speed
+echo "How fast do you want your printer to be moving when it is first started? (mm/s)"
+read -r -p "If you don't want to specify a speed just press enter, and then the speed will be 100 mm/s.  " speed
 
 if [[ "$speed" =~ ^[0-9]+$ ]]; then
     speed=$(( speed * 60 ))
