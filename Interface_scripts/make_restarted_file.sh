@@ -91,6 +91,10 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
+read -r -p "How fast do you want your printer to be moving when it is first started? (mm/s) " speed
+
+speed=$(( speed * 60 ))
+
 # Get the linenumber where the printer stopped
 linenumber=$(sed -n '1p' $dynamic_logpath)
 
@@ -98,8 +102,6 @@ linenumber=$(sed -n '1p' $dynamic_logpath)
 printerx=$(sed -n '2p' $dynamic_logpath)
 printery=$(sed -n '3p' $dynamic_logpath)
 printerz=$(sed -n '4p' $dynamic_logpath)
-
-speed=$(sed -n '5p' $dynamic_logpath)
 
 move="G0 F${speed} X${printerx} Y${printery} \nG0 F150  Z${printerz} \nG0 F${speed}"
 
