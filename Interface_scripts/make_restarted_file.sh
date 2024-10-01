@@ -26,7 +26,7 @@ if [[ "$originalfilepath" == "" ]]; then
 fi
 
 # Check if the filename has an extension
-if [[ $originalfilepath == *.* ]]; then
+if [[ $originalfilepath == *.gcode ]]; then
     # If it has an extension, do not add an extension
     originalfilepath="/home/$USER/printer_data/gcodes/$originalfilepath"
 else

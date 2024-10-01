@@ -24,7 +24,7 @@ fi
 num=1
 
 # Check if the filename has an extension
-if [[ $filepath == *.* ]]; then
+if [[ $filepath == *.gcode ]]; then
     # If it has an extension, do not add an extension
     filepath="/home/$USER/printer_data/gcodes/$filepath"
 else
