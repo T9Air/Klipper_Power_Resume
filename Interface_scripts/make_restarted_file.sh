@@ -21,7 +21,7 @@ read -r -p "Please input the filename: " originalfilepath
 if [[ "$originalfilepath" == "" ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    $kpr/Interface_scripts/menu.sh home
+    "$kpr/Interface_scripts/menu.sh" home
     exit 0
 fi
 
@@ -38,7 +38,7 @@ fi
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    $kpr/Interface_scripts/menu.sh home
+    "$kpr/Interface_scripts/menu.sh" home
     exit 0
 fi
 
@@ -73,7 +73,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        $kpr/Interface_scripts/menu.sh home  
+        "$kpr/Interface_scripts/menu.sh" home  
         exit 0
     fi
 else
@@ -172,5 +172,5 @@ if [[ $run == [Yy] ]]; then
     echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
 fi
 
-$kpr/Interface_scripts/menu.sh home
+"$kpr/Interface_scripts/menu.sh" home
 exit 0
