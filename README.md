@@ -16,6 +16,14 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.2.2
+
+* 2 log files are used
+* When restarting, ask User for the speed, instead of logging the speed during the print
+* Fixed 2 errors:
+  * Get "ome: command not found" when going back to menu.sh
+  * When giving a file without the .gcode extension, but the file has a "." in the name, it does not add .gcode to the end of the extension, and therefore can not find the file
+
 ### version 3.2.1
 
 * The speed is logged, and used in the _restarted file
