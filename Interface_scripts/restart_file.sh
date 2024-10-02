@@ -5,15 +5,16 @@ clear
 kpr="/home/$USER/Klipper_Power_Resume"
 
 # Set the path to the log file
-logpath="$kpr/log.txt"
+dynamic_logpath="$kpr/dynamic_log.txt"
+static_logpath="$kpr/static_log.txt"
 
-originalfilepath=$(sed -n '1p' $logpath)
+originalfilepath=$(sed -n '1p' $static_logpath)
 
 # Check if the file exists
 if [[ ! -f "$originalfilepath" ]]; then
     echo "File not found: $originalfilepath" # Error message if file not found
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    $kpr/Interface_scripts/menu.sh home
+    "$kpr/Interface_scripts/menu.sh" home
     exit 0
 fi
 
@@ -48,7 +49,7 @@ if [[ "$starttype" == [Nn] ]]; then
         echo "File not found: $startfilepath"
         echo "Press any key to exit..."
         read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        $kpr/Interface_scripts/menu.sh home  
+        "$kpr/Interface_scripts/menu.sh" home  
         exit 0
     fi
 else
@@ -66,17 +67,30 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
+echo ""
+echo "How fast do you want your printer to be moving when it is first started? (mm/s)"
+read -r -p "If you don't want to specify a speed just press enter, and then the speed will be 100 mm/s.  " speed
+
+if [[ "$speed" =~ ^[0-9]+$ ]]; then
+    speed=$(( speed * 60 ))
+else
+    echo "Your input is not good, the speed will be set to 100 mm/s..."
+    speed=6000
+    echo "Press any key to continue..."
+    read -r -n1 -s
+fi
+
+echo ""
+
 # Get the linenumber where the printer stopped
-linenumber=$(sed -n '2p' $logpath)
+linenumber=$(sed -n '1p' $dynamic_logpath)
 
 # Get the last recorded printer position
-printerx=$(sed -n '3p' $logpath)
-printery=$(sed -n '4p' $logpath)
-printerz=$(sed -n '5p' $logpath)
+printerx=$(sed -n '2p' $dynamic_logpath)
+printery=$(sed -n '3p' $dynamic_logpath)
+printerz=$(sed -n '4p' $dynamic_logpath)
 
-speed=$(sed -n '6p' $logpath)
-
-move="G0 F${speed} X${printerx} Y${printery} \nG0 Z${printerz} F150 \nG0 F${speed}"
+move="G0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed}"
 
 
 # Ask how many lines were skipped between logs
@@ -140,7 +154,7 @@ echo ""
 
 read -r -p "Do you want to restart the print now? (y/N) " run
 
-echo "Finished" > $kpr/log.txt
+echo "Finished" > $kpr/static_log.txt
 
 filename=$(basename newfilepath)
 

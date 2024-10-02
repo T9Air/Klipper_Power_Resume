@@ -14,7 +14,7 @@ read -r -p "Are you sure you want to proceed? (y/N)" response1
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
     read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    bash $kpr/Interface_scripts/menu.sh home
+    bash "$kpr/Interface_scripts/menu.sh" home
     exit 0
 fi
 
@@ -72,5 +72,5 @@ echo "Installation finished!"
 echo "Press any key to exit..."
 read -r -n1 -s
 
-$kpr/Interface_scripts/menu.sh home
+"$kpr/Interface_scripts/menu.sh" home
 exit 0
