@@ -151,7 +151,7 @@ if [[ "$home_area" == "1" ]]; then
                 fi
                 line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
             fi
-                        if [[ "$line" =~ E ]]; then
+            if [[ "$line" =~ E ]]; then
                 e_coord=$(echo "$line" | cut -d E -f 2)
                 new_e_coord=$(bc <<< "$e_coord - $printere")
                 line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
