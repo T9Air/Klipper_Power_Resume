@@ -98,7 +98,7 @@ linenumber=$(sed -n '1p' $dynamic_logpath)
 printerx=$(sed -n '2p' $dynamic_logpath)
 printery=$(sed -n '3p' $dynamic_logpath)
 printerz=$(sed -n '4p' $dynamic_logpath)
-speed=$(sed -n '5p' $dynamic_logpath)
+speed=$(sed -n '6p' $dynamic_logpath)
 
 move="G0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed}"
 
