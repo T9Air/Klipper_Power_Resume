@@ -82,6 +82,11 @@ move="G0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${spee
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
 
+# Check if number is less than 5
+if [ $skippedlines -lt 5 ]; then
+    skippedlines=5
+fi
+
 # Calculate the amount of lines to delete
 skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
 
