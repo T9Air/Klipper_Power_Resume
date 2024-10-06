@@ -91,21 +91,6 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
-echo ""
-echo "How fast do you want your printer to be moving when it is first started? (mm/s)"
-read -r -p "If you don't want to specify a speed just press enter, and then the speed will be 100 mm/s.  " speed
-
-if [[ "$speed" =~ ^[0-9]+$ ]]; then
-    speed=$(( speed * 60 ))
-else
-    echo "Your input is not good, the speed will be set to 100 mm/s..."
-    speed=6000
-    echo "Press any key to continue..."
-    read -r -n1 -s
-fi
-
-echo ""
-
 # Get the linenumber where the printer stopped
 linenumber=$(sed -n '1p' $dynamic_logpath)
 
@@ -113,6 +98,7 @@ linenumber=$(sed -n '1p' $dynamic_logpath)
 printerx=$(sed -n '2p' $dynamic_logpath)
 printery=$(sed -n '3p' $dynamic_logpath)
 printerz=$(sed -n '4p' $dynamic_logpath)
+speed=$(sed -n '5p' $dynamic_logpath)
 
 move="G0 F${speed} X${printerx} Y${printery} \nG0 F150  Z${printerz} \nG0 F${speed}"
 
