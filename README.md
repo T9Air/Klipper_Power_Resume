@@ -1,6 +1,7 @@
 # Klipper_Power_Resume
 
 [![CodeFactor](https://www.codefactor.io/repository/github/t9air/klipper_power_resume/badge)](https://www.codefactor.io/repository/github/t9air/klipper_power_resume)
+![Static Badge](https://img.shields.io/badge/version-3.2.3-blue)
 
 ## All feedback/ideas would be greatly appreciated
 
