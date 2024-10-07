@@ -77,7 +77,7 @@ printerz=$(sed -n '4p' $dynamic_logpath)
 printere=$(sed -n '5p' $dynamic_logpath)
 speed=$(sed -n '6p' $dynamic_logpath)
 
-move="G0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed}"
+move="G0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E0"
 
 
 # Ask how many lines were skipped between logs
