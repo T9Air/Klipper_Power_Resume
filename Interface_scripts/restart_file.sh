@@ -106,7 +106,7 @@ cp $originalfilepath $newfilepath
 sed -i "1,${linenumber}d" $newfilepath
 
 # Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $printerposition" $newfilepath
+sed -i "1i $move" $newfilepath
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
