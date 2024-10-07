@@ -1,6 +1,6 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/t9air/klipper_power_resume/badge)](https://www.codefactor.io/repository/github/t9air/klipper_power_resume)
-
 # Klipper_Power_Resume
+
+[![CodeFactor](https://www.codefactor.io/repository/github/t9air/klipper_power_resume/badge)](https://www.codefactor.io/repository/github/t9air/klipper_power_resume)
 
 ## All feedback/ideas would be greatly appreciated
 
