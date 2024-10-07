@@ -20,5 +20,5 @@ echo $linenumber > $log_path
 echo $x >> $log_path
 echo $y >> $log_path
 echo $z >> $log_path
-echo $e >> $log_path
+echo "$e" >> $log_path
 echo $speed >> $log_path
