@@ -18,6 +18,12 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.2.4
+
+* Cleaned up the root directory and moved these files into subdirectories:
+  * Logger.cfg and all the macros scripts went into one directory
+  * The log files went into a separate directory
+
 ### version 3.2.3
 
 * Created a minimum amount of lines that can be skipped: 5
