@@ -1,4 +1,4 @@
-import subprocess
+# import subprocess
 
 def log(filename, x_position, y_position, z_position):
     """
