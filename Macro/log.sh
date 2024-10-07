@@ -1,6 +1,6 @@
 #!/bin/bash
 
-log_path="/home/$USER/Klipper_Power_Resume/logs/dynamic_log.txt"
+log_path="/home/$USER/Klipper_Power_Resume/Logs/dynamic_log.txt"
 
 linenumber=$(sed -n '1p' $log_path)
 
