@@ -5,8 +5,8 @@ clear
 kpr="/home/$USER/Klipper_Power_Resume"
 
 # Set the path to the log file
-dynamic_logpath="$kpr/dynamic_log.txt"
-static_logpath="$kpr/static_log.txt"
+dynamic_logpath="$kpr/Logs/dynamic_log.txt"
+static_logpath="$kpr/Logs/static_log.txt"
 
 originalfilepath=$(sed -n '1p' $static_logpath)
 
