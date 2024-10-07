@@ -40,10 +40,18 @@ if [[ ! -f "$filepath" ]]; then
 fi
 
 # Prompt the user for the number of lines to skip
-read -r -p "How many lines do you want to skip between logs? " num
+# Minimum is 5 lines
+echo "How many lines do you want to skip between logs?"
+read -r -p "5 is the minimum: " num
 
-# Add 1 to the number so as to be able to add after each line
-num=$((num + 1))
+# Check if num is less than 5
+if [ $num -lt 5 ]; then
+    num=6
+else
+    # Add 1 to the number so as to be able to add after each line
+    num=$((num + 1))
+fi
+
 
 # Insert UNLOG_FILE at the beginning of the file
 sed -i '1i \UNLOG_FILE' $filepath

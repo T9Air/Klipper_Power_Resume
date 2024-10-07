@@ -67,21 +67,6 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
-echo ""
-echo "How fast do you want your printer to be moving when it is first started? (mm/s)"
-read -r -p "If you don't want to specify a speed just press enter, and then the speed will be 100 mm/s.  " speed
-
-if [[ "$speed" =~ ^[0-9]+$ ]]; then
-    speed=$(( speed * 60 ))
-else
-    echo "Your input is not good, the speed will be set to 100 mm/s..."
-    speed=6000
-    echo "Press any key to continue..."
-    read -r -n1 -s
-fi
-
-echo ""
-
 # Get the linenumber where the printer stopped
 linenumber=$(sed -n '1p' $dynamic_logpath)
 
@@ -89,12 +74,19 @@ linenumber=$(sed -n '1p' $dynamic_logpath)
 printerx=$(sed -n '2p' $dynamic_logpath)
 printery=$(sed -n '3p' $dynamic_logpath)
 printerz=$(sed -n '4p' $dynamic_logpath)
+printere=$(sed -n '5p' $dynamic_logpath)
+speed=$(sed -n '6p' "$dynamic_logpath")
 
-move="G0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed}"
+move="G90 \nG0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E0"
 
 
 # Ask how many lines were skipped between logs
 read -r -p "How many lines were skipped in between logs? " skippedlines
+
+# Check if number is less than 5
+if [ $skippedlines -lt 5 ]; then
+    skippedlines=5
+fi
 
 # Calculate the amount of lines to delete
 skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
@@ -114,13 +106,14 @@ cp $originalfilepath $newfilepath
 sed -i "1,${linenumber}d" $newfilepath
 
 # Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $printerposition" $newfilepath
+sed -i "1i $move" $newfilepath
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
 if [[ "$home_area" == "1" ]]; then
     touch "$newfilepath.tmp"
 
+    # Adjust E-coordinates in G1 commands based on the last recorded e position
     # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
     while IFS= read -r line; do
         if [[ "$line" =~ ^G[01] ]]; then
@@ -134,6 +127,11 @@ if [[ "$home_area" == "1" ]]; then
                     new_z_coord="${new_z_coord}.0"
                 fi
                 line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
+            fi
+            if [[ "$line" =~ E ]]; then
+                e_coord=$(echo "$line" | cut -d E -f 2)
+                new_e_coord=$(bc <<< "$e_coord - $printere")
+                line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
             fi
         fi
     echo "$line" >> "$newfilepath.tmp"
