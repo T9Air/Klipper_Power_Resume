@@ -22,8 +22,8 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 * Created a minimum amount of lines that can be skipped: 5
   * Avoids [#53](https://github.com/T9Air/Klipper_Power_Resume/issues/53)
-* Log the current speed, reverts back from v3.2.2
-* Log the current extrusion vlaue
+* Log the current speed, revert back from v3.2.2
+* Log the current extrusion value
 * Subtract all extrusions by the saved extrusion value when making a _restarted file
 
 ### version 3.2.2
