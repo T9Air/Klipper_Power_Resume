@@ -31,7 +31,7 @@ echo " "
 
 # Inform user about replacing username in configuration files
 echo "Changing username in files to your username..."
-sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/logger.cfg
+sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/Macro/logger.cfg
 echo "usernames changed"
 echo " "
 
