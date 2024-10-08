@@ -53,7 +53,7 @@ else
 fi
 
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
-sed -i "${num}~${num}a\LOG_FILE" $filepath
+# sed -i "${num}~${num}a\LOG_FILE" $filepath
 
 # Insert UNLOG_FILE at the beginning of the file
 sed -i '1i \UNLOG_FILE' $filepath
