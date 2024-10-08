@@ -18,6 +18,8 @@ if [ $1 == "restart" ]; then
     fi
 fi
 
+clear
+
 # Menu
 echo "Klipper_Power_Resume:"
 echo "(1) Install"
