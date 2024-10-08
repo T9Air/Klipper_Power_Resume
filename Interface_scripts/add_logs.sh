@@ -55,7 +55,7 @@ fi
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
 # sed -i "${num}~${num}a\LOG_FILE" $filepath
 
-i=0
+i=$num
 touch "$filepath.tmp"
 
 while IFS= read -r line; do
