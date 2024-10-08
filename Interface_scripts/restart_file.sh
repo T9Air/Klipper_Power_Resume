@@ -134,7 +134,7 @@ if [[ "$home_area" == "1" ]]; then
                 line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
             fi
         fi
-    echo "$line" >> "$newfilepath.tmp"
+        echo "$line" >> "$newfilepath.tmp"
     done < "$newfilepath"
     mv "$newfilepath.tmp" "$newfilepath"
 fi
