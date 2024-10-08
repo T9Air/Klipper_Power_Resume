@@ -133,13 +133,12 @@ sed -i "1i $move" $newfilepath
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
-if [[ "$home_area" == "1" ]]; then
-    touch "$newfilepath.tmp"
+touch "$newfilepath.tmp"
 
-    # Adjust E-coordinates in G1 commands based on the last recorded e position
-    # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
-    while IFS= read -r line; do
-        if [[ "$line" =~ ^G[01] ]]; then
+while IFS= read -r line; do
+    if [[ "$line" =~ ^G[01] ]]; then
+        if [[ "$home_area" == "1" ]]; then
+            # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
             if [[ "$line" =~ Z ]]; then
                 z_coord=$(echo "$line" | cut -d Z -f 2)
                 new_z_coord=$(bc <<< "$z_coord - $printerz")
@@ -151,16 +150,20 @@ if [[ "$home_area" == "1" ]]; then
                 fi
                 line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
             fi
-            if [[ "$line" =~ E ]]; then
-                e_coord=$(echo "$line" | cut -d E -f 2)
-                new_e_coord=$(bc <<< "$e_coord - $printere")
-                line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
-            fi
         fi
-        echo "$line" >> "$newfilepath.tmp"
-    done < "$newfilepath"
-    mv "$newfilepath.tmp" "$newfilepath"
-fi
+        
+        # Adjust E-coordinates in G1 commands based on the last recorded e position
+        if [[ "$line" =~ E ]]; then
+            e_coord=$(echo "$line" | cut -d E -f 2)
+            new_e_coord=$(bc <<< "$e_coord - $printere")
+            line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
+        fi
+    fi
+
+    echo "$line" >> "$newfilepath.tmp"
+done < "$newfilepath"
+
+mv "$newfilepath.tmp" "$newfilepath"
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
