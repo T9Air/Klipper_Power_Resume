@@ -49,6 +49,8 @@ if [ $num -lt 5 ]; then
     num=5
 fi
 
+echo "Skipping ${num} lines..."
+
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
 # sed -i "${num}~${num}a\LOG_FILE" $filepath
 
