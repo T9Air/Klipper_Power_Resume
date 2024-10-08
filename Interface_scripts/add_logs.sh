@@ -46,10 +46,7 @@ read -r -p "5 is the minimum: " num
 
 # Check if num is less than 5
 if [ $num -lt 5 ]; then
-    num=6
-else
-    # Add 1 to the number so as to be able to add after each line
-    num=$((num + 1))
+    num=5
 fi
 
 # Insert LOG_FILE after the specified number of lines (skipping the first line)
