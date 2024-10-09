@@ -54,13 +54,22 @@ echo "Skipping ${num} lines..."
 i=0
 touch "$filepath.tmp"
 
+start_logging=0
+
 while IFS= read -r line; do
     echo $line >> "$filepath.tmp"
-    if [ $i == $num ]; then
-        i=0
-        echo "LOG_FILE" >> "$filepath.tmp"
+    if [ $start_logging == 0 && ! "$line" =~ ^G[01] ]; then
+        start_logging=0
     else
-        i=$(( i + 1 ))
+        if [ $start_logging == 0 ]; then
+            start_logging=1
+        fi
+        if [ $i == $num ]; then
+            i=0
+            echo "LOG_FILE" >> "$filepath.tmp"
+        else
+            i=$(( i + 1 ))
+        fi
     fi
 done < "$filepath"
 
