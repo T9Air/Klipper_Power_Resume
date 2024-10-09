@@ -37,7 +37,7 @@ echo " "
 
 # Inform user about moving logger.cfg to where the config files are stored
 echo "Moving logger.cfg to where all your config files are stored..."
-cp /home/$USER/Klipper_Power_Resume/logger.cfg /home/$USER/printer_data/config/
+cp /home/$USER/Klipper_Power_Resume/Macro/logger.cfg /home/$USER/printer_data/config/
 echo "logger.cfg moved"
 echo ""
 
