@@ -18,6 +18,11 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.3.0
+
+* Logging how many bytes of the gcode file were run, not what line the file is up to
+* When adding logs, the command is more explicit than `sed`, enabling added features in the future
+
 ### version 3.2.4
 
 * Cleaned up the root directory and moved these files into subdirectories:
