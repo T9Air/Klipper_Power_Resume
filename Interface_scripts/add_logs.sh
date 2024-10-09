@@ -46,18 +46,28 @@ read -r -p "5 is the minimum: " num
 
 # Check if num is less than 5
 if [ $num -lt 5 ]; then
-    num=6
-else
-    # Add 1 to the number so as to be able to add after each line
-    num=$((num + 1))
+    num=5
 fi
 
+echo "Skipping ${num} lines..."
+
+i=0
+touch "$filepath.tmp"
+
+while IFS= read -r line; do
+    echo $line >> "$filepath.tmp"
+    if [ $i == $num ]; then
+        i=0
+        echo "LOG_FILE" >> "$filepath.tmp"
+    else
+        i=$(( i + 1 ))
+    fi
+done < "$filepath"
+
+mv "$filepath.tmp" "$filepath"
 
 # Insert UNLOG_FILE at the beginning of the file
 sed -i '1i \UNLOG_FILE' $filepath
-
-# Insert LOG_FILE after the specified number of lines (skipping the first line)
-sed -i "${num}~${num}a\LOG_FILE" $filepath
 
 # Add LOG_FINISHED to end of file
 echo "LOG_FINISHED" >> $filepath

@@ -66,32 +66,17 @@ else
     # 1. Heat up the bed, 2. Home the extruder, 3. Heat up the extruder, 4. UNLOG_FILE
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
-
-# Get the linenumber where the printer stopped
-linenumber=$(sed -n '1p' $dynamic_logpath)
+# Get the number of bytes that were run in the file
+bytes=$(sed -n '1p' "$dynamic_logpath")
 
 # Get the last recorded printer position
-printerx=$(sed -n '2p' $dynamic_logpath)
-printery=$(sed -n '3p' $dynamic_logpath)
-printerz=$(sed -n '4p' $dynamic_logpath)
-printere=$(sed -n '5p' $dynamic_logpath)
+printerx=$(sed -n '2p' "$dynamic_logpath")
+printery=$(sed -n '3p' "$dynamic_logpath")
+printerz=$(sed -n '4p' "$dynamic_logpath")
+printere=$(sed -n '5p' "$dynamic_logpath")
 speed=$(sed -n '6p' "$dynamic_logpath")
 
 move="G90 \nG0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E0"
-
-
-# Ask how many lines were skipped between logs
-read -r -p "How many lines were skipped in between logs? " skippedlines
-
-# Check if number is less than 5
-if [ $skippedlines -lt 5 ]; then
-    skippedlines=5
-fi
-
-# Calculate the amount of lines to delete
-skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
-
-linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
 
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
@@ -99,24 +84,20 @@ origfilepath_no_extension="${originalfilepath%.*}"
 # Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
-# Copy the contents of the original file to a new file
-cp $originalfilepath $newfilepath
-
-# Delete an amount of lines based on the calculated number above
-sed -i "1,${linenumber}d" $newfilepath
+# Copy the original file to the new file, and delete the first x bytes of the file based on the log
+dd if=$originalfilepath of=$newfilepath bs=1 skip=$bytes
 
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $move" $newfilepath
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
-if [[ "$home_area" == "1" ]]; then
-    touch "$newfilepath.tmp"
+touch "$newfilepath.tmp"
 
-    # Adjust E-coordinates in G1 commands based on the last recorded e position
-    # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
-    while IFS= read -r line; do
-        if [[ "$line" =~ ^G[01] ]]; then
+while IFS= read -r line; do
+    if [[ "$line" =~ ^G[01] ]]; then
+        if [[ "$home_area" == "1" ]]; then
+            # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
             if [[ "$line" =~ Z ]]; then
                 z_coord=$(echo "$line" | cut -d Z -f 2)
                 new_z_coord=$(bc <<< "$z_coord - $printerz")
@@ -128,16 +109,20 @@ if [[ "$home_area" == "1" ]]; then
                 fi
                 line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
             fi
-            if [[ "$line" =~ E ]]; then
-                e_coord=$(echo "$line" | cut -d E -f 2)
-                new_e_coord=$(bc <<< "$e_coord - $printere")
-                line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
-            fi
         fi
+        
+        # Adjust E-coordinates in G1 commands based on the last recorded e position
+        if [[ "$line" =~ E ]]; then
+            e_coord=$(echo "$line" | cut -d E -f 2)
+            new_e_coord=$(bc <<< "$e_coord - $printere")
+            line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
+        fi
+    fi
+
     echo "$line" >> "$newfilepath.tmp"
-    done < "$newfilepath"
-    mv "$newfilepath.tmp" "$newfilepath"
-fi
+done < "$newfilepath"
+
+mv "$newfilepath.tmp" "$newfilepath"
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
