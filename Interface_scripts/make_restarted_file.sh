@@ -91,8 +91,8 @@ else
     gcode="M190 S$bed_temp \nG28 \nM109 S$extruder_temp \nUNLOG_FILE"
 fi
 
-# Get the linenumber where the printer stopped
-linenumber=$(sed -n '1p' "$dynamic_logpath")
+# Get the number of bytes that were run in the file
+bytes=$(sed -n '1p' "$dynamic_logpath")
 
 # Get the last recorded printer position
 printerx=$(sed -n '2p' "$dynamic_logpath")
@@ -112,9 +112,9 @@ if [ $skippedlines -lt 5 ]; then
 fi
 
 # Calculate the amount of lines to delete
-skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
+# skippedlines=$((skippedlines + 2)) # Add 2 to the amount of lines that were skipped
 
-linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
+# linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
 
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
@@ -126,7 +126,7 @@ newfilepath="${origfilepath_no_extension}_restarted.gcode"
 cp $originalfilepath $newfilepath
 
 # Delete an amount of lines based on the calculated number above
-sed -i "1,${linenumber}d" $newfilepath
+# sed -i "1,${linenumber}d" $newfilepath
 
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $move" $newfilepath
