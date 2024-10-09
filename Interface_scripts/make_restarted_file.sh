@@ -123,7 +123,7 @@ origfilepath_no_extension="${originalfilepath%.*}"
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
 # Copy the contents of the original file to a new file
-cp $originalfilepath $newfilepath
+# cp $originalfilepath $newfilepath
 
 # Delete an amount of lines based on the calculated number above
 # sed -i "1,${linenumber}d" $newfilepath
