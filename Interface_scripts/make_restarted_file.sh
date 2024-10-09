@@ -128,6 +128,8 @@ newfilepath="${origfilepath_no_extension}_restarted.gcode"
 # Delete an amount of lines based on the calculated number above
 # sed -i "1,${linenumber}d" $newfilepath
 
+dd if=$originalfilepath of=$newfilepath bs=1 skip=$bytes
+
 # Add the gcode to move to the last recorded position to the first line of the file
 sed -i "1i $move" $newfilepath
 
