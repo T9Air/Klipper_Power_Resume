@@ -103,8 +103,6 @@ speed=$(sed -n '6p' "$dynamic_logpath")
 
 move="G90 \nG0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E0"
 
-# linenumber=$((linenumber * skippedlines)) # Multiply the logged line number by the above number
-
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
 
