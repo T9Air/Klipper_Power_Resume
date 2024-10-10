@@ -61,7 +61,7 @@ if [ $layer == "1" ]; then
 
     while IFS= read -r line; do
         echo $line >> "$filepath.tmp"
-        if [ $start_logging == 0 && ! "$line" =~ ^G[01] ]; then
+        if [[ $start_logging == 0 && ! "$line" =~ ^G[01] ]]; then
             start_logging=0
         else
             if [ $start_logging == 0 ]; then
@@ -79,7 +79,7 @@ else
     while IFS= read -r line; do
         echo $line >> "$filepath.tmp"
 
-        if [ $line =~ ^;LAYER ]; then
+        if [[ $line =~ ^;LAYER ]]; then
             echo "LOG_FILE" >> "$filepath.tmp"
         fi
     done < "$filepath"
