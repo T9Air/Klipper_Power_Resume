@@ -18,6 +18,11 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.4.0
+
+* User can choose to just log every layer
+* When adding the log macros, the logging only starts after the first G0 or G1 command
+
 ### version 3.3.0
 
 * Logging how many bytes of the gcode file were run, not what line the file is up to
