@@ -112,9 +112,6 @@ newfilepath="${origfilepath_no_extension}_restarted.gcode"
 # Copy the original file to the new file, and delete the first x bytes of the file based on the log
 dd if=$originalfilepath of=$newfilepath bs=1 skip=$bytes
 
-# Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $move" $newfilepath
-
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
 touch "$newfilepath.tmp"
@@ -134,6 +131,7 @@ while IFS= read -r line; do
             #     fi
             #     line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
             # fi
+
         fi
         
         # Adjust E-coordinates in G1 commands based on the last recorded e position
@@ -148,6 +146,9 @@ while IFS= read -r line; do
 done < "$newfilepath"
 
 mv "$newfilepath.tmp" "$newfilepath"
+
+# Add the gcode to move to the last recorded position to the first line of the file
+sed -i "1i $move" $newfilepath
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
