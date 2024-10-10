@@ -39,30 +39,51 @@ if [[ ! -f "$filepath" ]]; then
     "$kpr/Interface_scripts/menu.sh" home
 fi
 
-# Prompt the user for the number of lines to skip
-# Minimum is 5 lines
-echo "How many lines do you want to skip between logs?"
-read -r -p "5 is the minimum: " num
-
-# Check if num is less than 5
-if [ $num -lt 5 ]; then
-    num=5
-fi
-
-echo "Skipping ${num} lines..."
-
-i=0
 touch "$filepath.tmp"
 
-while IFS= read -r line; do
-    echo $line >> "$filepath.tmp"
-    if [ $i == $num ]; then
-        i=0
-        echo "LOG_FILE" >> "$filepath.tmp"
-    else
-        i=$(( i + 1 ))
+read -r -p "Do you want to log every (1) few lines or every (2) layer? " layer
+
+if [ $layer == "1" ]; then
+    # Prompt the user for the number of lines to skip
+    # Minimum is 5 lines
+    echo "How many lines do you want to skip between logs?"
+    read -r -p "5 is the minimum: " num
+
+    # Check if num is less than 5
+    if [ $num -lt 5 ]; then
+        num=5
     fi
-done < "$filepath"
+
+    echo "Skipping ${num} lines..."
+    
+    i=0
+    start_logging=0
+
+    while IFS= read -r line; do
+        echo $line >> "$filepath.tmp"
+        if [[ $start_logging == 0 && ! "$line" =~ ^G[01] ]]; then
+            start_logging=0
+        else
+            if [ $start_logging == 0 ]; then
+                start_logging=1
+            fi
+            if [ $i == $num ]; then
+                i=0
+                echo "LOG_FILE" >> "$filepath.tmp"
+            else
+                i=$(( i + 1 ))
+            fi
+        fi
+    done < "$filepath"
+else
+    while IFS= read -r line; do
+        echo $line >> "$filepath.tmp"
+
+        if [[ $line =~ ^\;LAYER ]]; then
+            echo "LOG_FILE" >> "$filepath.tmp"
+        fi
+    done < "$filepath"
+fi
 
 mv "$filepath.tmp" "$filepath"
 
