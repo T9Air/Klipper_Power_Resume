@@ -123,17 +123,17 @@ while IFS= read -r line; do
     if [[ "$line" =~ ^G[01] ]]; then
         if [[ "$home_area" == "1" ]]; then
             # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
-            if [[ "$line" =~ Z ]]; then
-                z_coord=$(echo "$line" | cut -d Z -f 2)
-                new_z_coord=$(bc <<< "$z_coord - $printerz")
-                if [[ $(bc <<< "$new_z_coord < 1") -eq 1 && $(bc <<< "$new_z_coord != 0") -eq 1 ]]; then
-                    new_z_coord="0${new_z_coord}"    
-                fi
-                if ! [[ $new_z_coord =~ \. ]]; then
-                    new_z_coord="${new_z_coord}.0"
-                fi
-                line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
-            fi
+            # if [[ "$line" =~ Z ]]; then
+            #     z_coord=$(echo "$line" | cut -d Z -f 2)
+            #     new_z_coord=$(bc <<< "$z_coord - $printerz")
+            #     if [[ $(bc <<< "$new_z_coord < 1") -eq 1 && $(bc <<< "$new_z_coord != 0") -eq 1 ]]; then
+            #         new_z_coord="0${new_z_coord}"    
+            #     fi
+            #     if ! [[ $new_z_coord =~ \. ]]; then
+            #         new_z_coord="${new_z_coord}.0"
+            #     fi
+            #     line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
+            # fi
         fi
         
         # Adjust E-coordinates in G1 commands based on the last recorded e position
