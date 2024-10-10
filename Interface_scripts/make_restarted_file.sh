@@ -132,6 +132,7 @@ while IFS= read -r line; do
             #     line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
             # fi
 
+            move="SET_GCODE_OFFSET Z_ADJUST=-${printerz} \n$move"
         fi
         
         # Adjust E-coordinates in G1 commands based on the last recorded e position
