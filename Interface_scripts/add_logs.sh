@@ -79,7 +79,7 @@ else
     while IFS= read -r line; do
         echo $line >> "$filepath.tmp"
 
-        if [[ $line =~ ^;LAYER ]]; then
+        if [[ $line =~ ^\;LAYER ]]; then
             echo "LOG_FILE" >> "$filepath.tmp"
         fi
     done < "$filepath"
