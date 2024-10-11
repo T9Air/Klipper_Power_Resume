@@ -94,23 +94,12 @@ read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
 touch "$newfilepath.tmp"
 
+if [[ "$home_area" == "1" ]]; then
+    move="SET_GCODE_OFFSET Z_ADJUST=-${printerz} \n$move"
+fi
+
 while IFS= read -r line; do
-    if [[ "$line" =~ ^G[01] ]]; then
-        if [[ "$home_area" == "1" ]]; then
-            # Adjust Z-coordinates in G0 and G1 commands based on the last recorded printer position
-            if [[ "$line" =~ Z ]]; then
-                z_coord=$(echo "$line" | cut -d Z -f 2)
-                new_z_coord=$(bc <<< "$z_coord - $printerz")
-                if [[ $(bc <<< "$new_z_coord < 1") -eq 1 && $(bc <<< "$new_z_coord != 0") -eq 1 ]]; then
-                    new_z_coord="0${new_z_coord}"    
-                fi
-                if ! [[ $new_z_coord =~ \. ]]; then
-                    new_z_coord="${new_z_coord}.0"
-                fi
-                line=$(echo "$line" | sed "s/Z${z_coord}/Z${new_z_coord}/")
-            fi
-        fi
-        
+    if [[ "$line" =~ ^G[01] ]]; then        
         # Adjust E-coordinates in G1 commands based on the last recorded e position
         if [[ "$line" =~ E ]]; then
             e_coord=$(echo "$line" | cut -d E -f 2)
