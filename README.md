@@ -18,6 +18,11 @@ You can find the instructions on how to use the interface over here: <https://gi
 
 ## Changelog
 
+### version 3.4.1
+
+* Fixed [#58](https://github.com/T9Air/Klipper_Power_Resume/issues/58)
+* Use SET_GCODE_OFFSET to change the z-position when homing on the print itself. This should speed up making a _restarted file
+
 ### version 3.4.0
 
 * User can choose to just log every layer
