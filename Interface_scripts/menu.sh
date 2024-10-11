@@ -10,7 +10,7 @@ if [ $1 == "restart" ]; then
     finished1=$(sed -n '1p' $kpr/Logs/static_log.txt)
     finished2=$(sed -n '2p' $kpr/Logs/static_log.txt)
 
-    if ! [ $finished1 == "Finished" || $finished2 == "Finished" ]; then
+    if ! [[ $finished1 == "Finished" || $finished2 == "Finished" ]]; then
         read -r -p "Do you want to restart your last print? (Y/n) " restart
     
         if [[ "$restart" == [Yy] ]]; then
