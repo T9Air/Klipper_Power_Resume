@@ -7,14 +7,16 @@ kpr="/home/$USER/Klipper_Power_Resume"
 
 if [ $1 == "restart" ]; then
      # Check if the last print was finished or not
-    finished=$(sed -n '1p' $kpr/Logs/static_log.txt)
+    finished1=$(sed -n '1p' $kpr/Logs/static_log.txt)
+    finished2=$(sed -n '2p' $kpr/Logs/static_log.txt)
 
-    if ! [ "$finished" == "Finished" ]; then
+    if ! [[ $finished1 == "Finished" || $finished2 == "Finished" ]]; then
         read -r -p "Do you want to restart your last print? (Y/n) " restart
     
         if [[ "$restart" == [Yy] ]]; then
             $kpr/Interface_scripts/restart_file.sh
         fi
+        echo "Finished" >> $kpr/Logs/static_log.txt
     fi
 fi
 
