@@ -4,39 +4,39 @@
 
 ### Added
 
-- User can create and edit custom start gcode files from the interface
+- Add the ability to create and edit custom start gcode files directly from the interface
 
 ### Fixed
 
-- Check if User inputted a .gcode extension or not when adding LOG_GCODE macro to files, and act accordingly
-- Check if User inputted a .gcode extension or not when creating a _restarted file, and act accordingly
+- Check if User inputs the file with the .gcode extension or not when adding LOG_GCODE macro to files, and act accordingly
+- Check if User inputs the file with the .gcode extension or not when creating a _restarted file, and act accordingly
 
 ## [2.1.0] - 2024-08-14
 
 ### Added
 
-- Added the ability to use custom start gcode when creating a _restarted file
+- Add the ability to use custom start gcode when creating a _restarted file
 
 ## [2.0.0] - 2024-08-13
 
 ### Added
 
-- Create a main bash interface to give access to all of the other scripts
-- Install script gives execute permissions to the User for all the script in the interface
-- Create a bash script to add the LOG_GCODE macro to files
-- Create a bash script to uninstall the repository
+- Add a main bash interface to give access to all of the other scripts
+- Have install script give execute permissions to the User for all the script in the interface
+- Add a bash script to add the LOG_GCODE macro to files
+- Add a bash script to uninstall the repository
 
 ### Removed
 
-- **Breaking:** deprecate the Cura post-proccesing script
-- **Breaking:** deprecate the Python script to create _restarted files
+- **Breaking:** Deprecate the Cura post-proccesing script
+- **Breaking:** Deprecate the Python script to create _restarted files
 
 ## [1.1.0] - 2024-08-10
 
 ### Added
 
-- Added an install script
-- Added documentation for using the install script
+- Add install script
+- Add documentation for using the install script
 
 ## [1.0.0] - 2024-08-10
 
