@@ -26,6 +26,11 @@
 - Create a bash script to add the LOG_GCODE macro to files
 - Create a bash script to uninstall the repository
 
+### Removed
+
+- **Breaking:** deprecate the Cura post-proccesing script
+- **Breaking:** deprecate the Python script to create _restarted files
+
 ## [1.1.0] - 2024-08-10
 
 ### Added
