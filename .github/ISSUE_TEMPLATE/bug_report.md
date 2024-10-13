@@ -12,6 +12,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -24,10 +25,11 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Klipper_Controller (please complete the following information):**
- - Controller: [e.g. RPI 4]
- - OS [e.g. mainsail os]
- - OS version
- - Klipper_Power_Resume version
+
+- Controller: [e.g. RPI 4]
+- OS [e.g. mainsail os]
+- OS version
+- Klipper_Power_Resume version
 
 **Additional context**
 Add any other context about the problem here.
