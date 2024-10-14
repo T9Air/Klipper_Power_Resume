@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.1] - 2024-08-15
+
+### Added
+
+- Ask User how many lines where skipped when creating _restarted file
+
+### Fixed
+
+- Fully uninstall repository from interface
+
 ## [2.2.0] - 2024-08-14
 
 ### Added
@@ -8,8 +18,7 @@
 
 ### Fixed
 
-- Check if User inputs the file with the .gcode extension or not when adding LOG_GCODE macro to files, and act accordingly
-- Check if User inputs the file with the .gcode extension or not when creating a _restarted file, and act accordingly
+- Fix error where file is not found if User inputs file without the .gcode extension
 
 ## [2.1.0] - 2024-08-14
 
@@ -42,6 +51,7 @@
 
 _First release._
 
+[2.2.1]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v2.2.1
 [2.2.0]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v2.2.0
 [2.1.0]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v2.1.0
 [2.0.0]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v2.0.0
