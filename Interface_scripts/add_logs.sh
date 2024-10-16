@@ -50,9 +50,9 @@ if [ $layer == "1" ]; then
     read -r -p "5 is the minimum: " num
 
     # Check if num is less than 5
-    if [ $num -lt 5 ]; then
-        num=5
-    fi
+    #if [ $num -lt 5 ]; then
+    #    num=5
+    #fi
 
     echo "Skipping ${num} lines..."
     
