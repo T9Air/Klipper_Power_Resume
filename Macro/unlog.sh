@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/home/$USER/Klipper_Power_Resume/Macro/unlog_subprocess.sh &
+/home/$USER/Klipper_Power_Resume/Macro/unlog_subprocess.sh $1 &
