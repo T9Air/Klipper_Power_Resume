@@ -2,7 +2,7 @@
 
 clear
 
-echo "Klipper_Power_Resume v3.4.1"
+echo "Klipper_Power_Resume v3.4.2"
 echo " "
 echo "Feedback would be greatly appreciated"
 echo " "
