@@ -6,6 +6,8 @@
 
 ## All feedback/ideas would be greatly appreciated
 
+> Note: When adding the logging macros with the script, it is recommended to skip at least 10-15 lines
+
 ### Installation instructions
 
 Installation instructions can be found here: <https://github.com/T9Air/Klipper_Power_Resume/blob/main/Docs/Installation.md>
