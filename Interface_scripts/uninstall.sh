@@ -19,11 +19,11 @@ echo " "
 
 # Inform user that logger.cfg is being deleted
 echo "Deleting logger.cfg..."
-rm /home/$USER/printer_data/config/logger.cfg
+rm -r /home/$USER/printer_data/config/kpr-config
 echo "logger.cfg deleted"
 
-# Ask user if the 2nd line of the printer.cfg is "[include logger.cfg]"
-read -r -p "Is the second line in your printer.cfg [include logger.cfg]?: (y/N)" response2
+# Ask user if the 2nd line of the printer.cfg is "[include kpr-config/logger.cfg]"
+read -r -p "Is the second line in your printer.cfg [include kpr-config/logger.cfg]?: (y/N)" response2
 
 if [[ "$response2" == [Nn] ]]; then
     # If no...

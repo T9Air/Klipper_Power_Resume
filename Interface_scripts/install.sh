@@ -31,29 +31,29 @@ echo " "
 
 # Inform user about replacing username in configuration files
 echo "Changing username in files to your username..."
-sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/Macro/logger.cfg
+sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/kpr-config/logger.cfg
 echo "usernames changed"
 echo " "
 
-# Inform user about moving logger.cfg to where the config files are stored
-echo "Moving logger.cfg to where all your config files are stored..."
-cp /home/$USER/Klipper_Power_Resume/Macro/logger.cfg /home/$USER/printer_data/config/
-echo "logger.cfg moved"
+# Create and copy kpr-config directory
+echo "Creating kpr-config directory in config folder..."
+mkdir -p /home/$USER/printer_data/config/kpr-config
+cp -r $kpr/kpr-config/* /home/$USER/printer_data/config/kpr-config/
+echo "kpr-config directory created and populated"
 echo ""
-
 
 # Check if logger.cfg is already in printer.cfg
 in_config=$(sed -n '2p' /home/$USER/printer_data/config/printer.cfg)
 
-if [[ "$in_config" == "[include logger.cfg]" ]]; then
-    # Inform user that [include logger.cfg] is already in printer.cfg
+if [[ "$in_config" == "[include kpr-config/logger.cfg]" ]]; then
+    # Inform user that [include kpr-config/logger.cfg] is already in printer.cfg
     echo "logger.cfg already in printer.cfg"
     echo ""
 else
     # Inform user that adding [include logger.cfg] to their printer.cfg
-    echo "Adding [include logger.cfg] to your printer.cfg..."
-    sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
-    echo "[include logger.cfg] added"
+    echo "Adding [include kpr-configlogger.cfg] to your printer.cfg..."
+    sed -i '1a \[include kpr-config/logger.cfg]' /home/$USER/printer_data/config/printer.cfg
+    echo "[include kpr-config/logger.cfg] added"
     echo ""
 fi
 

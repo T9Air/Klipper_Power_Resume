@@ -1,6 +1,6 @@
 #!/bin/bash
 
-log_path="/home/$USER/Klipper_Power_Resume/Logs/dynamic_log.txt"
+log_path="/home/$USER/printer_data/config/kpr-config/dynamic_log.txt"
 
 byte=$1
 x=$2
@@ -9,11 +9,9 @@ z=$4
 e=$5
 speed=$6
 
-
 truncate -s 0 $log_path
 
 echo $byte > $log_path
-
 echo $x >> $log_path
 echo $y >> $log_path
 echo $z >> $log_path

@@ -6,7 +6,7 @@ clear
 kpr="/home/$USER/Klipper_Power_Resume"
 
 # Set the path to the log file
-dynamic_logpath="$kpr/Logs/dynamic_log.txt"
+dynamic_logpath="/home/$USER/printer_data/config/kpr-config/dynamic_log.txt"
 
 # Ask user the name of the file that need to be restarted
 echo "Please write the name of the file you want to restart."
