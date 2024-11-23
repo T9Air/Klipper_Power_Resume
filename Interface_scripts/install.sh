@@ -47,7 +47,7 @@ in_config=$(sed -n '2p' /home/$USER/printer_data/config/printer.cfg)
 
 if [[ "$in_config" == "[include kpr-config/logger.cfg]" ]]; then
     # Inform user that [include kpr-config/logger.cfg] is already in printer.cfg
-    echo "logger.cfg already in printer.cfg"
+    echo "[include kpr-config/logger.cfg] already in printer.cfg"
     echo ""
 else
     # Inform user that adding [include logger.cfg] to their printer.cfg
