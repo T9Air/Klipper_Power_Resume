@@ -29,12 +29,6 @@ echo "Press enter to continue..."
 read -r -n1 -s
 echo " "
 
-# Inform user about replacing username in configuration files
-echo "Changing username in files to your username..."
-sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/kpr-config/logger.cfg
-echo "usernames changed"
-echo " "
-
 # Create and copy kpr-config directory
 echo "Creating kpr-config directory in config folder..."
 mkdir -p /home/$USER/printer_data/config/kpr-config
