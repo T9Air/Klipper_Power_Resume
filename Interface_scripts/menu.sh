@@ -20,16 +20,26 @@ if [ $1 == "restart" ]; then
     fi
 fi
 
+# Get currently selected printer
+selected_printer=""
+if [ -f "$kpr/config/selected_printer" ]; then
+    selected_printer=$(cat "$kpr/config/selected_printer")
+fi
+
 clear
 
 # Menu
 echo "Klipper_Power_Resume:"
+if [ ! -z "$selected_printer" ]; then
+    echo "Current printer: $selected_printer"
+fi
 echo "(1) Install"
 echo "(2) Add logging gcode to a file"
 echo "(3) Make a restarted file"
 echo "(4) Create start gcode"
 echo "(5) Edit start gcode"
 echo "(6) Uninstall"
+echo "(7) Select printer"
 echo "(0) Quit"
 
 # Ask user for menu option
@@ -66,6 +76,11 @@ fi
 
 if [[ "$action" == 6 ]]; then
     $kpr/Interface_scripts/uninstall.sh
+    exit 0
+fi
+
+if [[ "$action" == 7 ]]; then
+    $kpr/Interface_scripts/select_printer.sh
     exit 0
 fi
 

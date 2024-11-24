@@ -5,6 +5,18 @@ clear
 
 kpr="/home/$USER/Klipper_Power_Resume"
 
+# Add near the start of each script after kpr definition:
+# Check if printer is selected
+if [ ! -f "$kpr/config/selected_printer" ]; then
+    echo "No printer selected! Please select a printer first."
+    read -r -n1 -s
+    "$kpr/Interface_scripts/menu.sh" home
+    exit 1
+fi
+
+selected_printer=$(cat "$kpr/config/selected_printer")
+printer_path="/home/$USER/$selected_printer"
+
 # Ask the user for the filename
 echo "Please write the name of the file you want to add."
 echo "If it is in a subdirectory, please write it in this format: directory/file."
@@ -26,10 +38,10 @@ num=1
 # Check if the filename has an extension
 if [[ $filepath == *.gcode ]]; then
     # If it has an extension, do not add an extension
-    filepath="/home/$USER/printer_data/gcodes/$filepath"
+    filepath="/home/$USER/$printer_path/gcodes/$filepath"
 else
     # Otherwise add the .gcode extension
-    filepath="/home/$USER/printer_data/gcodes/${filepath}.gcode"
+    filepath="/home/$USER/$printer_path/gcodes/${filepath}.gcode"
 fi
 
 # Check if the file exists
