@@ -24,6 +24,9 @@ if [[ "$response1" == [Nn] ]]; then
     exit 0
 fi
 
+# Create config directory if it doesn't exist
+mkdir -p "$kpr/config"
+
 # Get available printer configs
 printer_configs=($(find_printer_configs))
 
