@@ -71,6 +71,14 @@ for printer in "${printer_configs[@]}"; do
         echo "Adding [include kpr-config/logger.cfg] to printer.cfg..."
         sed -i '1a \[include kpr-config/logger.cfg]' "${printer_path}/config/printer.cfg"
     fi
+
+    in_config=$(sed -n '3p' "${printer_path}/config/printer.cfg")
+    if [[ "$in_config" == "[include kpr-config/edit_file.cfg]" ]]; then
+        echo "[include kpr-config/edit_file.cfg] already in printer.cfg"
+    else
+        echo "Adding [include kpr-config/edit_file.cfg] to printer.cfg..."
+        sed -i '2a \[include kpr-config/edit_file.cfg]' "${printer_path}/config/printer.cfg"
+    fi
     echo "Installation complete for $printer"
     echo ""
 done
