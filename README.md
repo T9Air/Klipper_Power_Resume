@@ -1,7 +1,7 @@
 # Klipper_Power_Resume
 
 [![CodeFactor](https://www.codefactor.io/repository/github/t9air/klipper_power_resume/badge)](https://www.codefactor.io/repository/github/t9air/klipper_power_resume)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/09208fa8791d47e1a94103b238895fa5)](https://app.codacy.com/gh/T9Air/Klipper_Power_Resume/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/517abfdb0b32499095d4425407f6821f)](https://app.codacy.com/gh/T9Air/Klipper_Power_Resume/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 ![Static Badge](https://img.shields.io/badge/version-3.5.0-blue)
 
 ## All feedback/ideas would be greatly appreciated
