@@ -7,8 +7,8 @@ kpr="/home/$USER/Klipper_Power_Resume"
 
 if [ $1 == "restart" ]; then
      # Check if the last print was finished or not
-    finished1=$(sed -n '1p' $kpr/Logs/static_log.txt)
-    finished2=$(sed -n '2p' $kpr/Logs/static_log.txt)
+    finished1=$(sed -n '1p' /home/$USER/printer_data/config/kpr-config/static_log.txt)
+    finished2=$(sed -n '2p' /home/$USER/printer_data/config/kpr-config/static_log.txt)
 
     if ! [[ $finished1 == "Finished" || $finished2 == "Finished" ]]; then
         read -r -p "Do you want to restart your last print? (Y/n) " restart
@@ -16,20 +16,30 @@ if [ $1 == "restart" ]; then
         if [[ "$restart" == [Yy] ]]; then
             $kpr/Interface_scripts/restart_file.sh
         fi
-        echo "Finished" >> $kpr/Logs/static_log.txt
+        echo "Finished" >> /home/$USER/printer_data/kpr-config/static_log.txt
     fi
+fi
+
+# Get currently selected printer
+selected_printer=""
+if [ -f "$kpr/config/selected_printer" ]; then
+    selected_printer=$(cat "$kpr/config/selected_printer")
 fi
 
 clear
 
 # Menu
 echo "Klipper_Power_Resume:"
+if [ ! -z "$selected_printer" ]; then
+    echo "Current printer: $selected_printer"
+fi
 echo "(1) Install"
 echo "(2) Add logging gcode to a file"
 echo "(3) Make a restarted file"
 echo "(4) Create start gcode"
 echo "(5) Edit start gcode"
 echo "(6) Uninstall"
+echo "(7) Select printer"
 echo "(0) Quit"
 
 # Ask user for menu option
@@ -66,6 +76,11 @@ fi
 
 if [[ "$action" == 6 ]]; then
     $kpr/Interface_scripts/uninstall.sh
+    exit 0
+fi
+
+if [[ "$action" == 7 ]]; then
+    $kpr/Interface_scripts/select_printer.sh
     exit 0
 fi
 
