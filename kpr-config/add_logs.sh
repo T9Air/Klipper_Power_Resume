@@ -1,39 +1,10 @@
 #!/bin/bash
 
-# Clear the screen before starting
-clear
+printer_path="$(dirname "$(dirname "$(realpath "$0")")")"
 
-kpr="/home/$USER/Klipper_Power_Resume"
-
-# Add near the start of each script after kpr definition:
-# Check if printer is selected
-if [ ! -f "$kpr/config/selected_printer" ]; then
-    echo "No printer selected! Please select a printer first."
-    read -r -n1 -s
-    "$kpr/Interface_scripts/menu.sh" home
-    exit 1
-fi
-
-selected_printer=$(cat "$kpr/config/selected_printer")
-printer_path="/home/$USER/$selected_printer"
-
-# Ask the user for the filename
-echo "Please write the name of the file you want to add."
-echo "If it is in a subdirectory, please write it in this format: directory/file."
-echo "If you want to go back to the Main Menu, press enter"
-echo " "
-read -r -p "Please input the filename: " filepath
-
-# Check if the user pressed enter (empty input)
-if [[ "$filepath" == "" ]]; then
-    echo "Exiting..."
-    read -r -n1 -s  # Wait for a keypress to prevent immediate exit
-    "$kpr/Interface_scripts/menu.sh" home
-    exit 0
-fi
-
-# Initialize line number to skip 
-num=1
+filepath=$1
+layer=$2
+num=$3
 
 # Check if the filename has an extension
 if [[ $filepath == *.gcode ]]; then
@@ -47,19 +18,14 @@ fi
 # Check if the file exists
 if [[ ! -f "$filepath" ]]; then
     echo "File not found: $filepath" # Error message if file not found
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
-    "$kpr/Interface_scripts/menu.sh" home
+    exit 1
 fi
 
 touch "$filepath.tmp"
 
 read -r -p "Do you want to log every (1) few lines or every (2) layer? " layer
 
-if [ $layer == "1" ]; then
-    # Prompt the user for the number of lines to skip
-    # Minimum is 5 lines
-    echo "How many lines do you want to skip between logs?"
-    read -r -p "5 is the minimum: " num
+if [ $layer == "yes" ]; then
 
     # Check if num is less than 5
     if [ $num -lt 5 ]; then
@@ -107,7 +73,4 @@ echo "LOG_FINISHED" >> $filepath
 
 # Exit
 echo "File changed!"
-echo "Press any key to exit..."
-read -r -n1 -s
-"$kpr/Interface_scripts/menu.sh" home
 exit 0
