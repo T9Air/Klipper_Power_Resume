@@ -23,8 +23,6 @@ fi
 
 touch "$filepath.tmp"
 
-read -r -p "Do you want to log every (1) few lines or every (2) layer? " layer
-
 if [ $layer == "yes" ]; then
 
     # Check if num is less than 5
