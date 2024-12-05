@@ -1,22 +1,46 @@
 #!/bin/bash
 
-# Clear the screen before starting
 clear
-
 kpr="/home/$USER/Klipper_Power_Resume"
+
+# Function to find printer configs
+find_printer_configs() {
+    local configs=()
+    for dir in /home/$USER/printer_*; do
+        if [ -d "$dir" ]; then
+            configs+=("${dir##*/}")
+        fi
+    done
+    echo "${configs[@]}"
+}
 
 echo "KLIPPER_POWER_RESUME Installer:"
 
-# Ask for confirmation before installing
 read -r -p "Are you sure you want to proceed? (y/N)" response1
-
-# If no, go back to main menu
 if [[ "$response1" == [Nn] ]]; then
     echo "Exiting..."
-    read -r -n1 -s # Wait for a keypress to prevent immediate exit
+    read -r -n1 -s
     bash "$kpr/Interface_scripts/menu.sh" home
     exit 0
 fi
+
+# Create config directory if it doesn't exist
+mkdir -p "$kpr/config"
+
+# Get available printer configs
+printer_configs=($(find_printer_configs))
+
+if [ ${#printer_configs[@]} -eq 0 ]; then
+    echo "No printer configurations found!"
+    exit 1
+fi
+
+# Display found printers
+echo "Found printer configurations:"
+for printer in "${printer_configs[@]}"; do
+    echo "- $printer"
+done
+echo "Installing for all printers..."
 
 # Inform user that they need to install gcode_shell_command
 echo " "
@@ -29,46 +53,39 @@ echo "Press enter to continue..."
 read -r -n1 -s
 echo " "
 
-# Inform user about replacing username in configuration files
-echo "Changing username in files to your username..."
-sed -i "s/\/USER\([[:alnum:]_]*\)/\/$USER\1/g" $kpr/Macro/logger.cfg
-echo "usernames changed"
-echo " "
+# Install for each printer configuration
+for printer in "${printer_configs[@]}"; do
+    printer_path="/home/$USER/$printer"
+    echo "Installing for $printer..."
 
-# Inform user about moving logger.cfg to where the config files are stored
-echo "Moving logger.cfg to where all your config files are stored..."
-cp /home/$USER/Klipper_Power_Resume/Macro/logger.cfg /home/$USER/printer_data/config/
-echo "logger.cfg moved"
-echo ""
+    # Create and copy kpr-config directory
+    echo "Creating kpr-config directory in config folder..."
+    mkdir -p "${printer_path}/config/kpr-config"
+    cp -r $kpr/kpr-config/* "${printer_path}/config/kpr-config/"
 
-
-# Check if logger.cfg is already in printer.cfg
-in_config=$(sed -n '2p' /home/$USER/printer_data/config/printer.cfg)
-
-if [[ "$in_config" == "[include logger.cfg]" ]]; then
-    # Inform user that [include logger.cfg] is already in printer.cfg
-    echo "logger.cfg already in printer.cfg"
+    # Check and update printer.cfg
+    in_config=$(sed -n '2p' "${printer_path}/config/printer.cfg")
+    if [[ "$in_config" == "[include kpr-config/logger.cfg]" ]]; then
+        echo "[include kpr-config/logger.cfg] already in printer.cfg"
+    else
+        echo "Adding [include kpr-config/logger.cfg] to printer.cfg..."
+        sed -i '1a \[include kpr-config/logger.cfg]' "${printer_path}/config/printer.cfg"
+    fi
+    echo "Installation complete for $printer"
     echo ""
-else
-    # Inform user that adding [include logger.cfg] to their printer.cfg
-    echo "Adding [include logger.cfg] to your printer.cfg..."
-    sed -i '1a \[include logger.cfg]' /home/$USER/printer_data/config/printer.cfg
-    echo "[include logger.cfg] added"
-    echo ""
-fi
+done
 
 # Inform user about creating a folder to store custom start gcodes
 echo "Creating custom start gcode folder..."
 cd $kpr
-mkdir start_gcode
-echo "custom start gcode folder created"
+mkdir -p start_gcode
 
 # Inform user about adding execute permissions to whole directory
 echo "Adding permissions to files in Klipper_Power_Resume directory..."
 chmod -R u+rwx $kpr
 
 # Exit
-echo "Installation finished!"
+echo "Installation finished for all printers!"
 echo "Press any key to exit..."
 read -r -n1 -s
 

@@ -5,8 +5,20 @@ clear
 
 kpr="/home/$USER/Klipper_Power_Resume"
 
+# Add near the start of each script after kpr definition:
+# Check if printer is selected
+if [ ! -f "$kpr/config/selected_printer" ]; then
+    echo "No printer selected! Please select a printer first."
+    read -r -n1 -s
+    "$kpr/Interface_scripts/menu.sh" home
+    exit 1
+fi
+
+selected_printer=$(cat "$kpr/config/selected_printer")
+printer_path="/home/$USER/$selected_printer"
+
 # Set the path to the log file
-dynamic_logpath="$kpr/Logs/dynamic_log.txt"
+dynamic_logpath="/home/$USER/$printer_path/config/kpr-config/dynamic_log.txt"
 
 # Ask user the name of the file that need to be restarted
 echo "Please write the name of the file you want to restart."

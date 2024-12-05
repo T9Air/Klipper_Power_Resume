@@ -17,27 +17,29 @@ if [[ "$response1" == [Nn] ]]; then
 fi
 echo " "
 
-# Inform user that logger.cfg is being deleted
-echo "Deleting logger.cfg..."
-rm /home/$USER/printer_data/config/logger.cfg
-echo "logger.cfg deleted"
+# Find all printer_data directories
+printer_data_dirs=$(find /home/$USER -type d -name "printer_data" 2>/dev/null)
 
-# Ask user if the 2nd line of the printer.cfg is "[include logger.cfg]"
-read -r -p "Is the second line in your printer.cfg [include logger.cfg]?: (y/N)" response2
+# Process each printer_data directory
+for printer_dir in $printer_data_dirs; do
+    echo "Processing: $printer_dir"
+    
+    # Remove kpr-config directory if it exists
+    if [ -d "$printer_dir/config/kpr-config" ]; then
+        echo "Deleting logger.cfg from $printer_dir..."
+        rm -r "$printer_dir/config/kpr-config"
+        echo "logger.cfg deleted"
+    fi
 
-if [[ "$response2" == [Nn] ]]; then
-    # If no...
-    # Tell the user to delete it on their own
-    echo "Please remove it when you can."
-    echo "Press any key to continue..."
-    read -r -n1 -s # Wait for a keypress before continuing
-else
-    # If yes...
-    # Inform user that [include logger.cfg] is being deleted
-    echo "removing logger.cfg inclusion from printer.cfg..."
-    sed -i '2d' /home/$USER/printer_data/config/printer.cfg
-    echo "logger.cfg inclusion removed"
-fi
+    # Check and update printer.cfg
+    if [ -f "$printer_dir/config/printer.cfg" ]; then
+        if grep -q "^\[include kpr-config/logger.cfg\]" "$printer_dir/config/printer.cfg"; then
+            echo "Removing logger.cfg inclusion from $printer_dir/config/printer.cfg..."
+            sed -i '/^\[include kpr-config\/logger.cfg\]/d' "$printer_dir/config/printer.cfg"
+            echo "logger.cfg inclusion removed"
+        fi
+    fi
+done
 
 # Add break before deleting the whole repository
 echo "Press any key to continue..."
