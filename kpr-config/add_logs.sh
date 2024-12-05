@@ -9,10 +9,10 @@ num=$3
 # Check if the filename has an extension
 if [[ $filepath == *.gcode ]]; then
     # If it has an extension, do not add an extension
-    filepath="/home/$USER/$printer_path/gcodes/$filepath"
+    filepath="$printer_path/gcodes/$filepath"
 else
     # Otherwise add the .gcode extension
-    filepath="/home/$USER/$printer_path/gcodes/${filepath}.gcode"
+    filepath="$printer_path/gcodes/${filepath}.gcode"
 fi
 
 # Check if the file exists
