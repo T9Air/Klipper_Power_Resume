@@ -63,6 +63,11 @@ for printer in "${printer_configs[@]}"; do
     mkdir -p "${printer_path}/config/kpr-config"
     cp -r $kpr/kpr-config/* "${printer_path}/config/kpr-config/"
 
+    # Update USER and PRINTER placeholders in config files
+    echo "Updating configuration files..."
+    sed -i "s|/home/USER/PRINTER|/home/$USER/$printer|g" "${printer_path}/config/kpr-config/"*.cfg
+    echo "Configuration files updated"
+
     # Check and update printer.cfg
     in_config=$(sed -n '2p' "${printer_path}/config/printer.cfg")
     if [[ "$in_config" == "[include kpr-config/logger.cfg]" ]]; then
