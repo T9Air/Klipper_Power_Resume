@@ -38,6 +38,12 @@ for printer_dir in $printer_data_dirs; do
             sed -i '/^\[include kpr-config\/logger.cfg\]/d' "$printer_dir/config/printer.cfg"
             echo "logger.cfg inclusion removed"
         fi
+
+        if grep -q "^\[include kpr-config/edit_file.cfg\]" "$printer_dir/config/printer.cfg"; then
+            echo "Removing edit_file.cfg inclusion from $printer_dir/config/printer.cfg..."
+            sed -i '/^\[include kpr-config\/edit_file.cfg\]/d' "$printer_dir/config/printer.cfg"
+            echo "edit_file.cfg inclusion removed"
+        fi
     fi
 done
 
