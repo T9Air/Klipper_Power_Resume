@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.5.0] - 2023-10-XX
+## [3.5.0] - 2024-11-30
 
 ### Changed
 
@@ -10,7 +10,7 @@
 
 - Add multi-printer functionality ([#63](https://github.com/T9Air/Klipper_Power_Resume/issues/63), [#67](https://github.com/T9Air/Klipper_Power_Resume/pulls/67))
 
-## [3.4.1] - 2023-XX-XX
+## [3.4.1] - 2024-10-10
 
 ### Fixed
 
@@ -20,7 +20,7 @@
 
 - Use SET_GCODE_OFFSET to change the z-position when homing on the print itself, speeding up making a _restarted file
 
-## [3.4.0] - 2023-XX-XX
+## [3.4.0] - 2024-10-09
 
 ### Added
 
@@ -30,21 +30,20 @@
 
 - Start logging only after the first G0 or G1 command when adding the log macros
 
-## [3.3.0] - 2023-XX-XX
-
+## [3.3.0] - 2024-10-09
 ### Changed
 
 - Log how many bytes of the gcode file were run, not the line number
 - Make the command more explicit than `sed` when adding logs, enabling added features in the future
 
-## [3.2.4] - 2023-XX-XX
+## [3.2.4] - 2024-10-06
 
 ### Changed
 
 - Move Logger.cfg and all macro scripts into one directory
 - Move the log files into a separate directory
 
-## [3.2.3] - 2023-XX-XX
+## [3.2.3] - 2024-10-06
 
 ### Added
 
@@ -56,7 +55,7 @@
 - Log the current extrusion value
 - Subtract all extrusions by the saved extrusion value when making a _restarted file
 
-## [3.2.2] - 2023-XX-XX
+## [3.2.2] - 2024-10-02
 
 ### Changed
 
@@ -68,7 +67,7 @@
 - Fix "ome: command not found" error when returning to menu.sh
 - Handle filenames without the .gcode extension correctly when the name contains a "."
 
-## [3.2.1] - 2023-XX-XX
+## [3.2.1] - 2024-09-29
 
 ### Added
 
@@ -79,14 +78,14 @@
 - Modify the install script to only add `[include logger.cfg]` to printer.cfg if it's not already there
 - Change the G-code to move the Z-axis separately from the X and Y axes when moving to the last known position
 
-## [3.2.0] - 2023-XX-XX
+## [3.2.0] - 2024-09-25
 
 ### Added
 
 - Allow user to start the print from the interface after creating a _restarted file
 - Prompt user to make a _restarted file if the print has been cancelled when the interface first opens
 
-## [3.1.0] - 2023-XX-XX
+## [3.1.0] - 2024-09-15
 
 ### Added
 
@@ -96,7 +95,7 @@
 
 - Fix bug in [make_restarted_file.sh](https://github.com/T9Air/Klipper_Power_Resume/blob/v3.1.0/Interface_scripts/make_restarted_file.sh) where the script runs even if files do not exist
 
-## [3.0.0] - 2023-XX-XX
+## [3.0.0] - 2024-09-08
 
 ### Changed
 
@@ -106,7 +105,7 @@
 - Create a new install script
 - Update uninstall script
 
-## [2.2.1] - 2023-XX-XX
+## [2.2.1] - 2024-08-15
 
 ### Added
 
@@ -116,7 +115,7 @@
 
 - Ask the user how many lines to skip in `make_restarted_file.sh`
 
-## [2.2.0] - 2023-XX-XX
+## [2.2.0] - 2024-08-14
 
 ### Added
 
@@ -126,13 +125,13 @@
 
 - Add checks in `add_logs.sh` and `make_restarted_file.sh` to handle filenames with or without the `.gcode` extension
 
-## [2.1.0] - 2023-XX-XX
+## [2.1.0] - 2024-08-14
 
 ### Added
 
 - Allow user to use a custom G-code file as the start G-code
 
-## [2.0.0] - 2023-XX-XX
+## [2.0.0] - 2024-08-13
 
 ### Deprecated
 
@@ -149,13 +148,13 @@
 
 - Modify the install script from v1.1.0 with minor changes
 
-## [1.1.0] - 2023-XX-XX
+## [1.1.0] - 2024-08-10
 
 ### Added
 
 - Add an install script
 
-## [1.0.0] - 2023-XX-XX
+## [1.0.0] - 2024-08-10
 
 _Initial release._
 
