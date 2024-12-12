@@ -63,6 +63,13 @@ for printer in "${printer_configs[@]}"; do
     mkdir -p "${printer_path}/config/kpr-config"
     cp -r $kpr/kpr-config/* "${printer_path}/config/kpr-config/"
 
+    # Set permissions for kpr-config directory
+    chmod -R 755 "${printer_path}/config/kpr-config"
+    
+    # Set write permissions for log files
+    chmod 666 "${printer_path}/config/kpr-config/static_variables.cfg"
+    chmod 666 "${printer_path}/config/kpr-config/dynamic_variables.cfg"
+
     # Check and update printer.cfg
     in_config=$(sed -n '2p' "${printer_path}/config/printer.cfg")
     if [[ "$in_config" == "[include kpr-config/logger.cfg]" ]]; then
@@ -82,7 +89,7 @@ mkdir -p start_gcode
 
 # Inform user about adding execute permissions to whole directory
 echo "Adding permissions to files in Klipper_Power_Resume directory..."
-chmod -R u+rwx $kpr
+chmod -R 755 $kpr
 
 # Exit
 echo "Installation finished for all printers!"
