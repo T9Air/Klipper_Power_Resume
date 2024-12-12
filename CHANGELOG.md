@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.5.1] - 2024-12-11
+
+### Fixed
+
+- Fixed a potential issue with file permissions not being set to write and execute ([9281f73](https://github.com/T9Air/Klipper_Power_Resume/commit/9281f73))
+
+### Added
+
+- Add update script ([91d5afe](https://github.com/T9Air/Klipper_Power_Resume/commit/91d5afe))
+
 ## [3.5.0] - 2024-11-30
 
 ### Changed
@@ -31,6 +41,7 @@
 - Start logging only after the first G0 or G1 command when adding the log macros
 
 ## [3.3.0] - 2024-10-09
+
 ### Changed
 
 - Log how many bytes of the gcode file were run, not the line number
@@ -158,6 +169,7 @@
 
 _Initial release._
 
+[3.5.1]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.5.1
 [3.5.0]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.5.0
 [3.4.1]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.4.1
 [3.4.0]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.4.0
