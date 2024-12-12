@@ -5,6 +5,13 @@ clear
 
 kpr="/home/$USER/Klipper_Power_Resume"
 
+# Check for --skip-delete-repo flag
+if [ "$1" == "--skip-delete-repo" ]; then
+    SKIP_DELETE_REPO=true
+else
+    SKIP_DELETE_REPO=false
+fi
+
 # Ask user to confirm that they want to uninstall
 read -r -p "Are you sure you want to uninstall? You will have to redownload if you want to re-install (y/N)" response1
 
@@ -52,9 +59,12 @@ echo "Press any key to continue..."
 read -r -n1 -s # Wait for a keypress before continuing
 echo " "
 
-# Inform user that the Klipper_Power_Resume repository is being deleted
-echo "Deleting Klipper_Power_Resume repository..."
-rm -rf $kpr
-echo "Repository deleted"
+# Only delete the repository if not skipping
+if [ "$SKIP_DELETE_REPO" = false ]; then
+    echo "Deleting Klipper_Power_Resume repository..."
+    rm -rf $kpr
+    echo "Repository deleted"
+fi
+
 cd ~
 exit 0
