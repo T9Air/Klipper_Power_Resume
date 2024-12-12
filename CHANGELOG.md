@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- Fixed a potential issue with file permissions not being set to write and execute ([9281f73](https://github.com/T9Air/Klipper_Power_Resume/commit/9281f73))
+- Fix a potential issue with file permissions not being set to write and execute ([9281f73](https://github.com/T9Air/Klipper_Power_Resume/commit/9281f73))
 
 ### Added
 
@@ -14,7 +14,7 @@
 
 ### Changed
 
-- Updated documentation for clarity ([#65](https://github.com/T9Air/Klipper_Power_Resume/issues/65))
+- Update documentation for clarity ([#65](https://github.com/T9Air/Klipper_Power_Resume/issues/65))
 
 ### Added
 
@@ -24,7 +24,7 @@
 
 ### Fixed
 
-- Resolved an issue where the printer failed to resume properly after homing due to incorrect Z-axis positioning ([#58](https://github.com/T9Air/Klipper_Power_Resume/issues/58))
+- Resolve an issue where the printer failed to resume properly after homing due to incorrect Z-axis positioning ([#58](https://github.com/T9Air/Klipper_Power_Resume/issues/58))
 
 ### Changed
 
