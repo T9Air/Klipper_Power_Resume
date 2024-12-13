@@ -7,7 +7,7 @@ echo " "
 read -r -n1 -s "Press enter to continue..."
 clear
 
-current_version="v3.6.0"
+current_version="v3.5.1"
 kpr="/home/$USER/Klipper_Power_Resume"
 
 # Check for updates
