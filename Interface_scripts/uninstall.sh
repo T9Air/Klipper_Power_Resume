@@ -60,5 +60,8 @@ if [ "$SKIP_DELETE_REPO" = false ]; then
     echo "Repository deleted"
 fi
 
+# Change ownership of the Klipper_Power_Resume directory back to the original user
+chown -R $USER:$USER $kpr
+
 cd ~
 exit 0
