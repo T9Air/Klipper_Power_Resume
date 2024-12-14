@@ -25,6 +25,7 @@
    ```bash
    cd ~
    git clone https://github.com/T9Air/Klipper_Power_Resume.git
+   chown -R $USER:$USER /home/$USER/Klipper_Power_Resume
    chmod -R u+rwx /home/$USER/Klipper_Power_Resume
    ```
 

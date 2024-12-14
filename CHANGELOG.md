@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.5.2] - 2024-12-12
+
+### Fixed
+
+- Fix an error some users have where the file permissions can not be changed because they are not set as the owner ([[#70](https://github.com/T9Air/Klipper_Power_Resume/issues/70)], [#73](https://github.com/T9Air/Klipper_Power_Resume/pull/73))
+
 ## [3.5.1] - 2024-12-11
 
 ### Fixed
@@ -169,6 +175,7 @@
 
 _Initial release._
 
+[3.5.2]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.5.2
 [3.5.1]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.5.1
 [3.5.0]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.5.0
 [3.4.1]: https://github.com/T9Air/Klipper_Power_Resume/releases/tag/v3.4.1

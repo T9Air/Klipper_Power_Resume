@@ -63,13 +63,16 @@ for printer in "${printer_configs[@]}"; do
     mkdir -p "${printer_path}/config/kpr-config"
     cp -r $kpr/kpr-config/* "${printer_path}/config/kpr-config/"
 
+    # Change ownership of the kpr-config directory to the current user
+    chown -R $USER:$USER "${printer_path}/config/kpr-config"
+
     # Update USER and PRINTER placeholders in config files
     echo "Updating configuration files..."
     sed -i "s|/home/USER/PRINTER|/home/$USER/$printer|g" "${printer_path}/config/kpr-config/"*.cfg
     echo "Configuration files updated"
     
     # Set permissions for kpr-config directory
-    chmod -R 755 "${printer_path}/config/kpr-config"
+    chmod -R 777 "${printer_path}/config/kpr-config"
     
     # Set write permissions for log files
     chmod 666 "${printer_path}/config/kpr-config/static_variables.cfg"
@@ -100,9 +103,12 @@ echo "Creating custom start gcode folder..."
 cd $kpr
 mkdir -p start_gcode
 
+# Change ownership of the Klipper_Power_Resume directory to the current user
+chown -R $USER:$USER $kpr
+
 # Inform user about adding execute permissions to whole directory
 echo "Adding permissions to files in Klipper_Power_Resume directory..."
-chmod -R 755 $kpr
+chmod -R 777 $kpr
 
 # Exit
 echo "Installation finished for all printers!"
