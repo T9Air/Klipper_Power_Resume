@@ -66,6 +66,11 @@ for printer in "${printer_configs[@]}"; do
     # Change ownership of the kpr-config directory to the current user
     chown -R $USER:$USER "${printer_path}/config/kpr-config"
 
+    # Update USER and PRINTER placeholders in config files
+    echo "Updating configuration files..."
+    sed -i "s|/home/USER/PRINTER|/home/$USER/$printer|g" "${printer_path}/config/kpr-config/"*.cfg
+    echo "Configuration files updated"
+    
     # Set permissions for kpr-config directory
     chmod -R 777 "${printer_path}/config/kpr-config"
     
@@ -80,6 +85,14 @@ for printer in "${printer_configs[@]}"; do
     else
         echo "Adding [include kpr-config/logger.cfg] to printer.cfg..."
         sed -i '1a \[include kpr-config/logger.cfg]' "${printer_path}/config/printer.cfg"
+    fi
+
+    in_config=$(sed -n '3p' "${printer_path}/config/printer.cfg")
+    if [[ "$in_config" == "[include kpr-config/edit_file.cfg]" ]]; then
+        echo "[include kpr-config/edit_file.cfg] already in printer.cfg"
+    else
+        echo "Adding [include kpr-config/edit_file.cfg] to printer.cfg..."
+        sed -i '2a \[include kpr-config/edit_file.cfg]' "${printer_path}/config/printer.cfg"
     fi
     echo "Installation complete for $printer"
     echo ""
