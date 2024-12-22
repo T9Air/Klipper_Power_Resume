@@ -75,8 +75,8 @@ for printer in "${printer_configs[@]}"; do
     chmod -R 777 "${printer_path}/config/kpr-config"
     
     # Set write permissions for log files
-    chmod 666 "${printer_path}/config/kpr-config/static_variables.cfg"
-    chmod 666 "${printer_path}/config/kpr-config/dynamic_variables.cfg"
+    chmod 666 "${printer_path}/config/kpr-config/static_log.txt"
+    chmod 666 "${printer_path}/config/kpr-config/dynamic_log.txt"
 
     # Check and update printer.cfg
     in_config=$(sed -n '2p' "${printer_path}/config/printer.cfg")
