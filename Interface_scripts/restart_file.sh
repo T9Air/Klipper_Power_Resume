@@ -143,7 +143,7 @@ echo "Finished" > $kpr/static_log.txt
 filename=$(basename newfilepath)
 
 if [[ $run == [Yy] ]]; then
-    echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
+    echo SDCARD_PRINT_FILE FILENAME=$filename > /$printer_path/comms/klippy.serial
 fi
 
 exit 0

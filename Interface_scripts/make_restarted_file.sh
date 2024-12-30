@@ -18,7 +18,7 @@ selected_printer=$(cat "$kpr/config/selected_printer")
 printer_path="/home/$USER/$selected_printer"
 
 # Set the path to the log file
-dynamic_logpath="/home/$USER/$printer_path/config/kpr-config/dynamic_log.txt"
+dynamic_logpath="$printer_path/config/kpr-config/dynamic_log.txt"
 
 # Ask user the name of the file that need to be restarted
 echo "Please write the name of the file you want to restart."
@@ -168,7 +168,7 @@ read -r -p "Do you want to restart the print now? (y/N) " run
 filename=$(basename newfilepath)
 
 if [[ $run == [Yy] ]]; then
-    echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
+    echo SDCARD_PRINT_FILE FILENAME=$filename > /$printer_path/comms/klippy.serial
 fi
 
 "$kpr/Interface_scripts/menu.sh" home
