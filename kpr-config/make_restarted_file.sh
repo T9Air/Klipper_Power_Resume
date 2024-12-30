@@ -28,7 +28,7 @@ if [[ ! -f "$filepath" ]]; then
     exit 1
 fi
 
-if [[ "$starttype" != "yes"] ]]; then
+if [[ "$starttype" != "yes" ]]; then
     # Construct the full filepath with extension
     startfilepath="$kpr/start_gcode/${startfile}.gcode"
 
