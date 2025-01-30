@@ -15,7 +15,7 @@ if [ ! -f "$kpr/config/selected_printer" ]; then
 fi
 
 selected_printer=$(cat "$kpr/config/selected_printer")
-printer_path="/home/$USER/$selected_printer"
+printer_path="$kpr/$selected_printer"
 
 # Ask the user for the filename
 echo "Please write the name of the file you want to add."
