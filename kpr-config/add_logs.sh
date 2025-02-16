@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printer_path="$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")"
+printer_path="$(dirname "$(dirname "$(dirname "$(reallink -f "$0")")")")"
 
 filepath=$1
 layer=$2

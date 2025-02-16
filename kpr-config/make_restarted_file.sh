@@ -2,7 +2,7 @@
 
 kpr="/home/$USER/Klipper_Power_Resume"
 
-printer_path="$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")"
+printer_path="$(dirname "$(dirname "$(dirname "$(readlink "$0")")")")"
 
 dynamic_logpath="$printer_path/config/kpr-config/dynamic_log.txt"
 
