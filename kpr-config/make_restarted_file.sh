@@ -36,10 +36,7 @@ if [[ "$starttype" != "yes" ]]; then
     if [[ ! -f "$startfilepath" ]]; then
         # If not...
         echo "File not found: $startfilepath"
-        echo "Press any key to exit..."
-        read -r -n1 -s # Wait for a keypress to prevent immediate exit
-        "$kpr/Interface_scripts/menu.sh" home  
-        exit 0
+        exit 1
     fi
 else
     # If using standard start gcode
