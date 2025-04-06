@@ -25,17 +25,17 @@ read -r -p "What to name the file? " filename
 filename="$kpr/start_gcode/${filename}.gcode"
 
 # Create the file
-touch $filename
+touch "$filename"
 
 echo "Please remember to add UNLOG_FILE to the end of the file"
 echo "Press ctrl+x when finished editing"
 read -r -n1 -s
 
 # Navigate to the directory the file is in
-cd $kpr/start_gcode
+cd "$kpr/start_gcode"
 
 # Open the nano editor
-nano ${filename}
+nano "$filename"
 
 # Exit
 echo " "

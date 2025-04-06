@@ -6,15 +6,15 @@ printer_path="$(dirname "$(dirname "$(dirname "$(readlink "$0")")")")"
 
 dynamic_logpath="$printer_path/config/kpr-config/dynamic_log.txt"
 
-filepath=$1
-starttype=$2
-startfile=$3
-extruder_temp=$4
-bed_temp=$5
-home_area=$6
+filepath="$1"
+starttype="$2"
+startfile="$3"
+extruder_temp="$4"
+bed_temp="$5"
+home_area="$6"
 
 # Check if the filename has an extension
-if [[ $filepath == *.gcode ]]; then
+if [[ "$filepath" == *.gcode ]]; then
     # If it has an extension, do not add an extension
     filepath="$printer_path/gcodes/$filepath"
 else
@@ -56,13 +56,13 @@ speed=$(sed -n '6p' "$dynamic_logpath")
 move="G90 \nG0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E0"
 
 # Create a string of the original file without the .gcode extension
-origfilepath_no_extension="${originalfilepath%.*}"
+origfilepath_no_extension="${filepath%.*}"
 
 # Create a new file that has the same name as the original with an added _restarted.gcode added on
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
 # Copy the original file to the new file, and delete the first x bytes of the file based on the log
-dd if=$originalfilepath of=$newfilepath bs=1 skip=$bytes
+dd if="$filepath" of="$newfilepath" bs=1 skip="$bytes"
 touch "$newfilepath.tmp"
 
 if [[ "$home_area" == "yes" ]]; then
@@ -80,19 +80,19 @@ while IFS= read -r line; do
     fi
 
     echo "$line" >> "$newfilepath.tmp"
-done < "$newfilepath"
+done < "$filepath"
 
 mv "$newfilepath.tmp" "$newfilepath"
 
 # Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $move" $newfilepath
+sed -i "1i $move" "$newfilepath"
 
 if [[ "$starttype" != "yes" ]]; then
     # If using custom start gcode...
-    sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
+    sed -i "1r $startfilepath" "$newfilepath" # Append the contents of the custom gcode to the begginging of the new file
 else
     # If using standard start gcode
-    sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
+    sed -i "1i $gcode" "$newfilepath" # Add the gcode that was created above to the begginging of the new file
 fi
 
 # Exit

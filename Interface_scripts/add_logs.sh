@@ -36,7 +36,7 @@ fi
 num=1
 
 # Check if the filename has an extension
-if [[ $filepath == *.gcode ]]; then
+if [[ "$filepath" == *.gcode ]]; then
     # If it has an extension, do not add an extension
     filepath="/home/$USER/$printer_path/gcodes/$filepath"
 else
@@ -100,10 +100,10 @@ fi
 mv "$filepath.tmp" "$filepath"
 
 # Insert UNLOG_FILE at the beginning of the file
-sed -i '1i \UNLOG_FILE' $filepath
+sed -i '1i \UNLOG_FILE' "$filepath"
 
 # Add LOG_FINISHED to end of file
-echo "LOG_FINISHED" >> $filepath
+echo "LOG_FINISHED" >> "$filepath"
 
 # Exit
 echo "File changed!"
