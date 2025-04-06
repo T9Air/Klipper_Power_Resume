@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Klipper_Power_Resume v3.5.2"
+echo "Klipper_Power_Resume v3.6.0-beta.1"
 echo " "
 echo "Feedback would be greatly appreciated"
 echo " "
 read -r -n1 -s "Press enter to continue..."
 clear
 
-current_version="v3.5.2"
+current_version="v3.6.0-beta.1"
 kpr="/home/$USER/Klipper_Power_Resume"
 
 # Check for updates
