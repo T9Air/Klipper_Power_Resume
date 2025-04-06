@@ -1,42 +1,43 @@
 # Usage
 
-## Selecting Printer
+## Selecting Your Printer
 
-> Whenever you want to choose which printer to use, if you have multiple printers, or when using the program for the first time, do this
+1. Run `~/Klipper_Power_Resume/kpr.sh` on your Raspberry Pi
+2. Select option 7
+3. Follow the on-screen prompts to select your printer
 
-1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/kpr.sh```
-2. Press 7 to run the select printer script
+## Adding Required Log Macros
 
-## Adding Log Macro to a File
+The program needs to track printer positions and states through log macros.
 
-> You need to do this so that the positions of the printer, etc. can be logged to a file.
-> The program will use that log to create a new file after a reset.
+1. Run `~/Klipper_Power_Resume/kpr.sh`
+2. Select option 2
+3. Follow the prompts to add the necessary macros to your g-code file
 
-1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/kpr.sh```
-2. Press 2 to run the add_logs script
-3. Follow the instructions in the script to add the macros
+## Resuming After a Power Loss
 
-### Create a _restarted file after a reset
+To create a recovery file after a print was interrupted:
 
-> To do this, the gcode file that got canceled must have the log macros added to it (see previous instruction)
-> It will create a file that contains all of the gcode after the print was canceled, with instructions on how to start based on your input to the script
-> The file will be named "(original_name)_restarted.gcode"
+1. Run `~/Klipper_Power_Resume/kpr.sh`
+2. Select option 3
+3. Follow the prompts to create a "(original_name)_restarted.gcode" file
 
-1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/kpr.sh```
-2. Press 3 to run the make_restarted_file script
-3. Follow the instructions in the script
+> Note: The original gcode file must have had logging macros added for this to work
 
-## Creating Custom Start Gcode Files
+## Custom Start G-Code Management
 
-> Note: You can also import files using an editor such as WinSCP.
-> Make sure to put the files in the start_gcode folder
+### Creating Custom Start Files
 
-1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/kpr.sh```
-2. Press 4 to run the create_gcode script
-3. Follow the instructions in the script
+1. Run `~/Klipper_Power_Resume/kpr.sh`
+2. Select option 4
+3. Follow the prompts
 
-### Editing Custom Start Gcode Files
+> Alternative: Use WinSCP to manually place files in the start_gcode folder
 
-1. Run the following command on your Raspberry Pi ```~/Klipper_Power_Resume/kpr.sh```
-2. Press 5 to run the edit_gcode script
-3. Follow the instructions in the script
+### Editing Existing Start Files
+
+1. Run `~/Klipper_Power_Resume/kpr.sh`
+2. Select option 5
+3. Follow the prompts
+
+> Note: Ensure you have proper file permissions before running any commands (this should be set up during the installation process)
