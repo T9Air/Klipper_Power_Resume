@@ -19,6 +19,10 @@ latest_version=$(git describe --tags $(git rev-list --tags --max-count=1))
 if [ "$current_version" != "$latest_version" ]; then
     echo "A new version ($latest_version) is available."
     read -r -p "Do you want to update? (Y/n) " response
+    if [[ $latest_version =~ ("alpha"|"beta") ]]; then
+        echo "This is a pre-release version."
+        read -r -p "Are you sure you want to update? (Y/n) " response
+    fi
     if [[ "$response" =~ ^(Y|y|)$ ]]; then
         bash "$kpr/update.sh"
         exit 0
