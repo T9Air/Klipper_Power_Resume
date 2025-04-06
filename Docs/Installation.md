@@ -1,8 +1,15 @@
 # Installation
 
-## Using the interface script
+## Prerequisites
 
-1. Run the following commands on your Raspberry Pi
+- Raspberry Pi running Klipper
+- VIRTUAL_SDCARD must be enabled
+- SSH access to your Raspberry Pi
+- KIAUH installed (for gcode_shell_command extension)
+
+## Automatic Installation (Recommended)
+
+1. SSH into your Raspberry Pi and run:
 
    ```bash
    cd ~
@@ -11,16 +18,19 @@
    bash kpr.sh
    ```
 
-2. Press 1 to run the installation script
+2. Select option 1 for automatic installation
+3. When prompted, install the gcode_shell_command extension:
+   - Run `./kiauh/kiauh.sh`
+   - Select option 4 (Advanced)
+   - Select option 8 (Install gcode_shell_command)
 
-3. Follow the instructions in the install script. To install the gcode_shell_command extension, go to kiauh, `./kiauh/kiauh.sh`, press option 4 (advanced), and then option 8.
+> IMPORTANT: Run the installation script first to set proper permissions
 
-> NOTE: YOU MUST RUN THE INSTALLATION SCRIPT FIRST, OTHERWISE YOU WILL RECEIVE AN ERROR TELLING YOU THAT YOU DO NOT HAVE EXECUTE PERMISSIONS
-> NOTE: You must have VIRTUAL_SDCARD enabled
+## Manual Installation
 
-## Manually installing
+If you prefer manual control:
 
-1. Run the following commands on your Raspberry Pi
+1. Clone and set permissions:
 
    ```bash
    cd ~
@@ -29,15 +39,52 @@
    chmod -R u+rwx /home/$USER/Klipper_Power_Resume
    ```
 
-2. Install the gcode_shell_command extension. To install, go to kiauh, `./kiauh/kiauh.sh`, press option 4 (advanced), and then option 8.
-3. In all the files, change "USER" to your username
-4. Move logger.cfg to the path where all your config files are. (Usually ~/printer_data/config)
-5. In your printer.cfg add ```[include logger.cfg]```
+2. Install gcode_shell_command via KIAUH as described above
 
-## Uninstalling
+3. Create required directories:
 
-1. Run the following command on your Raspberry Pi `~/Klipper_Power_Resume/kpr.sh`
+   ```bash
+   mkdir -p ~/Klipper_Power_Resume/start_gcode
+   ```
 
-2. Press 0 to run the uninstall script
+4. Add the config files to each printer:
+   > Repeat this step for each printer you want Klipper_Power_Resume to work with.
+   >
+   > In all of the commands, replace `printer_data` with the name of your printer's path if the name is not `printer_data` (such as `printer_1_data`, `printer_ender3v3se_data`, etc.)
 
-3. Follow the instructions in the script
+   - Copy `kpr-config` to `~/printer_data/config/kpr-config/`:
+
+      ```bash
+      mkdir -p ~/printer_data/config/kpr-config
+      cp -r ~/Klipper_Power_Resume/kpr-config/* ~/printer_data/config/kpr-config/
+      ```
+
+   - Update the config files:
+      - Add this to the printer.cfg:
+
+         ```ini
+         [include kpr-config/logger.cfg]
+         [include kpr-config/shell_command.cfg]
+         ```
+
+      - Change `USER` in `logger.cfg` and `edit_file.cfg` to your username.
+      - Change `PRINTER_NAME` in `logger.cfg` and `edit_file.cfg` to the printer's directory (i.e. `printer_data`, `printer_ender3v3se_data`, etc.).
+
+5. Verify permissions:
+
+      ```bash
+   chmod +x ~/Klipper_Power_Resume/scripts/*
+   chmod +x ~/Klipper_Power_Resume/kpr.sh
+   ```
+
+## Uninstallation
+
+1. Execute `~/Klipper_Power_Resume/kpr.sh`
+2. Select option 0
+3. Follow the uninstallation prompts
+
+## Troubleshooting
+
+- If you get permission errors, ensure the installation script was run first
+- Verify VIRTUAL_SDCARD is enabled in your configuration
+- Check that logger.cfg is properly included in your printer.cfg

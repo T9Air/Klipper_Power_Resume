@@ -20,7 +20,7 @@ printer_path="/home/$USER/$selected_printer"
 dynamic_logpath="${printer_path}/config/kpr-config/dynamic_log.txt"
 static_logpath="${printer_path}/config/kpr-config/static_log.txt"
 
-originalfilepath=$(sed -n '1p' $static_logpath)
+originalfilepath=$(sed -n '1p' "$static_logpath")
 
 # Check if the file exists
 if [[ ! -f "$originalfilepath" ]]; then
@@ -44,7 +44,7 @@ if [[ "$starttype" == [Nn] ]]; then
     echo " "
     echo "List of available start_gcode files..."
     echo " "
-    cd $kpr/start_gcode 
+    cd "$kpr/start_gcode"
     ls
     echo " "
 
@@ -97,10 +97,10 @@ origfilepath_no_extension="${originalfilepath%.*}"
 newfilepath="${origfilepath_no_extension}_restarted.gcode"
 
 # Copy the original file to the new file, and delete the first x bytes of the file based on the log
-dd if=$originalfilepath of=$newfilepath bs=1 skip=$bytes
+dd if="$originalfilepath" of="$newfilepath" bs=1 skip="$bytes"
 
 # Add the gcode to move to the last recorded position to the first line of the file
-sed -i "1i $move" $newfilepath
+sed -i "1i $move" "$newfilepath"
 
 read -r -p "Are you homing on the print (1) or in the corner (2)? " home_area
 
@@ -127,10 +127,10 @@ mv "$newfilepath.tmp" "$newfilepath"
 
 if [[ "$starttype" == [Nn] ]]; then
     # If using custom start gcode...
-    sed -i "1r $startfilepath" $newfilepath # Append the contents of the custom gcode to the begginging of the new file
+    sed -i "1r $startfilepath" "$newfilepath" # Append the contents of the custom gcode to the begginging of the new file
 else
     # If using standard start gcode
-    sed -i "1i $gcode" $newfilepath # Add the gcode that was created above to the begginging of the new file
+    sed -i "1i $gcode" "$newfilepath" # Add the gcode that was created above to the begginging of the new file
 fi
 
 echo "_restarted file created!"
@@ -138,12 +138,12 @@ echo ""
 
 read -r -p "Do you want to restart the print now? (y/N) " run
 
-echo "Finished" > $kpr/static_log.txt
+echo "Finished" > "$kpr/static_log.txt"
 
-filename=$(basename newfilepath)
+filename=$(basename "$newfilepath")
 
 if [[ $run == [Yy] ]]; then
-    echo SDCARD_PRINT_FILE FILENAME=$filename > ~/printer_data/comms/klippy.serial
+    echo SDCARD_PRINT_FILE FILENAME="$filename" > "/$printer_path/comms/klippy.serial"
 fi
 
 exit 0

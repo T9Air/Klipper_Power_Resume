@@ -10,7 +10,7 @@ if [ "$(ls -A "$kpr/start_gcode")" ]; then
     # If there are...
     echo "These are the files currently available to edit..."
     echo " " 
-    cd $kpr/start_gcode # Navigate to the start_gcode directory
+    cd "$kpr/start_gcode" # Navigate to the start_gcode directory
     ls # List all of the files available to edit
 else
     # If not...
@@ -55,10 +55,10 @@ echo "Press ctrl+x when finished editing"
 read -r -n1 -s
 
 # Navigate to the start_gcode directory
-cd $kpr/start_gcode
+cd "$kpr/start_gcode"
 
 # Open the nano editor
-nano ${filename}
+nano "$filename"
 
 # Exit
 echo " "

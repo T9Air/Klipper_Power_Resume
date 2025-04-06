@@ -1,6 +1,8 @@
 #!/bin/bash
 
-log_path="/home/$USER/printer_data/config/kpr-config/dynamic_log.txt"
+printer_path = "$(dirname "$(dirname "$(dirname "$(reallink -f "$0")")")")"
+
+log_path="$printer_path/config/kpr-config/dynamic_log.txt"
 
 byte=$1
 x=$2
