@@ -64,7 +64,7 @@ If you prefer manual control:
 
          ```ini
          [include kpr-config/logger.cfg]
-         [include kpr-config/shell_command.cfg]
+         [include kpr-config/edit_file.cfg]
          ```
 
       - Change `USER` in `logger.cfg` and `edit_file.cfg` to your username.
