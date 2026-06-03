@@ -113,7 +113,7 @@ printerz=$(sed -n '4p' "$dynamic_logpath")
 printere=$(sed -n '5p' "$dynamic_logpath")
 speed=$(sed -n '6p' "$dynamic_logpath")
 
-move="G90 \nG0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E0"
+move="G90 \nG0 F${speed} X${printerx} Y${printery} \nG0 F150 Z${printerz} \nG0 F${speed} \nG92 E${printere}"
 
 # Create a string of the original file without the .gcode extension
 origfilepath_no_extension="${originalfilepath%.*}"
@@ -133,14 +133,27 @@ if [[ "$home_area" == "1" ]]; then
 fi
 
 while IFS= read -r line; do
+    if [[ "$line" =~ ^G92 ]]; then
+    # Adjust start E-coordinates in G1 commands based on G92 param
+      params=$(echo "$line" | cut -d' ' -f2-)
+      for param in $params; do      
+        axis=$(echo "$param" | cut -c1)
+        value=$(echo "$param" | cut -c2-)
+        target_variable_name="printer${axis,,}"
+        declare "$target_variable_name"="$value"        
+       done
+       speed=$printerf
+    fi
     if [[ "$line" =~ ^G[01] ]]; then        
         # Adjust E-coordinates in G1 commands based on the last recorded e position
         if [[ "$line" =~ E ]]; then
-            e_coord=$(echo "$line" | cut -d E -f 2)
+            e_coord=$(echo "$line" | cut -d E -f 2|cut -d ' ' -f 1)
             new_e_coord=$(bc <<< "$e_coord - $printere")
-            line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
-        fi
-    fi
+            if (( $(echo "$new_e_coord >= 0" | bc -l) )); then
+               line=$(echo "$line" | sed "s/E${e_coord}/E${new_e_coord}/")
+            fi
+         fi
+      fi
 
     echo "$line" >> "$newfilepath.tmp"
 done < "$newfilepath"
